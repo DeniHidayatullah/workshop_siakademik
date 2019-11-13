@@ -1,0 +1,39 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	background: url(gambar/foto.jpg);
+	margin: 0;
+	background-size: 100% 100%;
+	background-attachment: fixed;
+}
+
+.wadah {
+	width: 450px;
+	height: 280px;
+	float: left;
+	background: rgba(255, 255, 255, 0.6);
+	margin-top: 150px;
+	margin-left: 440px;
+	border-radius: 10px;
+	box-shadow: 0 0 6px 3px #CCC;
+}
+
+.tf {
+	width: 90%;
+	padding-left: 10%;
+	height: 45px;
+	color: #000;
+	border-radius: 5px;
+	border: 1px solid #000;
+	background: rgba(109, 107, 107, 0);
+}
+
+.button {
+	width: 100%;
+	height: 45px;
+	background: #ff9000;
+	border: 1px solid #ff9000;
+	border-radius: 5px;
+	color: #fff;
+}
