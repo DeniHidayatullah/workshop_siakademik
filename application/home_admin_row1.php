@@ -1,7 +1,7 @@
 <a style='color:#000' href='index.php?view=siswa'>
     <div class="col-md-3 col-sm-6 col-xs-12">
         <div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
+            <span class="info-box-icon bg-aqua"><i class="fa fa-beaker"></i></span>
             <div class="info-box-content">
                 <?php $siswa = mysqli_fetch_array(mysqli_query($koneksi, "SELECT count(*) as total FROM siswa")); ?>
                 <span class="info-box-text">Siswa</span>
