@@ -145,3 +145,38 @@ echo "</td></tr>
 <button type='submit' name='update' class='btn btn-info'>Update</button>
 <a href='index.php?view=jurusan'><button class='btn btn-default pull-right'>Cancle</button></a>
 
+</div>
+</form>
+</div>
+} elseif ($_GET[act] == 'tambah') {
+if (isset ($_POST[tambah])) {
+mysqli_query($koneksi, "INSERT INTO jurusan
+VALUES('$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[e]','$_POST[f]','$_POST[g]','$_POST[h]','$_POST[i]','$_POST[j]')");
+echo "<script>document.location='index.php?view=jurusan';</script>";
+}
+echo "<div class='col-md-12'>
+<div class='box box-info'>
+<div class='box-header with_border'>
+<h3 class ='box-title'>Tambah Data Jurusan</h3>
+</div>
+<div class='box-body'>
+<form method='POST' class='form-horizontal' action='' enctype='multipart/form-data'>
+<div class ='col-md-12'>
+<table class='table table-condensend table-bordered'>
+</tbody>
+<tr><th widht='140px' scope='row'>Kode JuJurusanrusan</th> </td><input type='text' class='form-control' name='a'></td></tr>
+<tr><th scope='row'>Nama Jurusan</th>           <td><input type='text' class='form-control' name='b'></td></tr>
+<tr><th scope='row'>Nama Jurusan En</th>        <td><input type='text' class='form-control' name='c'></td></tr>
+<tr><th scope='row'>Bidang Keahlian</th>        <td><input type='text' class='form-control' name='d'></td></tr>
+<tr><th scope='row'>Kompetensi Umum</th>        <td><input type='text' class='form-control' name='e'></td></tr>
+<tr><th scope='row'>Kompetensi Khusus</th>      <td><input type='text' class='form-control' name='f'></td></tr>
+<tr><th scope='row'>Pejabat</th>                <td><input type='text' class='form-control' name='g'></td></tr>
+<tr><th scope='row'>Jabatan</th>                <td><input type='text' class='form-control' name='h'></td></tr>
+<tr><th scope='row'>Keterangan</th>             <td><input type='text' class='form-control' name='i'></td></tr>
+<tr><th scope='row'>Aktif</th>                  <td<input type='radio' name='j' value='Ya'> Ya
+<input type='radio' name='tambah' class='btn btn-default pull-right'>Cncel</button></a>
+</div>
+</form>
+</div>";
+}
+?>
