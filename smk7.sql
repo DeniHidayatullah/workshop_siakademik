@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Nov 2019 pada 02.53
+-- Waktu pembuatan: 20 Nov 2019 pada 08.09
 -- Versi server: 10.1.35-MariaDB
 -- Versi PHP: 7.2.9
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `workshop_siakademik`
+-- Database: `smk7`
 --
 
 -- --------------------------------------------------------
@@ -42,6 +42,8 @@ CREATE TABLE `absensi_siswa` (
 --
 
 INSERT INTO `absensi_siswa` (`id_absensi_siswa`, `kodejdwl`, `nisn`, `kode_kehadiran`, `tanggal`, `waktu_input`) VALUES
+(37, 0, '0151379251', 'H', '2019-11-11', '2019-11-12 20:28:47'),
+(36, 0, '9991268756', 'S', '2019-11-11', '2019-11-12 20:28:47'),
 (2, 5, '0151379251', 'H', '2019-11-10', '2019-11-10 12:03:20'),
 (1, 13, '9991268756', 'S', '2019-11-10', '2019-11-10 12:03:20');
 
@@ -69,50 +71,6 @@ INSERT INTO `agama` (`id_agama`, `nama_agama`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `gedung`
---
-
-CREATE TABLE `gedung` (
-  `kode_gedung` varchar(10) NOT NULL,
-  `nama_gedung` varchar(100) NOT NULL,
-  `jumlah_lantai` varchar(20) NOT NULL,
-  `panjang` varchar(20) NOT NULL,
-  `tinggi` varchar(20) NOT NULL,
-  `lebar` varchar(20) NOT NULL,
-  `keterangan` text NOT NULL,
-  `aktif` enum('Y','N') NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `gedung`
---
-
-INSERT INTO `gedung` (`kode_gedung`, `nama_gedung`, `jumlah_lantai`, `panjang`, `tinggi`, `lebar`, `keterangan`, `aktif`) VALUES
-('G001', 'Gedung A', '2', '100', '50', '50', '', 'Y'),
-('G002', 'Gedung B', '3', '50', '80', '30', '', 'Y');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `golongan`
---
-
-CREATE TABLE `golongan` (
-  `id_golongan` int(5) NOT NULL,
-  `nama_golongan` varchar(150) NOT NULL,
-  `keterangan` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `golongan`
---
-
-INSERT INTO `golongan` (`id_golongan`, `nama_golongan`, `keterangan`) VALUES
-(1, 'IV/a', 'Golongan IV/a');
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `guru`
 --
 
@@ -120,7 +78,7 @@ CREATE TABLE `guru` (
   `nip` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `nama_guru` varchar(150) NOT NULL,
-  `id_jenis_kelamin` varchar(20) NOT NULL,
+  `id_jenis_kelamin` int(11) NOT NULL,
   `tempat_lahir` varchar(150) NOT NULL,
   `tanggal_lahir` date NOT NULL,
   `nik` varchar(50) NOT NULL,
@@ -129,7 +87,7 @@ CREATE TABLE `guru` (
   `id_status_kepegawaian` int(5) NOT NULL,
   `id_jenis_ptk` int(5) NOT NULL,
   `pengawas_bidang_studi` varchar(150) NOT NULL,
-  `id_agama` int(20) NOT NULL,
+  `id_agama` int(11) NOT NULL,
   `alamat_jalan` varchar(255) NOT NULL,
   `rt` varchar(5) NOT NULL,
   `rw` varchar(5) NOT NULL,
@@ -147,7 +105,6 @@ CREATE TABLE `guru` (
   `sk_pengangkatan` varchar(150) NOT NULL,
   `tmt_pengangkatan` date NOT NULL,
   `lembaga_pengangkatan` varchar(150) NOT NULL,
-  `id_golongan` int(5) NOT NULL,
   `keahlian_laboratorium` varchar(150) NOT NULL,
   `sumber_gaji` varchar(150) NOT NULL,
   `nama_ibu_kandung` varchar(100) NOT NULL,
@@ -171,13 +128,13 @@ CREATE TABLE `guru` (
 -- Dumping data untuk tabel `guru`
 --
 
-INSERT INTO `guru` (`nip`, `password`, `nama_guru`, `id_jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `nik`, `niy_nigk`, `nuptk`, `id_status_kepegawaian`, `id_jenis_ptk`, `pengawas_bidang_studi`, `id_agama`, `alamat_jalan`, `rt`, `rw`, `nama_dusun`, `desa_kelurahan`, `kecamatan`, `kode_pos`, `telepon`, `hp`, `email`, `tugas_tambahan`, `id_status_keaktifan`, `sk_cpns`, `tanggal_cpns`, `sk_pengangkatan`, `tmt_pengangkatan`, `lembaga_pengangkatan`, `id_golongan`, `keahlian_laboratorium`, `sumber_gaji`, `nama_ibu_kandung`, `id_status_pernikahan`, `nama_suami_istri`, `nip_suami_istri`, `pekerjaan_suami_istri`, `tmt_pns`, `lisensi_kepsek`, `jumlah_sekolah_binaan`, `diklat_kepengawasan`, `mampu_handle_kk`, `keahlian_breile`, `keahlian_bahasa_isyarat`, `npwp`, `kewarganegaraan`, `foto`) VALUES
-('196608201993032006', '7473038696', 'Lili Suyani', '2', 'Agam', '1966-08-20', '1374025104571989', '', '8152744647300033', 3, 4, '', 1, 'simpang empat padang lua', '0', '0', 'padang lua', 'banuhampu', 'Kec. Banuhampu', 0, '0751461692', '081267771344', 'dankrez48@gmail.com', '', 1, '271/IV.E/KWPK-1993', '1993-03-01', '3234/IV/KWPK-1994', '1994-06-01', 'Pemerintah Propinsi', 1, '', 'APBN', 'Erma', 1, 'Yonnofa Hendri', '', 'Petani', '1994-06-01', 'TIDAK', 0, 'TIDAK', '0', 'TIDAK', 'TIDAK', '', 'INDONESIA', ''),
-('195806161984000016', '11435453225', 'Agus Musanib', '1', 'Bali', '1950-02-02', '1374025104571989', '', '', 1, 1, '', 1, 'Prof.M.Yamin, SH', '4', '4', '', 'Tarok Dipo', 'Kec. Guguk Panjang', 0, '0751461692', '081267771344', 'dankrez48@gmail.com', '', 1, '', '0000-00-00', '800.sma.3.bkt', '2004-05-05', 'Kepala Sekolah', 1, '', 'Sekolah', 'Hy', 2, '', '', 'Tidak bekerja', '0000-00-00', 'TIDAK', 0, 'TIDAK', '0', 'TIDAK', 'TIDAK', '', 'INDONESIA', ''),
-('198406142009012003', '12241237914', 'Dellya', '2', 'Bukittinggi', '1984-06-14', '1374025104571989', '', '3946762664210112', 3, 3, '', 1, 'Parak Kongsi Jorong Parik Putuih', '0', '0', '', 'Ampang Gadang', 'Kec. Ampek Angkek', 0, '0751461692', '081267771344', 'dankrez48@gmail.com', '', 1, '813/022-5D/BKD-2009', '2009-01-01', '813/022-5D/BKD-2009', '2009-01-01', 'Pemerintah Pusat', 1, '', 'APBD Kabupaten/Kota', 'Yarmini', 1, 'Syawaldi', '', 'Karyawan Swasta', '2010-04-01', 'TIDAK', 0, 'TIDAK', '0', 'TIDAK', 'TIDAK', '', 'INDONESIA', ''),
-('195806161984000001', '12177967191', 'Aina Yonavia', '2', 'Bukittinggi', '1989-02-28', '1374025104571989', '', '', 2, 2, '', 1, 'Jl.bonjo Baru By Pass', '3', '5', '', 'Tarok DIpo', 'Kec. Guguk Panjang', 26122, '0751461692', '081267771344', 'dankrez48@gmail.com', '', 1, '', '0000-00-00', '', '2015-07-13', 'Kepala Sekolah', 1, '', 'Sekolah', 'Nuraida', 2, '', '', 'Tidak bekerja', '0000-00-00', 'TIDAK', 0, 'TIDAK', '0', 'TIDAK', 'TIDAK', '', 'INDONESIA', ''),
-('195806161984032002', '6883346563', 'Aisyah', '2', 'Bukittinggi', '1958-06-16', '1374025104571989', '', '3948736639300012', 3, 2, '', 1, 'Birugo Puhun 80.266', '0', '0', '', 'Tarok Dipo', 'Kec. Aur Birugo Tigo Baleh', 0, '0751461692', '081267771344', 'dankrez48@gmail.com', '', 1, '822/1412/III-BKD-2005', '2005-12-23', '822/1412/III-BKD-2005', '1983-03-01', 'Pemerintah Pusat', 1, '', 'APBD Kabupaten/Kota', 'Djuniar', 1, 'Mufti SH, S.Pd', '', '3/TNI/Polri', '2006-03-01', 'TIDAK', 0, 'TIDAK', '0', 'TIDAK', 'TIDAK', '475928198202000', 'INDONESIA', ''),
-('195704111980032004', '12169300491', 'April Daniati', '2', 'Padang Panjang', '1957-04-11', '1374025104571989', '', '1743735636300012', 3, 2, '', 1, 'Jl.Perintis Kemerdekaan No.121 B', '3', '0', '', 'Balai-Balai', 'Kec. Padang Panjang Barat', 27114, '0751461692', '081267771344', 'dankrez48@gmail.com', 'Kepala Laboratorium', 1, '56483/C/2/80', '1980-03-01', '56483/C/2/80', '1980-03-01', 'Pemerintah Pusat', 1, '', 'APBD Kabupaten/Kota', 'Hj. Djawana', 1, 'Zainudin, S.PD.I', '', 'Wiraswasta', '1981-05-01', 'TIDAK', 0, 'TIDAK', '0', 'TIDAK', 'TIDAK', '', 'INDONESIA', '');
+INSERT INTO `guru` (`nip`, `password`, `nama_guru`, `id_jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `nik`, `niy_nigk`, `nuptk`, `id_status_kepegawaian`, `id_jenis_ptk`, `pengawas_bidang_studi`, `id_agama`, `alamat_jalan`, `rt`, `rw`, `nama_dusun`, `desa_kelurahan`, `kecamatan`, `kode_pos`, `telepon`, `hp`, `email`, `tugas_tambahan`, `id_status_keaktifan`, `sk_cpns`, `tanggal_cpns`, `sk_pengangkatan`, `tmt_pengangkatan`, `lembaga_pengangkatan`, `keahlian_laboratorium`, `sumber_gaji`, `nama_ibu_kandung`, `id_status_pernikahan`, `nama_suami_istri`, `nip_suami_istri`, `pekerjaan_suami_istri`, `tmt_pns`, `lisensi_kepsek`, `jumlah_sekolah_binaan`, `diklat_kepengawasan`, `mampu_handle_kk`, `keahlian_breile`, `keahlian_bahasa_isyarat`, `npwp`, `kewarganegaraan`, `foto`) VALUES
+('196608201993032006', '7473038696', 'Lili Suyani', 2, 'Jember', '1966-08-20', '1374025104571989', '', '8152744647300033', 3, 4, '', 1, 'simpang empat padang lua', '0', '0', 'padang lua', 'banuhampu', 'Kec. sumberbaru', 0, '0751461692', '081267771344', '@gmail.com', '', 1, '271/IV.E/KWPK-1993', '1993-03-01', '3234/IV/KWPK-1994', '1994-06-01', 'Pemerintah Propinsi', '', 'APBN', 'Erma', 1, 'Yonnofa Hendri', '', 'Petani', '1994-06-01', 'TIDAK', 0, 'TIDAK', '0', 'TIDAK', 'TIDAK', '', 'INDONESIA', ''),
+('195806161984000016', '11435453225', 'Agus Musanib', 2, 'Lumajang', '1950-02-02', '1374025104571989', '', '', 1, 1, '', 1, 'Prof.M.Yamin, SH', '4', '4', '', 'Tarok Dipo', 'Kec. jatiroto', 0, '0751461692', '081267771344', 'dankrez48@gmail.com', '', 1, '', '0000-00-00', '800.sma.3.bkt', '2004-05-05', 'Kepala Sekolah', '', 'Sekolah', 'Hy', 2, '', '', 'Tidak bekerja', '0000-00-00', 'TIDAK', 0, 'TIDAK', '0', 'TIDAK', 'TIDAK', '', 'INDONESIA', ''),
+('198406142009012003', '12241237914', 'Dellya', 2, 'Jember', '1984-06-14', '1374025104571989', '', '3946762664210112', 3, 3, '', 1, 'Parak Kongsi Jorong Parik Putuih', '0', '0', '', 'Ampang Gadang', 'Kec. sumberbaru', 0, '0751461692', '081267771344', '@gmail.com', '', 1, '813/022-5D/BKD-2009', '2009-01-01', '813/022-5D/BKD-2009', '2009-01-01', 'Pemerintah Pusat', '', 'APBD Kabupaten/Kota', 'Yarmini', 1, 'Syawaldi', '', 'Karyawan Swasta', '2010-04-01', 'TIDAK', 0, 'TIDAK', '0', 'TIDAK', 'TIDAK', '', 'INDONESIA', ''),
+('195806161984000001', '12177967191', 'Aina Yonavia', 1, 'Jember', '1989-02-28', '1374025104571989', '', '', 2, 2, '', 1, 'Jl.bonjo Baru By Pass', '3', '5', '', 'Tarok DIpo', 'Kec. Sumberagung', 26122, '0751461692', '081267771344', 'dankrez48@gmail.com', '', 1, '', '0000-00-00', '', '2015-07-13', 'Kepala Sekolah', '', 'Sekolah', 'Nuraida', 2, '', '', 'Tidak bekerja', '0000-00-00', 'TIDAK', 0, 'TIDAK', '0', 'TIDAK', 'TIDAK', '', 'INDONESIA', ''),
+('195806161984032002', '6883346563', 'Aisyah', 2, 'Jember', '1958-06-16', '1374025104571989', '', '3948736639300012', 3, 2, '', 1, 'Birugo Puhun 80.266', '0', '0', '', 'Tarok Dipo', 'Kec. sumberbaru', 0, '0751461692', '081267771344', 'dankrez48@gmail.com', '', 1, '822/1412/III-BKD-2005', '2005-12-23', '822/1412/III-BKD-2005', '1983-03-01', 'Pemerintah Pusat', '', 'APBD Kabupaten/Kota', 'Djuniar', 1, 'Mufti SH, S.Pd', '', '3/TNI/Polri', '2006-03-01', 'TIDAK', 0, 'TIDAK', '0', 'TIDAK', 'TIDAK', '475928198202000', 'INDONESIA', ''),
+('195704111980032004', '123', 'April Daniati', 2, 'Lumajang', '1957-04-11', '1374025104571989', '', '1743735636300012', 3, 2, '', 1, 'Jl.Perintis Kemerdekaan No.121 B', '3', '0', '', 'Balai-Balai', 'Kec. jatiroto', 27114, '0751461692', '081267771344', 'dankrez48@gmail.com', 'Kepala Laboratorium', 1, '56483/C/2/80', '1980-03-01', '56483/C/2/80', '1980-03-01', 'Pemerintah Pusat', '', 'APBD Kabupaten/Kota', 'Hj. Djawana', 1, 'Zainudin, S.PD.I', '', 'Wiraswasta', '1981-05-01', 'TIDAK', 0, 'TIDAK', '0', 'TIDAK', 'TIDAK', '', 'INDONESIA', '');
 
 -- --------------------------------------------------------
 
@@ -205,10 +162,10 @@ CREATE TABLE `jadwal_pelajaran` (
 --
 
 INSERT INTO `jadwal_pelajaran` (`kodejdwl`, `id_tahun_akademik`, `kode_kelas`, `kode_pelajaran`, `kode_ruangan`, `nip`, `paralel`, `jadwal_serial`, `jam_mulai`, `jam_selesai`, `hari`, `aktif`) VALUES
-(5, 20161, 'X.TKJ.1', 'MK02', 'R003', '195806161984000001', '', '', '23:00:00', '23:30:00', 'Senin', 'Ya'),
 (13, 20161, 'X.TKJ.1', 'MK01', 'R003', '195704111980032004', '', '', '09:00:00', '11:30:00', 'Senin', 'Ya'),
 (14, 20161, 'X.TKJ.1', 'MK03', 'R004', '195806161984032002', '', '', '08:00:00', '10:30:00', 'Selasa', 'Ya'),
-(33, 20162, 'X.TKJ.1', 'MK15', 'R001', '195806161984000002', '00', '00', '08:00:00', '10:00:00', 'Senin', 'Ya');
+(33, 20162, 'X.TKJ.1', 'MK15', 'R001', '195806161984000002', '00', '00', '08:00:00', '10:00:00', 'Senin', 'Ya'),
+(34, 20161, 'X.TKJ.1', 'MK02', 'R004', '195806161984000001', '', '', '12:00:00', '12:30:00', 'Senin', 'Ya');
 
 -- --------------------------------------------------------
 
@@ -249,7 +206,7 @@ INSERT INTO `jenis_ptk` (`id_jenis_ptk`, `jenis_ptk`, `keterangan`) VALUES
 (1, 'Tenaga Administrasi Sekolah', ''),
 (2, 'Guru Mapel', ''),
 (3, 'Guru BK', ''),
-(4, 'Guru Kelas', '');
+(4, 'Wali Kelas', '');
 
 -- --------------------------------------------------------
 
@@ -349,11 +306,11 @@ CREATE TABLE `kelas` (
 --
 
 INSERT INTO `kelas` (`kode_kelas`, `nip`, `kode_jurusan`, `kode_ruangan`, `nama_kelas`, `aktif`) VALUES
-('X.TSM.2', '198406142009012003', 'TSM', 'R004', 'Kelas X TSM 2', 'Tidak'),
-('X.IPS.1', '195806161984000001', 'TSM', 'R002', 'Kelas X TSM 1', 'Tidak'),
-('X.TKJ.3', '196608201993032006', 'TKJ', 'R003', 'Kelas X TKJ 3', 'Tidak'),
-('X.TKJ.2', '195806161984000016', 'TKJ', 'R002', 'Kelas X TKJ 2', 'Tidak'),
-('X.TKJ.1', '195704111980032004', 'TKJ', 'R001', 'Kelas X TKJ 1', 'Tidak');
+('X.TSM.2', '198406142009012003', 'TSM', 'R004', 'Kelas X TSM 2', 'Ya'),
+('X.IPS.1', '195806161984000001', 'TSM', 'R002', 'Kelas X TSM 1', 'Ya'),
+('X.TKJ.3', '196608201993032006', 'TKJ', 'R003', 'Kelas X TKJ 3', 'Ya'),
+('X.TKJ.2', '195806161984000016', 'TKJ', 'R01', 'Kelas X TKJ 2', 'Tidak'),
+('X.TKJ.1', '195704111980032004', 'TKJ', 'R001', 'Kelas X TKJ 1', 'Ya');
 
 -- --------------------------------------------------------
 
@@ -409,7 +366,6 @@ CREATE TABLE `mata_pelajaran` (
   `id_kelompok_mata_pelajaran` int(3) NOT NULL,
   `kode_jurusan` varchar(10) NOT NULL,
   `nip` varchar(30) NOT NULL,
-  `kode_kurikulum` int(5) NOT NULL,
   `namamatapelajaran` varchar(150) NOT NULL,
   `namamatapelajaran_en` varchar(150) NOT NULL,
   `tingkat` varchar(10) NOT NULL,
@@ -425,11 +381,10 @@ CREATE TABLE `mata_pelajaran` (
 -- Dumping data untuk tabel `mata_pelajaran`
 --
 
-INSERT INTO `mata_pelajaran` (`kode_pelajaran`, `id_kelompok_mata_pelajaran`, `kode_jurusan`, `nip`, `kode_kurikulum`, `namamatapelajaran`, `namamatapelajaran_en`, `tingkat`, `kompetensi_umum`, `kompetensi_khusus`, `jumlah_jam`, `sesi`, `urutan`, `aktif`) VALUES
-('MK01', 1, 'MIPA', '195704111980032004', 1, 'Bahasa Indonesia', '', '2 (SLTA)', 'Isikan Nama Kompetensi Umum', 'Isikan Nama Kompetensi Khusus', '2', '', 0, 'Ya'),
-('MK02', 1, 'IPS', '195806161984000001', 1, 'Matematika', '', '2 (SLTA)', 'Isikan Nama Kompetensi Umum', 'Isikan Nama Kompetensi Khusus', '2', '', 0, 'Ya'),
-('MK03', 2, 'MIPA', '195806161984032002', 1, 'Bahasa Inggris', '', '2 (SLTA)', 'Isikan Nama Kompetensi Umum', 'Isikan Nama Kompetensi Khusus', '2', '', 0, 'Ya'),
-('MK15', 3, 'IPS', '195806161984000002', 1, 'Web Programming', '', '3 (SLTA)', 'Mengenal teknik Pembuatan Web', 'Menguasai Bahasa Pemrograman Web', '3', '', 0, 'Ya');
+INSERT INTO `mata_pelajaran` (`kode_pelajaran`, `id_kelompok_mata_pelajaran`, `kode_jurusan`, `nip`, `namamatapelajaran`, `namamatapelajaran_en`, `tingkat`, `kompetensi_umum`, `kompetensi_khusus`, `jumlah_jam`, `sesi`, `urutan`, `aktif`) VALUES
+('MK01', 1, 'TKJ', '195704111980032004', 'Bahasa Indonesia', '', '2 (SLTA)', 'Isikan Nama Kompetensi Umum', 'Isikan Nama Kompetensi Khusus', '2', '', 0, 'Ya'),
+('MK02', 1, 'TSM', '195806161984000001', 'Matematika', '', '2 (SLTA)', 'Isikan Nama Kompetensi Umum', 'Isikan Nama Kompetensi Khusus', '2', '', 0, 'Ya'),
+('MK03', 2, 'TKJ', '195806161984032002', 'Bahasa Inggris', '', '2 (SLTA)', 'Isikan Nama Kompetensi Umum', 'Isikan Nama Kompetensi Khusus', '2', '', 0, 'Ya');
 
 -- --------------------------------------------------------
 
@@ -696,7 +651,6 @@ INSERT INTO `predikat` (`id_predikat`, `kode_kelas`, `nilai_a`, `nilai_b`, `grad
 
 CREATE TABLE `ruangan` (
   `kode_ruangan` varchar(10) NOT NULL,
-  `kode_gedung` varchar(10) NOT NULL,
   `nama_ruangan` varchar(100) NOT NULL,
   `kapasitas_belajar` int(5) NOT NULL,
   `kapasitas_ujian` int(5) NOT NULL,
@@ -708,14 +662,14 @@ CREATE TABLE `ruangan` (
 -- Dumping data untuk tabel `ruangan`
 --
 
-INSERT INTO `ruangan` (`kode_ruangan`, `kode_gedung`, `nama_ruangan`, `kapasitas_belajar`, `kapasitas_ujian`, `keterangan`, `aktif`) VALUES
-('R001', 'G001', 'A.1', 35, 30, '', ''),
-('R002', 'G001', 'A.2', 40, 35, '', ''),
-('R003', 'G002', 'B.1', 34, 29, '', ''),
-('R004', 'G002', 'B.2', 45, 40, '', ''),
-('R01', '', 'Ruangan 1', 0, 0, '', 'Ya'),
-('R02', '', 'Ruangan 2', 0, 0, '', 'Ya'),
-('R03', '', 'Ruangan 3', 0, 0, '', 'Ya');
+INSERT INTO `ruangan` (`kode_ruangan`, `nama_ruangan`, `kapasitas_belajar`, `kapasitas_ujian`, `keterangan`, `aktif`) VALUES
+('R001', 'A.1', 35, 30, '', ''),
+('R002', 'A.2', 40, 35, '', ''),
+('R003', 'B.1', 34, 29, '', ''),
+('R004', 'B.2', 45, 40, '', ''),
+('R01', 'Ruangan 1', 0, 0, '', 'Ya'),
+('R02', 'Ruangan 2', 0, 0, '', 'Ya'),
+('R03', 'Ruangan 4', 0, 0, '', 'Ya');
 
 -- --------------------------------------------------------
 
@@ -809,14 +763,14 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`id_siswa`, `nipd`, `password`, `nama`, `id_jenis_kelamin`, `nisn`, `tempat_lahir`, `tanggal_lahir`, `nik`, `id_agama`, `kebutuhan_khusus`, `alamat`, `rt`, `rw`, `dusun`, `kelurahan`, `kecamatan`, `kode_pos`, `jenis_tinggal`, `alat_transportasi`, `telepon`, `hp`, `email`, `skhun`, `penerima_kps`, `no_kps`, `foto`, `nama_ayah`, `tahun_lahir_ayah`, `pendidikan_ayah`, `pekerjaan_ayah`, `penghasilan_ayah`, `kebutuhan_khusus_ayah`, `no_telpon_ayah`, `nama_ibu`, `tahun_lahir_ibu`, `pendidikan_ibu`, `pekerjaan_ibu`, `penghasilan_ibu`, `kebutuhan_khusus_ibu`, `no_telpon_ibu`, `nama_wali`, `tahun_lahir_wali`, `pendidikan_wali`, `pekerjaan_wali`, `penghasilan_wali`, `angkatan`, `status_awal`, `status_siswa`, `tingkat`, `kode_kelas`, `kode_jurusan`, `id_sesi`) VALUES
-(1, '14422', '9991268756', 'AAD SIROJUDIN', '1', '9991268756', 'BUKITTINGGI', '1999-11-14', '1306066910090000', '1', 'Tidak ada', 'PERUMNAS KUBANG PUTIH JL. MERPATI NO.301', '0', '0', '', 'KUBANG PUTIAH', 'Kec. Banuhampu', 26181, '', 'Sepeda motor', '0751-7835083', '082385418021', 'AAD.SIROJUDIN04@GMAIL.COM', '2-12-02-002-002-7   ', 'TIDAK', '', '', 'WASLIM', 1968, 'SMP / sederajat', 'Lainnya', 'Rp. 1,000,000 - Rp. 1,999,999', 'Tidak ada', '', 'TETI MURNI', 1973, 'SMP / sederajat', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2014, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.1', 'TKJ', 1),
-(63, '14423', '0151379251', 'AL FAJRI', '1', '0151379251', 'BUKITTINGGI', '2015-06-27', '1375012610990000', '1', 'Tidak ada', 'JALAN PANORAMA NO 4B', '4', '2', '', 'PANORAMA', 'Kec. Mandiangin Koto Selayan', 0, 'Bersama orang tua', 'Angkutan umum/bus/pete-pete', '75221487', '085766422330', 'AYI.ALFAJRI@YAHOO.COM', '2-12-02-001-007-2   ', 'TIDAK', '', '', 'EFDIWARMAN', 1964, 'SMA / sederajat', 'Wiraswasta', 'Rp. 2,000,000 - Rp. 4,999,999', 'Tidak ada', '', 'ASYULIANTI', 1969, 'SMA / sederajat', '', 'Rp. 2,000,000 - Rp. 4,999,999', 'Tidak ada', '', '', 1900, '', '', '', 2014, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.1', 'TKJ', 1),
-(105, '14424', '0004107204', 'ANDRE THOMOK SIDABUTAR', '1', '0004107204', 'LUBUK BASUNG', '2000-05-16', '', '1', 'Tidak ada', 'MANGGIS GANTING', '0', '0', '', 'MANGGIS', 'Kec. Mandiangin Koto Selayan', 0, 'Bersama orang tua', 'Angkutan umum/bus/pete-pete', '', '', '', '2/12/2002', 'TIDAK', '', '', 'UNTUNG SARAGI SIDABUTAR', 1966, 'SMA / sederajat', 'PNS/TNI/Polri', 'Rp. 2,000,000 - Rp. 4,999,999', 'Tidak ada', '', 'RONA TAMPUBOLON', 1977, 'SMA / sederajat', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2014, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.2', 'TKJ', 1),
-(143, '14425', '9998218087', 'ANNISA SERLINA', '2', '9998218087', 'PEKAN KAMIS', '2000-10-15', '1306095510000000', '1', 'Tidak ada', 'GANTING KOTO TANGAN', '0', '0', 'KOTO TANGAH', 'KOTO TANGAH', 'Kec. Tilatang Kamang', 0, 'Bersama orang tua', 'Angkutan umum/bus/pete-pete', '', '083180361912', '', '2/12/2002', 'TIDAK', '', '', 'NOVIARDI', 1965, 'SMA / sederajat', 'Petani', 'Rp. 500,000 - Rp. 999,999', 'Tidak ada', '', 'SESNIAR', 1966, 'SMA / sederajat', 'Lainnya', 'Rp. 500,000 - Rp. 999,999', 'Tidak ada', '', '', 1900, '', '', '', 2014, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.2', 'TKJ', 1),
-(214, '14426', '0007105659', 'DAVIN FERDIANSYAH', '1', '0007105659', 'PADANG', '2000-09-06', '1312060609020000', '1', 'Tidak ada', '', '0', '0', '', 'MUARO KIAWAI', 'Kec. Gunung Tuleh', 26371, 'Kost', 'Angkutan umum/bus/pete-pete', '', '', '', '2/12/2002', 'TIDAK', '', '', 'SYAHRIAL', 1962, 'S1', 'PNS/TNI/Polri', 'Rp. 5,000,000 - Rp. 20,000,000', 'Tidak ada', '', 'DESMINAR', 1965, 'S1', 'PNS/TNI/Polri', 'Rp. 2,000,000 - Rp. 4,999,999', 'Tidak ada', '', '', 1900, '', '', '', 2014, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.3', 'TKJ', 1),
-(242, '14427', '0000267795', 'DHINDA AMALIA KIFLIA', '2', '0000267795', 'Bukittinggi', '2000-03-01', '1375034103000000', '1', 'Tidak ada', 'JL.Puding Mas no.33-Tabek Gadang-Aur Kuning-Bukittinggi', '1', '2', 'Tabek Gadang', 'Aur Kuning', 'Kec. Aur Birugo Tigo Baleh', 0, 'Bersama orang tua', 'Angkutan umum/bus/pete-pete', '0752-31089', '081261631384', 'dhindaamaliakiflianainggolan@yahoo.co.id', '2/12/2002', 'TIDAK', '', '', 'Zulkifli Nainggolan', 1966, 'SMA / sederajat', 'Wiraswasta', 'Rp. 1,000,000 - Rp. 1,999,999', 'Tidak ada', '', 'Delfiani', 1972, 'SMA / sederajat', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2014, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.3', 'TKJ', 1),
-(335, '14428', '0007011100', 'FARID NAJAH ALDI', '1', '0007011100', 'Jakarta', '2000-04-12', '1306071204000000', '1', 'Tidak ada', 'Tanah  Nyariang', '0', '0', '', 'Batu Taba', 'Kec. Ampek Angkek', 0, 'Bersama orang tua', '', '', '085263312034', '', '2/12/2002', 'TIDAK', '', '', 'endrisman', 1971, 'SMA / sederajat', 'Wiraswasta', 'Rp. 500,000 - Rp. 999,999', 'Tidak ada', '', 'Reni', 1972, 'D1', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2014, 'Baru', 'Aktif', '(SLTA)', 'X.IPS.1', 'IPS', 1),
-(369, '14429', '0000261160', 'FELLYA KHAIRANI MONEVY', '2', '0000261160', 'BUKITTINGGI', '2000-07-07', '1306074707000000', '1', 'Tidak ada', 'JORONG PARIT PUTUS,NAGARI AMPANG GADANG,Kec.AMPEK ANGKEK,Kab.AGAM', '0', '0', 'PARIT PUTUS', 'AMPANG GADANG', 'Kec. Ampek Angkek', 0, 'Bersama orang tua', 'Sepeda motor', '', '089629288677', 'FELLYAKHAIRANIMONEVY@YAHOO.co.id', '2-12-02-            ', 'TIDAK', '', '', 'MEDMON HAIKAL', 1969, 'S1', 'PNS/TNI/Polri', 'Rp. 2,000,000 - Rp. 4,999,999', 'Tidak ada', '', 'EVI YENDRIANI', 1975, 'SMA / sederajat', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2014, 'Baru', 'Aktif', '(SLTA)', 'X.IPS.1', 'IPS', 1),
+(1, '14422', '9991268756', 'DENI HIDAYATULLAH', '1', '9991268756', 'Jember', '1999-11-14', '1306066910090000', '1', 'Tidak ada', 'PERUMNAS KUBANG PUTIH JL. MERPATI NO.301', '0', '0', '', 'Yosorat', 'Sumberbaru', 26181, '', 'Sepeda motor', '0751-7835083', '082385418021', 'deni@GMAIL.COM', '2-12-02-002-002-7   ', 'TIDAK', '', '', 'WASLIM', 1968, 'SMP / sederajat', 'Lainnya', 'Rp. 1,000,000 - Rp. 1,999,999', 'Tidak ada', '', 'TETI MURNI', 1973, 'SMP / sederajat', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2019, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.1', 'TKJ', 1),
+(63, '14423', '0151379251', 'M Hanafi Abror', '1', '0151379251', 'Jember', '2015-06-27', '1375012610990000', '1', 'Tidak ada', 'JALAN PANORAMA NO 4B', '4', '2', '', 'Jatiroto', 'Lumajang', 0, 'Bersama orang tua', 'Angkutan umum/bus/pete-pete', '75221487', '085766422330', 'mha@YAHOO.COM', '2-12-02-001-007-2   ', 'TIDAK', '', '', 'EFDIWARMAN', 1964, 'SMA / sederajat', 'Wiraswasta', 'Rp. 2,000,000 - Rp. 4,999,999', 'Tidak ada', '', 'ASYULIANTI', 1969, 'SMA / sederajat', '', 'Rp. 2,000,000 - Rp. 4,999,999', 'Tidak ada', '', '', 1900, '', '', '', 2019, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.1', 'TKJ', 1),
+(105, '14424', '0004107204', 'ANDRE THOMOK SIDABUTAR', '1', '0004107204', 'LUBUK BASUNG', '2000-05-16', '', '1', 'Tidak ada', 'MANGGIS GANTING', '0', '0', '', 'MANGGIS', '', 0, 'Bersama orang tua', 'Angkutan umum/bus/pete-pete', '', '', '', '2/12/2002', 'TIDAK', '', '', 'UNTUNG SARAGI SIDABUTAR', 1966, 'SMA / sederajat', 'PNS/TNI/Polri', 'Rp. 2,000,000 - Rp. 4,999,999', 'Tidak ada', '', 'RONA TAMPUBOLON', 1977, 'SMA / sederajat', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2019, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.2', 'TKJ', 1),
+(143, '14425', '9998218087', 'ANNISA SERLINA', '2', '9998218087', 'PEKAN KAMIS', '2000-10-15', '1306095510000000', '1', 'Tidak ada', 'GANTING KOTO TANGAN', '0', '0', '', '', '', 0, 'Bersama orang tua', 'Angkutan umum/bus/pete-pete', '', '083180361912', '', '2/12/2002', 'TIDAK', '', '', 'NOVIARDI', 1965, 'SMA / sederajat', 'Petani', 'Rp. 500,000 - Rp. 999,999', 'Tidak ada', '', 'SESNIAR', 1966, 'SMA / sederajat', 'Lainnya', 'Rp. 500,000 - Rp. 999,999', 'Tidak ada', '', '', 1900, '', '', '', 2019, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.2', 'TKJ', 1),
+(214, '14426', '0007105659', 'DAVIN FERDIANSYAH', '1', '0007105659', 'PADANG', '2000-09-06', '1312060609020000', '1', 'Tidak ada', '', '0', '0', '', 'MUARO KIAWAI', 'Kec. Gunung Tuleh', 26371, 'Kost', 'Angkutan umum/bus/pete-pete', '', '', '', '2/12/2002', 'TIDAK', '', '', 'SYAHRIAL', 1962, 'S1', 'PNS/TNI/Polri', 'Rp. 5,000,000 - Rp. 20,000,000', 'Tidak ada', '', 'DESMINAR', 1965, 'S1', 'PNS/TNI/Polri', 'Rp. 2,000,000 - Rp. 4,999,999', 'Tidak ada', '', '', 1900, '', '', '', 2019, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.3', 'TKJ', 1),
+(242, '14427', '0000267795', 'DHINDA AMALIA KIFLIA', '2', '0000267795', 'Bukittinggi', '2000-03-01', '1375034103000000', '1', 'Tidak ada', 'JL.Puding Mas no.33-Tabek Gadang-Aur Kuning-Bukittinggi', '1', '2', '', '', '', 0, 'Bersama orang tua', 'Angkutan umum/bus/pete-pete', '0752-31089', '081261631384', 'dhindaamaliakiflianainggolan@yahoo.co.id', '2/12/2002', 'TIDAK', '', '', 'Zulkifli Nainggolan', 1966, 'SMA / sederajat', 'Wiraswasta', 'Rp. 1,000,000 - Rp. 1,999,999', 'Tidak ada', '', 'Delfiani', 1972, 'SMA / sederajat', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2019, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.3', 'TKJ', 1),
+(335, '14428', '0007011100', 'Erwin Andrianto', '1', '0007011100', 'Jakarta', '2000-04-12', '1306071204000000', '1', 'Tidak ada', 'Tanah  Nyariang', '0', '0', '', 'Sumberjo', 'Sumberbaru', 0, 'Bersama orang tua', '', '', '085263312034', '', '2/12/2002', 'TIDAK', '', '', 'endrisman', 1971, 'SMA / sederajat', 'Wiraswasta', 'Rp. 500,000 - Rp. 999,999', 'Tidak ada', '', 'Reni', 1972, 'D1', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2019, 'Baru', 'Aktif', '(SLTA)', 'X.IPS.1', 'TSM', 1),
+(369, '14429', '0000261160', 'Kirana Yuwita', '2', '0000261160', 'BUKITTINGGI', '2000-07-07', '1306074707000000', '1', 'Tidak ada', 'JORONG PARIT PUTUS,NAGARI AMPANG GADANG,Kec.AMPEK ANGKEK,Kab.AGAM', '0', '0', '', 'Rowotengah', 'Sumberbaru', 0, 'Bersama orang tua', 'Sepeda motor', '', '089629288677', 'kirana@YAHOO.co.id', '2-12-02-            ', 'TIDAK', '', '', 'MEDMON HAIKAL', 1969, 'S1', 'PNS/TNI/Polri', 'Rp. 2,000,000 - Rp. 4,999,999', 'Tidak ada', '', 'EVI YENDRIANI', 1975, 'SMA / sederajat', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2019, 'Baru', 'Aktif', '(SLTA)', 'X.IPS.1', 'TSM', 1),
 (378, '14430', '9991261263', 'FERNANDO PRATAMA', '1', '9991261263', 'BUKITTINGGI', '1999-11-08', '1306060811990000', '1', 'Tidak ada', 'JLN.BANUHAMPU RAYA NO.246 PERUMNAS KUBANG PUTIH', '0', '0', '', 'KUBANG PUTIH', 'Kec. Banuhampu', 26181, 'Bersama orang tua', 'Angkutan umum/bus/pete-pete', '0752-7835136', '08126695672', '', '2/12/2002', 'TIDAK', '', '', 'MUKHLIS', 1970, 'SMA / sederajat', 'Wiraswasta', 'Rp. 5,000,000 - Rp. 20,000,000', 'Tidak ada', '', 'NENY FEBRIDAL', 1974, 'SMA / sederajat', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2014, 'Baru', 'Aktif', '(SLTA)', 'X.IPS.2', 'IPS', 1),
 (391, '14431', '9994930260', 'FIRA WARZUKNI', '2', '9994930260', 'KAPECONG', '1999-10-23', '1306151606100010', '1', 'Tidak ada', 'TARUSAN JR HALALANG', '0', '0', '', 'TARUSAN', 'Kec. Kamang Magek', 0, 'Bersama orang tua', 'Angkutan umum/bus/pete-pete', '', '083180050317', '', '2/12/2002', 'TIDAK', '', '', 'JUFRIAL', 1967, 'SMP / sederajat', 'Wiraswasta', 'Rp. 2,000,000 - Rp. 4,999,999', 'Tidak ada', '', 'NURAINI', 1967, 'SMA / sederajat', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2014, 'Baru', 'Aktif', '(SLTA)', 'X.IPS.2', 'IPS', 1);
 
@@ -901,10 +855,10 @@ CREATE TABLE `tahun_akademik` (
 --
 
 INSERT INTO `tahun_akademik` (`id_tahun_akademik`, `nama_tahun`, `keterangan`, `aktif`) VALUES
-(20151, 'Semester Ganjil 2015/2016', '2015/2016', 'Ya'),
-(20152, 'Semester Genap 2015/2016', '2015/2016', 'Ya'),
-(20161, 'Semester Ganjil 2016/2017', '2016/2017', 'Ya'),
-(20162, 'Semester Genap 2016/2017', '2016/2017', 'Ya');
+(20151, 'Semester Ganjil 2018/2019', '2018/2019', 'Tidak'),
+(20152, 'Semester Genap 2018/2019', '2020/2019', 'Tidak'),
+(20161, 'Semester Ganjil 2019/2020', '2019/2020', 'Ya'),
+(20162, 'Semester Genap 2019/2020', '2019/2020', 'Tidak');
 
 -- --------------------------------------------------------
 
@@ -929,156 +883,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `username`, `password`, `nama_lengkap`, `email`, `no_telpon`, `jabatan`, `level`, `aktif`) VALUES
-(1, 'admin', 'bff0cc42103de1b4721370e84dc24f635a7afeca41198c9b3e03946a1b6b7191d14356408a5e57ce6daf77e6e800c66fac7ab0482d57d48d23e6808e4b562daa', 'Administrator', 'admin@sman3bukittinggi.sch.id', '081267771344', 'Kepala IT', 'superuser', 'Y');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `users_aktivitas`
---
-
-CREATE TABLE `users_aktivitas` (
-  `id_users_aktivitas` int(10) NOT NULL,
-  `identitas` varchar(50) NOT NULL,
-  `ip_address` varchar(50) NOT NULL,
-  `browser` varchar(50) NOT NULL,
-  `os` varchar(50) NOT NULL,
-  `status` enum('siswa','guru','superuser') NOT NULL,
-  `jam` time NOT NULL,
-  `tanggal` date NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `users_aktivitas`
---
-
-INSERT INTO `users_aktivitas` (`id_users_aktivitas`, `identitas`, `ip_address`, `browser`, `os`, `status`, `jam`, `tanggal`) VALUES
-(1, '195704111980032004', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'guru', '10:59:57', '2016-04-13'),
-(2, '9991268756', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'siswa', '11:00:27', '2016-04-13'),
-(3, '9994030915', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'siswa', '11:01:44', '2016-04-14'),
-(4, '9975540740', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'siswa', '11:20:43', '2016-04-14'),
-(5, '195901241986032002', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'guru', '11:21:04', '2016-04-14'),
-(6, '0006223671', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'siswa', '12:18:06', '2016-04-15'),
-(7, '195912121986021004', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'guru', '12:18:32', '2016-04-15'),
-(8, '197110292005011003', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'guru', '12:18:40', '2016-04-15'),
-(9, '196109191988031006', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'guru', '12:18:49', '2016-04-16'),
-(10, '196202191990032001', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'guru', '12:19:02', '2016-04-16'),
-(11, '9999344284', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'siswa', '12:19:24', '2016-04-16'),
-(12, '9980725248', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'siswa', '12:19:32', '2016-04-16'),
-(13, '0006223671', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'siswa', '12:19:42', '2016-04-16'),
-(14, '2', '', ' Chrome 49.0.2623.112', 'Windows 7', 'guru', '06:13:43', '2016-04-23'),
-(15, '195704111980032004', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'guru', '06:15:28', '2016-04-23'),
-(16, '1', '', ' Chrome 49.0.2623.112', 'Windows 7', 'superuser', '06:27:20', '2016-04-23'),
-(17, '195704111980032004', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'guru', '06:34:28', '2016-04-23'),
-(18, '9980708111', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'siswa', '06:36:21', '2016-04-23'),
-(19, '195704111980032004', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'guru', '06:37:05', '2016-04-23'),
-(20, '9994030915', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'siswa', '06:41:40', '2016-04-23'),
-(21, '195704111980032004', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'guru', '06:43:49', '2016-04-23'),
-(22, '9991268756', '::1', 'Firefox 46.0', 'Windows 7', 'siswa', '06:46:06', '2016-04-23'),
-(23, '1', '', ' Chrome 49.0.2623.112', 'Windows 7', 'superuser', '07:02:03', '2016-04-23'),
-(24, '9980708111', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'siswa', '07:21:03', '2016-04-23'),
-(25, '9980720559', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'siswa', '07:21:21', '2016-04-23'),
-(26, '9991268756', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'siswa', '07:22:01', '2016-04-23'),
-(27, '9999152999', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'siswa', '07:29:17', '2016-04-23'),
-(28, '195704111980032004', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'guru', '08:40:14', '2016-04-23'),
-(29, '1', '', 'Chrome 49.0.2623.112', 'Windows 7', 'superuser', '08:45:52', '2016-04-23'),
-(30, '1', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'superuser', '06:13:18', '2016-04-16'),
-(31, '1', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'superuser', '03:12:26', '2016-04-15'),
-(32, '1', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'superuser', '06:13:18', '2016-04-14'),
-(33, '1', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'superuser', '03:12:26', '2016-04-13'),
-(34, '1', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'superuser', '07:13:18', '2016-04-14'),
-(35, '1', '::1', 'Chrome 49.0.2623.112', 'Windows 7', 'superuser', '05:12:26', '2016-04-13'),
-(36, '1', '36.68.12.49', 'Chrome 49.0.2623.112', 'Windows 7', 'superuser', '10:32:19', '2016-04-23'),
-(48, '1', '114.4.79.250', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '15:08:36', '2016-04-27'),
-(47, '1', '36.84.224.134', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '10:17:00', '2016-04-27'),
-(40, '195704111980032004', '114.4.21.153', 'Chrome 50.0.2661.87', 'Windows 7', 'guru', '07:50:45', '2016-04-27'),
-(41, '1', '114.4.21.153', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '07:54:08', '2016-04-27'),
-(42, '9980708111', '114.4.21.153', 'Chrome 50.0.2661.87', 'Windows 7', 'siswa', '07:55:08', '2016-04-27'),
-(43, '9980722436', '114.4.21.153', 'Chrome 50.0.2661.87', 'Windows 7', 'siswa', '07:55:23', '2016-04-27'),
-(44, '198605012009011001', '114.4.21.153', 'Chrome 50.0.2661.87', 'Windows 7', 'guru', '07:55:38', '2016-04-27'),
-(45, '1', '114.4.21.153', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '07:55:51', '2016-04-27'),
-(46, '1', '114.4.21.153', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '08:01:10', '2016-04-27'),
-(49, '1', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '20:16:59', '2016-04-27'),
-(50, '1', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '08:27:54', '2016-04-28'),
-(51, '198710052010012011', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'guru', '10:41:56', '2016-04-28'),
-(52, '195704111980032004', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'guru', '10:42:15', '2016-04-28'),
-(53, '1', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '13:12:06', '2016-04-28'),
-(54, '9991268756', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'siswa', '13:30:48', '2016-04-28'),
-(55, '1', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '19:15:10', '2016-04-28'),
-(56, '1', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '10:02:22', '2016-04-29'),
-(57, '195806161984000001', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'guru', '22:37:57', '2016-04-29'),
-(58, '9991268756', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'siswa', '22:41:40', '2016-04-29'),
-(59, '1', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '23:09:20', '2016-04-29'),
-(60, '1', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '23:20:06', '2016-04-29'),
-(61, '195704111980032004', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'guru', '06:14:36', '2016-04-30'),
-(62, '1', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '06:14:55', '2016-04-30'),
-(63, '195806161984000001', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'guru', '06:18:35', '2016-04-30'),
-(64, '195806161984000001', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'guru', '06:19:47', '2016-04-30'),
-(65, '1', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '10:00:28', '2016-04-30'),
-(66, '9991268756', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'siswa', '10:01:25', '2016-04-30'),
-(67, '1', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '10:01:44', '2016-04-30'),
-(68, '2', '::1', 'Chrome 50.0.2661.87', 'Windows 7', '', '10:02:29', '2016-04-30'),
-(69, '196209051987031007', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'guru', '10:02:51', '2016-04-30'),
-(70, '1', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '10:37:52', '2016-04-30'),
-(71, '195806161984000001', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'guru', '10:58:18', '2016-04-30'),
-(72, '1', '::1', 'Chrome 50.0.2661.87', 'Windows 7', 'superuser', '12:57:17', '2016-04-30'),
-(74, '1', '::1', 'Chrome 50.0.2661.94', 'Windows 7', 'superuser', '20:17:11', '2016-05-04'),
-(75, '1', '::1', 'Chrome 50.0.2661.94', 'Windows 7', 'superuser', '22:34:59', '2016-05-11'),
-(76, '1', '::1', 'Chrome 50.0.2661.102', 'Windows 7', 'superuser', '07:21:10', '2016-06-02'),
-(77, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '22:52:32', '2016-06-19'),
-(78, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '15:06:29', '2016-06-22'),
-(79, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '15:45:59', '2016-06-22'),
-(80, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '07:40:52', '2016-06-23'),
-(81, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '11:41:34', '2016-06-23'),
-(82, '9991268756', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'siswa', '04:56:37', '2016-06-29'),
-(83, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '08:46:48', '2016-07-01'),
-(84, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '15:32:49', '2016-07-02'),
-(85, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '06:37:49', '2016-07-03'),
-(86, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '11:24:00', '2016-07-04'),
-(87, '9991268756', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'siswa', '12:24:55', '2016-07-04'),
-(88, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '13:38:17', '2016-07-04'),
-(89, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '16:41:51', '2016-07-04'),
-(90, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '05:45:25', '2016-07-05'),
-(91, '195704111980032004', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'guru', '09:59:50', '2016-07-05'),
-(92, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '10:12:22', '2016-07-05'),
-(93, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '10:34:34', '2016-07-05'),
-(94, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '08:09:08', '2016-07-08'),
-(95, '195806161984000002', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'guru', '11:15:49', '2016-07-08'),
-(96, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '11:32:28', '2016-07-08'),
-(97, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '13:30:18', '2016-07-08'),
-(98, '9991268756', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'siswa', '13:31:00', '2016-07-08'),
-(99, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '13:49:22', '2016-07-08'),
-(100, '9991268756', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'siswa', '13:50:02', '2016-07-08'),
-(101, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '15:27:03', '2016-07-08'),
-(102, '9991268756', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'siswa', '15:54:51', '2016-07-08'),
-(103, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '05:36:38', '2016-07-09'),
-(104, '9991268756', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'siswa', '06:12:14', '2016-07-09'),
-(105, '2', '::1', 'Chrome 51.0.2704.103', 'Windows 7', '', '06:18:50', '2016-07-09'),
-(106, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '06:27:53', '2016-07-09'),
-(107, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '06:57:52', '2016-07-09'),
-(108, '195806161984000002', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'guru', '07:01:50', '2016-07-09'),
-(109, '1', '::1', 'Chrome 51.0.2704.103', 'Windows 7', 'superuser', '05:41:14', '2016-07-10'),
-(110, '195806161984000001', '::1', 'Chrome 63.0.3239.132', 'Windows 7', 'guru', '17:47:13', '2018-01-22'),
-(111, '1', '::1', 'Chrome 63.0.3239.132', 'Windows 7', 'superuser', '17:51:31', '2018-01-22'),
-(112, '1', '::1', 'Chrome 63.0.3239.132', 'Windows 7', 'superuser', '17:54:24', '2018-01-22'),
-(113, '1', '::1', 'Chrome 63.0.3239.132', 'Windows 7', 'superuser', '12:50:32', '2018-01-24'),
-(114, '1', '::1', 'Chrome 63.0.3239.132', 'Windows 7', 'superuser', '13:00:21', '2018-01-24'),
-(115, '9991268756', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'siswa', '11:02:08', '2019-11-10'),
-(116, '1', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'superuser', '11:03:53', '2019-11-10'),
-(117, '195704111980032004', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'guru', '12:03:01', '2019-11-10'),
-(118, '196608201993032006', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'guru', '12:07:39', '2019-11-10'),
-(119, '1', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'superuser', '12:34:50', '2019-11-10'),
-(120, '1', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'superuser', '12:45:29', '2019-11-10'),
-(121, '1', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'superuser', '12:46:46', '2019-11-10'),
-(0, '1', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'superuser', '17:05:32', '2019-11-10'),
-(0, '2', '::1', 'Chrome 78.0.3904.97', 'Windows 10', '', '17:28:28', '2019-11-10'),
-(0, '1', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'superuser', '18:26:52', '2019-11-10'),
-(0, '1', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'superuser', '19:50:47', '2019-11-10'),
-(0, '1', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'superuser', '23:28:44', '2019-11-10'),
-(0, '1', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'superuser', '09:16:27', '2019-11-11'),
-(0, '1', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'superuser', '16:59:10', '2019-11-12'),
-(0, '1', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'superuser', '18:02:41', '2019-11-12'),
-(0, '1', '::1', 'Chrome 78.0.3904.97', 'Windows 10', 'superuser', '20:20:54', '2019-11-12');
+(1, 'admin', 'bff0cc42103de1b4721370e84dc24f635a7afeca41198c9b3e03946a1b6b7191d14356408a5e57ce6daf77e6e800c66fac7ab0482d57d48d23e6808e4b562daa', 'Administrator', 'admin@smkn7jember.sch.id', '081267771344', 'Kepala IT', 'superuser', 'Y'),
+(2, 'kepsek', '2cd39b25613a7c5d37ff41cb39aba8ee5cb7fc1e238c3916b24ffa2f21e78652e0c0c74ea25b7f044e2275ecd16c559eb3e9c2743fa7debc8002c74657dcde14', 'Drs. kepsek Jaya, M.Pd', '@gmail.com', '082173054501', 'Kepala Sekolah', 'kepala', 'Y');
 
 --
 -- Indexes for dumped tables
@@ -1095,18 +901,6 @@ ALTER TABLE `absensi_siswa`
 --
 ALTER TABLE `agama`
   ADD PRIMARY KEY (`id_agama`);
-
---
--- Indeks untuk tabel `gedung`
---
-ALTER TABLE `gedung`
-  ADD PRIMARY KEY (`kode_gedung`);
-
---
--- Indeks untuk tabel `golongan`
---
-ALTER TABLE `golongan`
-  ADD PRIMARY KEY (`id_golongan`);
 
 --
 -- Indeks untuk tabel `guru`
@@ -1272,7 +1066,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `absensi_siswa`
 --
 ALTER TABLE `absensi_siswa`
-  MODIFY `id_absensi_siswa` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_absensi_siswa` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT untuk tabel `agama`
@@ -1281,16 +1075,10 @@ ALTER TABLE `agama`
   MODIFY `id_agama` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `golongan`
---
-ALTER TABLE `golongan`
-  MODIFY `id_golongan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT untuk tabel `jadwal_pelajaran`
 --
 ALTER TABLE `jadwal_pelajaran`
-  MODIFY `kodejdwl` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `kodejdwl` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT untuk tabel `jenis_kelamin`
