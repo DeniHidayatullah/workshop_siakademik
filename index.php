@@ -11,6 +11,16 @@ if (isset($_SESSION[id])) {
     $nama =  $iden[nama_lengkap];
     $level = 'Administrator';
     $foto = 'dist/img/user2-160x160.jpg';
+  } elseif ($_SESSION[level] == 'kepala') {
+    $iden = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM users where id_user='$_SESSION[id]'"));
+    $gu = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM guru where nip='$iden[username]'"));
+    $nama =  $iden[nama_lengkap];
+    $level = 'Kepala Sekolah';
+    if (trim($gu[foto]) == '') {
+      $foto = 'foto_siswa/no-image.jpg';
+    } else {
+      $foto = 'foto_pegawai/' . $gu[foto];
+    }
   } elseif ($_SESSION[level] == 'guru') {
     $iden = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM guru where nip='$_SESSION[id]'"));
     $nama =  $iden[nama_guru];
@@ -30,8 +40,6 @@ if (isset($_SESSION[id])) {
       $foto = 'foto_siswa/' . $iden[foto];
     }
   }
-
-  $kurikulum = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kurikulum where status_kurikulum='Ya'"));
   ?>
   <!DOCTYPE html>
   <html>
@@ -129,9 +137,6 @@ if (isset($_SESSION[id])) {
               } else {
                 echo "<div class='row'>";
                 include "application/home_admin_row1.php";
-                echo "</div>
-                        <div class='row'>";
-                include "application/home_admin_row2.php";
                 echo "</div>";
               }
             } elseif ($_GET[view] == 'journalkbm') {
@@ -158,6 +163,11 @@ if (isset($_SESSION[id])) {
               echo "<div class='row'>";
               include "application/master_guru.php";
               echo "</div>";
+            } elseif ($_GET[view] == 'wakilkepala') {
+              cek_session_admin();
+              echo "<div class='row'>";
+              include "application/master_wakilkepala.php";
+              echo "</div>";
             } elseif ($_GET[view] == 'admin') {
               cek_session_admin();
               echo "<div class='row'>";
@@ -173,20 +183,10 @@ if (isset($_SESSION[id])) {
               echo "<div class='row'>";
               include "application/master_tahun_akademik.php";
               echo "</div>";
-            } elseif ($_GET[view] == 'gedung') {
-              cek_session_admin();
-              echo "<div class='row'>";
-              include "application/master_gedung.php";
-              echo "</div>";
             } elseif ($_GET[view] == 'ruangan') {
               cek_session_admin();
               echo "<div class='row'>";
               include "application/master_ruangan.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'golongan') {
-              cek_session_admin();
-              echo "<div class='row'>";
-              include "application/master_golongan.php";
               echo "</div>";
             } elseif ($_GET[view] == 'ptk') {
               cek_session_admin();
@@ -207,11 +207,6 @@ if (isset($_SESSION[id])) {
               cek_session_admin();
               echo "<div class='row'>";
               include "application/master_jurusan.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'kurikulum') {
-              cek_session_admin();
-              echo "<div class='row'>";
-              include "application/master_kurikulum.php";
               echo "</div>";
             } elseif ($_GET[view] == 'predikat') {
               cek_session_admin();

@@ -15,9 +15,9 @@
 <!-- Logo -->
 <a href="index.php" class="logo">
   <!-- mini logo for sidebar mini 50x50 pixels -->
-  <span class="logo-mini"></span>
+  <span class="logo-mini">SIA</span>
   <!-- logo for regular state and mobile devices -->
-  <span class="logo-lg"><b>SIAKAD</b></span>
+  <span class="logo-lg"><b>SMK N 7 JEMBER</b></span>
 </a>
 <!-- Header Navbar: style can be found in header.less -->
 <nav class="navbar navbar-static-top" role="navigation">
