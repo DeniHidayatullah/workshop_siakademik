@@ -71,10 +71,15 @@
                               <td>$r[jam_selesai]</td>
                               <td>$r[nama_ruangan]</td>";
                 echo "<td style='width:80px !important'><center>
-                                        <a class='btn btn-success btn-xs' title='Lihat Journal' href='index.php?view=journalkbm&act=lihat&id=$r[kodejdwl]'><span class='glyphicon glyphicon-search'></span> Lihat Journal</a>
+                                        <a class='btn btn-success btn-xs' title='Lihat Journal' href='index.php?view=journalkbm&act=lihat&id=$r[kodejdwl]'>
+                                        <span class='glyphicon glyphicon-search'></span> Lihat Journal</a>
                                       </center></td>";
                 echo "</tr>";
                 $no++;
+              }
+              if (isset($_GET[hapus])) {
+                mysqli_query($koneksi, "DELETE FROM journal_list where id_journal='$_GET[hapus]'");
+                echo "<script>document.location='index.php?view=journalkbm';</script>";
               }
               ?>
           <tbody>

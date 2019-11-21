@@ -70,8 +70,8 @@
               }
 
               if (isset($_GET[hapus])) {
-                mysqli_query($koneksi, "DELETE FROM jadwal_pelajaran where kodejdwl='$_GET[hapus]'");
-                echo "<script>document.location='index.php?view=jadwalpelajaran';</script>";
+                mysqli_query($koneksi, "DELETE FROM kompetensi_dasar where id_kompetensi_dasar='$_GET[hapus]'");
+                echo "<script>document.location='index.php?view=kompetensidasar';</script>";
               }
               ?>
           <tbody>
@@ -164,7 +164,8 @@
                   <table class='table table-condensed table-bordered'>
                   <tbody>
                   <input type='hidden' name='jdwl' value='$_GET[jdwl]'>
-                    <tr><th width='140px' scope='row'>Kelas</th>   <td><select class='form-control' name='b'>";
+                    <tr><th width='140px' scope='row'>Kelas</th>   
+                    <td><select class='form-control' name='b'>";
   $kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
   while ($a = mysqli_fetch_array($kelas)) {
     if ($e[kode_kelas] == $a[kode_kelas]) {
@@ -173,7 +174,8 @@
   }
   echo "</select>
                     </td></tr>
-                    <tr><th scope='row'>Mata Pelajaran</th>   <td><select class='form-control' name='c'>";
+                    <tr><th scope='row'>Mata Pelajaran</th>   
+                    <td><select class='form-control' name='c'>";
   $mapel = mysqli_query($koneksi, "SELECT * FROM mata_pelajaran");
   while ($a = mysqli_fetch_array($mapel)) {
     if ($e[kode_pelajaran] == $a[kode_pelajaran]) {
@@ -182,13 +184,13 @@
   }
   echo "</select>
                     </td></tr>
-                   
-                    <tr><th scope='row'>Ranah</th>   <td><select class='form-control' name='e'> 
-                                                              <option value='0' selected>- Pilih -</option>
-                                                              <option value='pengetahuan'>Pengetahuan</option>
-                                                              <option value='keterampilan'>Keterampilan</option>
-                                                              <option value='sikap'>Sikap</option>
-                                                            </select>
+                    <tr><th scope='row'>Ranah</th>   
+                    <td><select class='form-control' name='e'> 
+                    <option value='0' selected>- Pilih -</option>
+                    <option value='pengetahuan'>Pengetahuan</option>
+                    <option value='keterampilan'>Keterampilan</option>
+                    <option value='sikap'>Sikap</option>
+                  </select>
                     </td></tr>
                     <tr><th scope='row'>Kompetensi Dasar</th>  <td><input type='text' class='form-control' name='f'></td></tr>
                     
@@ -206,8 +208,7 @@
             </div>";
 } elseif ($_GET[act] == 'edit') {
   if (isset($_POST[update])) {
-    mysqli_query($koneksi, "UPDATE kompetensi_dasar SET ranah = '$_POST[e]',
-                                                    kompetensi_dasar = '$_POST[f]' where id_kompetensi_dasar='$_POST[id]'");
+    mysqli_query($koneksi, "UPDATE kompetensi_dasar SET ranah = '$_POST[e]',kompetensi_dasar = '$_POST[f]' where id_kompetensi_dasar='$_POST[id]'");
     echo "<script>document.location='index.php?view=kompetensidasar&act=lihat&id=$_POST[jdwl]';</script>";
   }
   $e = mysqli_fetch_array(mysqli_query($koneksi, "SELECT a.*, b.kode_pelajaran, b.kode_kelas FROM kompetensi_dasar a JOIN jadwal_pelajaran b ON a.kodejdwl=b.kodejdwl where a.id_kompetensi_dasar='$_GET[id]'"));

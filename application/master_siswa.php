@@ -1,4 +1,3 @@
-
 <?php 
 if ($_GET[act]==''){ 
   cek_session_admin();
@@ -63,10 +62,10 @@ if ($_GET[act]==''){
                 <input type="hidden" name='kelas' value='<?php echo $_GET[kelas]; ?>'>
                 <?php 
                   if (isset($_GET[kelas])){
-                    echo "<table id='myTable' class='table table-bordered table-striped'>
+                    echo "<table id='example1' class='table table-bordered table-striped'>
                             <tr><th></th>";
                   }else{
-                    echo "<table id='example' class='table table-bordered table-striped'>
+                    echo "<table id='example1' class='table table-bordered table-striped'>
                             <thead>
                               <tr>";
                   }
@@ -130,14 +129,45 @@ if ($_GET[act]==''){
                           echo "<script>document.location='index.php?view=siswa';</script>";
                       }
                   ?>
+
+<?php 
+                    $tampil = mysqli_query($koneksi,"SELECT * FROM siswa a 
+                    LEFT JOIN kelas b ON a.kode_kelas=b.kode_kelas 
+                    LEFT JOIN jenis_kelamin c ON a.id_jenis_kelamin=c.id_jenis_kelamin 
+                      LEFT JOIN jurusan d ON b.kode_jurusan=d.kode_jurusan  ORDER BY a.id_siswa");
+                    $no = 1;
+                    while($r=mysqli_fetch_array($tampil)){
+                    echo "<tr><td>$no</td>
+                    <td>$r[nipd]</td>
+                    <td>$r[nisn]</td>
+                    <td>$r[nama]</td>
+                    <td>$r[angkatan]</td>
+                    <td>$r[nama_jurusan]</td>
+                    <td>$r[nama_kelas]</td>";
+                              if($_SESSION[level]!='kepala'){
+                                echo "<td><center>
+                                  <a class='btn btn-default btn-xs' title='Lihat Detail' href='?view=siswa&act=detailsiswa&id=$r[nisn]'><span class='glyphicon glyphicon-search'></span></a>
+                                  <a class='btn btn-info btn-xs' title='Edit Siswa' href='?view=siswa&act=editsiswa&id=$r[nisn]'><span class='glyphicon glyphicon-edit'></span></a>
+                                  <a class='btn btn-danger btn-xs' title='Delete Siswa' href='?view=siswa&hapus=$r[nisn]' onclick=\"return confirm('Apa anda yakin untuk hapus Data ini?')\"><span class='glyphicon glyphicon-remove'></span></a>
+                                </center></td>";
+                              }else{
+                                  echo "<td><center>
+                                  <a class='btn btn-default btn-xs' title='Lihat Detail' href='?view=siswa&act=detailsiswa&id=$r[nisn]'><span class='glyphicon glyphicon-search'></span></a>
+                                </center></td>";
+                              }
+                            echo "</tr>";
+                      $no++;
+                      }
+                      if (isset($_GET[hapus])){
+                        mysqli_query($koneksi,"DELETE FROM siswa where nisn='$_GET[hapus]'");
+                        echo "<script>document.location='index.php?view=siswa';</script>";
+                    }
+
+                  ?>
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->
-                <?php 
-                    if ($_GET[kelas] == '' AND $_GET[tahun] == ''){
-                        echo "<center style='padding:60px; color:red'>Silahkan Input Angkatan dan Memilih Kelas Terlebih dahulu...</center>";
-                    }
-                ?>
+                
               </div><!-- /.box -->
               <?php if($_SESSION[level]!='kepala'){
                     if (isset($_GET[kelas])){ ?>
@@ -656,7 +686,8 @@ if ($_GET[act]==''){
     }else{
         $nisn = $_GET[id];
     }
-    $detail = mysqli_query($koneksi,"SELECT * FROM siswa a LEFT JOIN kelas b ON a.kode_kelas=b.kode_kelas 
+    $detail = mysqli_query($koneksi,"SELECT * FROM siswa a
+     LEFT JOIN kelas b ON a.kode_kelas=b.kode_kelas 
                               LEFT JOIN jenis_kelamin c ON a.id_jenis_kelamin=c.id_jenis_kelamin 
                                   LEFT JOIN jurusan d ON b.kode_jurusan=d.kode_jurusan
                                     LEFT JOIN agama e ON a.id_agama=e.id_agama 
