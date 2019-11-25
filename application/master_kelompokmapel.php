@@ -75,8 +75,7 @@
               </div>
               <div class='box-footer'>
                     <button type='submit' name='update' class='btn btn-info'>Update</button>
-                    <a href='index.php?view=kelompokmapel'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
-                    
+                    <a href='index.php?view=kelompokmapel'><button type='button' class='btn btn-danger'>Kembali</button></a>
                   </div>
               </form>
             </div>";
@@ -104,8 +103,7 @@
               </div>
               <div class='box-footer'>
                     <button type='submit' name='tambah' class='btn btn-info'>Tambahkan</button>
-                    <a href='index.php?view=kelompokmapel'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
-                    
+                    <a href='index.php?view=kelompokmapel'><button type='button' class='btn btn-danger'>Kembali</button></a>
                   </div>
               </form>
             </div>";

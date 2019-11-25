@@ -56,8 +56,6 @@
                 echo "<a href='index.php?view=admin&act=edit&id=$_SESSION[id]' class='btn btn-default btn-flat'>Edit Profile</a>";
               } elseif ($_SESSION[level] == 'guru') {
                 echo "<a href='index.php?view=guru&act=detailguru&id=$_SESSION[id]' class='btn btn-default btn-flat'>View Profile</a>";
-              } elseif ($_SESSION[level] == 'siswa') {
-                echo "<a href='index.php?view=siswa&act=detailsiswa&id=$_SESSION[id]' class='btn btn-default btn-flat'>View Profile</a>";
               }
               ?>
             </div>

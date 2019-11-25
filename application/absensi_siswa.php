@@ -88,14 +88,39 @@
                 $no++;
               }
               ?>
+
+            <?php
+              if ($_GET[kelas] == '' and $_GET[tahun] == '') {
+                $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
+          JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran
+            JOIN guru c ON a.nip=c.nip 
+              JOIN ruangan d ON a.kode_ruangan=d.kode_ruangan
+                JOIN kelas e ON a.kode_kelas=e.kode_kelas ORDER BY a.hari DESC");
+              }
+              $no = 1;
+              while ($r = mysqli_fetch_array($tampil)) {
+                echo "<tr><td>$no</td>
+                      <td>$r[namamatapelajaran]</td>
+                      <td>$r[nama_kelas]</td>
+                      <td>$r[nama_guru]</td>
+                      <td>$r[hari]</td>
+                      <td>$r[jam_mulai]</td>
+                      <td>$r[jam_selesai]</td>
+                      <td>$r[nama_ruangan]</td>
+                      <td>$r[id_tahun_akademik]</td>";
+                if ($_SESSION[level] != 'kepala') {
+                  echo "<td style='width:70px !important'><center>
+<a class='btn btn-success btn-xs' title='Tampil List Absensi' href='index.php?view=absensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]&jdwl=$r[kodejdwl]'><span class='glyphicon glyphicon-th'></span> Tampilkan</a>
+</center></td>";
+                }
+                echo "</tr>";
+                $no++;
+              }
+              ?>
           </tbody>
         </table>
       </div><!-- /.box-body -->
-      <?php
-        if ($_GET[kelas] == '' and $_GET[tahun] == '') {
-          echo "<center style='padding:60px; color:red'>Silahkan Memilih Tahun akademik dan Kelas Terlebih dahulu...</center>";
-        }
-        ?>
+
     </div>
   </div>
   <?php
@@ -277,7 +302,8 @@
               </div>";
     if ($_SESSION[level] != 'kepala') {
       echo "<div class='box-footer'>
-                      <button type='submit' name='simpann' class='btn btn-info pull-right'>Simpan Absensi</button>
+      <a href='index.php?view=absensiswa'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>                
+      <button type='submit' name='simpann' class='btn btn-info pull-right'>Simpan Absensi</button>
                 </div>";
     }
     echo "</form>

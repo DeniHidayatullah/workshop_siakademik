@@ -18,6 +18,7 @@
     <li class="treeview">
       <a href="#"><i class="fa fa-th"></i> <span>Data Master</span><i class="fa fa-angle-left pull-right"></i></a>
       <ul class="treeview-menu">
+        <li><a href="index.php?view=identitas"><i class="fa fa-circle-o"></i> Data Identitas Sekolah</a></li>
         <li><a href="index.php?view=tahunakademik"><i class="fa fa-circle-o"></i> Data Tahun Akademik</a></li>
         <li><a href="index.php?view=ruangan"><i class="fa fa-circle-o"></i> Data Ruangan</a></li>
         <li><a href="index.php?view=jurusan"><i class="fa fa-circle-o"></i> Data Jurusan</a></li>
@@ -67,6 +68,7 @@
         <li><a href="index.php?view=raportcetak"><i class="fa fa-circle-o"></i> Cetak Raport</a></li>
       </ul>
     </li>
+    <li><a href="index.php?view=kalender"><i class="fa fa-calendar-times-o"></i> <span>Kalender Akademik</span></a></li>
     <li><a href="index.php?view=dokumentasi"><i class="fa fa-book"></i> <span>Panduan Penggunaan</span></a></li>
   </ul>
 </section>

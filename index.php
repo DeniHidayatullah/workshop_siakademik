@@ -173,6 +173,11 @@ if (isset($_SESSION[id])) {
               echo "<div class='row'>";
               include "application/master_admin.php";
               echo "</div>";
+            } elseif ($_GET[view] == 'kalender') {
+              cek_session_admin();
+              echo "<div class='row'>";
+              include "application/master_kalender.php";
+              echo "</div>";
             } elseif ($_GET[view] == 'kelas') {
               cek_session_admin();
               echo "<div class='row'>";
@@ -217,6 +222,11 @@ if (isset($_SESSION[id])) {
               cek_session_admin();
               echo "<div class='row'>";
               include "application/master_statuspegawai.php";
+              echo "</div>";
+            } elseif ($_GET[view] == 'identitas') {
+              cek_session_admin();
+              echo "<div class='row'>";
+              include "application/master_identitas.php";
               echo "</div>";
             } elseif ($_GET[view] == 'kelompokmapel') {
               cek_session_admin();

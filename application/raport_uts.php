@@ -202,7 +202,7 @@ if ($_GET[act] == '') {
                 <div style='clear:both'></div>
                                 <div class='box-footer'>
                                   <button type='submit' name='simpan' class='btn btn-info'>Simpan</button>
-                                  <button type='reset' class='btn btn-default pull-right'>Cancel</button>
+                                  <a href='index.php?view=raportuts'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>
                                 </div>
                 </form>
 

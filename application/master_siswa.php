@@ -39,7 +39,6 @@ if ($_GET[act]==''){
 
                   <form style='margin-right:5px; margin-top:0px' class='pull-right' action='' method='GET'>
                     <input type="hidden" name='view' value='siswa'>
-                    <input type="number" name='angkatan' style='padding:3px' placeholder='Angkatan' value='<?php echo $_GET[angkatan]; ?>'>
                     <select name='kelas' style='padding:4px'>
                         <?php 
                             echo "<option value=''>- Filter Kelas -</option>";
@@ -130,7 +129,8 @@ if ($_GET[act]==''){
                       }
                   ?>
 
-<?php 
+                  <?php
+                  if ($_GET[kelas] == '' AND $_GET[tahun] == ''){ 
                     $tampil = mysqli_query($koneksi,"SELECT * FROM siswa a 
                     LEFT JOIN kelas b ON a.kode_kelas=b.kode_kelas 
                     LEFT JOIN jenis_kelamin c ON a.id_jenis_kelamin=c.id_jenis_kelamin 
@@ -162,6 +162,7 @@ if ($_GET[act]==''){
                         mysqli_query($koneksi,"DELETE FROM siswa where nisn='$_GET[hapus]'");
                         echo "<script>document.location='index.php?view=siswa';</script>";
                     }
+                  }
 
                   ?>
                     </tbody>
@@ -184,7 +185,7 @@ if ($_GET[act]==''){
                         ?>
                     </select>
                   <button style='margin-top:-5px' type='submit' name='pindahkelas' class='btn btn-sm btn-info'>Proses</button>
-                  <a href='index.php?view=siswa'><button type='button' class='btn btn-sm  btn-default pull-right'>Cancel</button></a>
+                    <a href='index.php?view=siswa'><button type='button' class='btn btn-danger'>Kembali</button></a>
               </div>
               <?php }} ?>
 
@@ -201,10 +202,11 @@ if ($_GET[act]==''){
       $filename = basename($_FILES['ao']['name']);
       $filenamee = date("YmdHis").'-'.basename($_FILES['ao']['name']);
       $uploadfile = $dir_gambar . $filenamee;
+      $bc = tgl_simpan($_POST[bc]);
       if ($filename != ''){      
         if (move_uploaded_file($_FILES['ao']['tmp_name'], $uploadfile)) {
            mysqli_query($koneksi,"INSERT INTO siswa VALUES('','$_POST[aa]','$_POST[ac]','$_POST[ad]','$_POST[bd]','$_POST[ab]',
-                               '$_POST[bb]','$_POST[bc]','$_POST[ba]','$_POST[be]','$_POST[bf]','$_POST[ah]','$rt','$rw',
+                               '$_POST[bb]','$bc','$_POST[ba]','$_POST[be]','$_POST[bf]','$_POST[ah]','$rt','$rw',
                                '$_POST[aj]','$_POST[ak]','$_POST[al]','$_POST[am]','$_POST[bg]','$_POST[bh]','$_POST[bi]',
                                '$_POST[bj]','$_POST[bk]','$_POST[bl]','$_POST[bm]','$_POST[bn]','$filenamee','$_POST[ca]',
                                '$_POST[cb]','$_POST[cc]','$_POST[cd]','$_POST[ce]','$_POST[cf]','$_POST[cg]','$_POST[ch]',
@@ -214,7 +216,7 @@ if ($_GET[act]==''){
         }
       }else{
             mysqli_query($koneksi,"INSERT INTO siswa VALUES('','$_POST[aa]','$_POST[ac]','$_POST[ad]','$_POST[bd]','$_POST[ab]',
-                               '$_POST[bb]','$_POST[bc]','$_POST[ba]','$_POST[be]','$_POST[bf]','$_POST[ah]','$rt','$rw',
+                               '$_POST[bb]','$bc','$_POST[ba]','$_POST[be]','$_POST[bf]','$_POST[ah]','$rt','$rw',
                                '$_POST[aj]','$_POST[ak]','$_POST[al]','$_POST[am]','$_POST[bg]','$_POST[bh]','$_POST[bi]',
                                '$_POST[bj]','$_POST[bk]','$_POST[bl]','$_POST[bm]','$_POST[bn]','','$_POST[ca]',
                                '$_POST[cb]','$_POST[cc]','$_POST[cd]','$_POST[ce]','$_POST[cf]','$_POST[cg]','$_POST[ch]',
@@ -285,7 +287,7 @@ if ($_GET[act]==''){
                             <tbody>
                               <tr><th width='130px' scope='row'>NIK</th> <td><input type='text' class='form-control' name='ba'></td></tr>
                               <tr><th scope='row'>Tempat Lahir</th> <td><input type='text' class='form-control' name='bb'></td></tr>
-                              <tr><th scope='row'>Tanggal Lahir</th> <td><input type='text' class='form-control' name='bc'></td></tr>
+                              <tr><th scope='row'>Tanggal Lahir</th> <td><input type='text' style='border-radius:0px; padding-left:12px' class='datepicker form-control' value='" . date('d-m-Y') . "' name='bc' data-date-format='dd-mm-yyyy'></td></tr>
                               <tr><th scope='row'>Jenis Kelamin</th> <td><select class='form-control' name='bd'> 
                                                                             <option value='0' selected>- Pilih Jenis Kelamin -</option>"; 
                                                                               $jk = mysqli_query($koneksi,"SELECT * FROM jenis_kelamin");
@@ -317,7 +319,7 @@ if ($_GET[act]==''){
                           <div style='clear:both'></div>
                           <div class='box-footer'>
                             <button type='submit' name='tambah' class='btn btn-info'>Tambahkan</button>
-                            <a href='index.php?view=siswa'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
+                            <a href='index.php?view=siswa'><button type='button' class='btn btn-danger'>Kembali</button></a>
                           </div> 
                       </div>
 
@@ -351,7 +353,7 @@ if ($_GET[act]==''){
                           </div>
                           <div class='box-footer'>
                             <button type='submit' name='tambah' class='btn btn-info'>Tambahkan</button>
-                            <a href='index.php?view=siswa'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
+                            <a href='index.php?view=siswa'><button type='button' class='btn btn-danger'>Kembali</button></a>
                           </div>
                           </form>
                       </div>
@@ -371,6 +373,7 @@ if ($_GET[act]==''){
       $filename = basename($_FILES['ao']['name']);
       $filenamee = date("YmdHis").'-'.basename($_FILES['ao']['name']);
       $uploadfile = $dir_gambar . $filenamee;
+      $bc = tgl_simpan($_POST[bc]);
       if ($filename != ''){      
         if (move_uploaded_file($_FILES['ao']['tmp_name'], $uploadfile)){
            mysqli_query($koneksi,"UPDATE siswa SET 
@@ -393,7 +396,7 @@ if ($_GET[act]==''){
 
                                nik = '$_POST[ba]',
                                tempat_lahir = '$_POST[bb]',
-                               tanggal_lahir = '$_POST[bc]',
+                               tanggal_lahir = '$bc',
                                id_jenis_kelamin = '$_POST[bd]',
                                id_agama = '$_POST[be]',
                                kebutuhan_khusus = '$_POST[bf]',
@@ -427,7 +430,7 @@ if ($_GET[act]==''){
 
                                nik = '$_POST[ba]',
                                tempat_lahir = '$_POST[bb]',
-                               tanggal_lahir = '$_POST[bc]',
+                               tanggal_lahir = '$bc',
                                id_jenis_kelamin = '$_POST[bd]',
                                id_agama = '$_POST[be]',
                                kebutuhan_khusus = '$_POST[bf]',
@@ -441,7 +444,7 @@ if ($_GET[act]==''){
                                no_kps = '$_POST[bn]',
                                status_siswa = '$_POST[bo]' where nipd='$_POST[id]'");
       }
-          echo "<script>document.location='index.php?view=siswa&act=editsiswa&id=".$_POST[id]."';</script>";
+          echo "<script>document.location='index.php?view=siswa&act=editsiswa&id=".$_POST[ab]."';</script>";
   }
 
   if (isset($_POST[update2])){
@@ -578,7 +581,7 @@ if ($_GET[act]==''){
                           <tbody>
                             <tr><th width='120px' scope='row'>NIK</th> <td><input type='text' class='form-control' value='$s[nik]' name='ba'></td></tr>
                             <tr><th scope='row'>Tempat Lahir</th> <td><input type='text' class='form-control' value='$s[tempat_lahir]' name='bb'></td></tr>
-                            <tr><th scope='row'>Tanggal Lahir</th> <td><input type='text' class='form-control' value='$s[tanggal_lahir]' name='bc'></td></tr>
+                            <tr><th scope='row'>Tanggal Lahir</th> <td><input type='text' style='border-radius:0px; padding-left:12px' class='datepicker form-control' value='" . tgl_view($s[tanggal_lahir]) . "' name='bc' data-date-format='dd-mm-yyyy'></td></tr>
                             <tr><th scope='row'>Jenis Kelamin</th> <td><select class='form-control' name='bd'> 
                                                                           <option value='0' selected>- Pilih Jenis Kelamin -</option>"; 
                                                                             $jk = mysqli_query($koneksi,"SELECT * FROM jenis_kelamin");
@@ -625,7 +628,7 @@ if ($_GET[act]==''){
                         <div style='clear:both'></div>
                         <div class='box-footer'>
                           <button type='submit' name='update1' class='btn btn-info'>Update</button>
-                          <a href='index.php?view=siswa'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
+                          <a href='index.php?view=siswa'><button type='button' class='btn btn-danger'>Kembali</button></a>
                         </div> 
 
                         </form>
@@ -671,7 +674,7 @@ if ($_GET[act]==''){
                         </div>
                         <div class='box-footer'>
                           <button type='submit' name='update2' class='btn btn-info'>Update</button>
-                          <a href='index.php?view=siswa'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
+                          <a href='index.php?view=siswa'><button type='button' class='btn btn-danger'>Kembali</button></a>
                         </div>
                         </form>
                     </div>
@@ -720,6 +723,7 @@ echo "<img class='img-thumbnail' style='width:155px' src='foto_siswa/$s[foto]'>"
 }
 if($_SESSION[level]!='kepala'){
 echo "<a href='index.php?view=siswa&act=editsiswa&id=$_GET[id]' class='btn btn-success btn-block'>Edit Profile</a>";
+echo"<a href='index.php?view=siswa'><button type='button' class='btn btn-danger btn-block'>Kembali</button></a>";
 }
 echo "</th>
 </tr>
@@ -777,6 +781,7 @@ echo "</th>
                                 }
                               if($_SESSION[level]!='kepala'){
                                 echo "<a href='index.php?view=siswa&act=editsiswa&id=$_GET[id]' class='btn btn-success btn-block'>Edit Profile</a>";
+                                echo"<a href='index.php?view=siswa'><button type='button' class='btn btn-danger btn-block'>Kembali</button></a>";
                               }
                                 echo "</th>
                             </tr>

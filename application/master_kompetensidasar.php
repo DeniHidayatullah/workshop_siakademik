@@ -23,7 +23,7 @@
 
       </div><!-- /.box-header -->
       <div class="box-body">
-        <table id="example" class="table table-bordered table-striped">
+        <table id="example1" class="table table-bordered table-striped">
           <thead>
             <tr>
               <th style='width:20px'>No</th>
@@ -74,14 +74,43 @@
                 echo "<script>document.location='index.php?view=kompetensidasar';</script>";
               }
               ?>
+
+            <?php
+              if ($_GET[kelas] == '') {
+                $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
+          JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran
+            JOIN guru c ON a.nip=c.nip 
+              JOIN ruangan d ON a.kode_ruangan=d.kode_ruangan
+                JOIN kelas e ON a.kode_kelas=e.kode_kelas ORDER BY a.hari DESC");
+              }
+              $no = 1;
+              while ($r = mysqli_fetch_array($tampil)) {
+                echo "<tr><td>$no</td>
+                      <td>$r[namamatapelajaran]</td>
+                      <td>$r[nama_kelas]</td>
+                      <td>$r[nama_guru]</td>
+                      <td>$r[hari]</td>
+                      <td>$r[jam_mulai]</td>
+                      <td>$r[jam_selesai]</td>
+                      <td>$r[nama_ruangan]</td>";
+                if ($_SESSION[level] != 'kepala') {
+                  echo "<td style='width:80px !important'><center>
+      <a class='btn btn-success btn-xs' title='Lihat Kompetensi Dasar' href='index.php?view=kompetensidasar&act=lihat&id=$r[kodejdwl]'><span class='glyphicon glyphicon-search'></span> Lihat Indikator</a>
+    </center></td>";
+                }
+                echo "</tr>";
+                $no++;
+              }
+
+              if (isset($_GET[hapus])) {
+                mysqli_query($koneksi, "DELETE FROM kompetensi_dasar where id_kompetensi_dasar='$_GET[hapus]'");
+                echo "<script>document.location='index.php?view=kompetensidasar';</script>";
+              }
+              ?>
           <tbody>
         </table>
       </div><!-- /.box-body -->
-      <?php
-        if ($_GET[kelas] == '') {
-          echo "<center style='padding:60px; color:red'>Silahkan Memilih Kelas Terlebih dahulu...</center>";
-        }
-        ?>
+
     </div>
   </div>
 
@@ -201,8 +230,7 @@
               </div>
               <div class='box-footer'>
                     <button type='submit' name='tambah' class='btn btn-info'>Tambahkan</button>
-                    <a href='#'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
-                    
+                    <a href='index.php?view=kompetensidasar'><button type='button' class='btn btn-danger'>Kembali</button></a>
                   </div>
               </form>
             </div>";
@@ -264,8 +292,7 @@
               </div>
               <div class='box-footer'>
                     <button type='submit' name='update' class='btn btn-info'>Update</button>
-                    <a href='#'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
-                    
+                    <a href='index.php?view=kompetensidasar'><button type='button' class='btn btn-danger'>Kembali</button></a>
                   </div>
               </form>
             </div>";

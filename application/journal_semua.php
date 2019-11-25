@@ -82,14 +82,40 @@
                 echo "<script>document.location='index.php?view=journalkbm';</script>";
               }
               ?>
+
+            <?php
+              if ($_GET[kelas] == '' and $_GET[tahun] == '') {
+                $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
+                                            JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran
+                                              JOIN guru c ON a.nip=c.nip 
+                                                JOIN ruangan d ON a.kode_ruangan=d.kode_ruangan
+                                                  JOIN kelas e ON a.kode_kelas=e.kode_kelas  ORDER BY a.hari DESC");
+              }
+              $no = 1;
+              while ($r = mysqli_fetch_array($tampil)) {
+                echo "<tr><td>$no</td>
+                              <td>$r[namamatapelajaran]</td>
+                              <td>$r[nama_kelas]</td>
+                              <td>$r[nama_guru]</td>
+                              <td>$r[hari]</td>
+                              <td>$r[jam_mulai]</td>
+                              <td>$r[jam_selesai]</td>
+                              <td>$r[nama_ruangan]</td>";
+                echo "<td style='width:80px !important'><center>
+                                        <a class='btn btn-success btn-xs' title='Lihat Journal' href='index.php?view=journalkbm&act=lihat&id=$r[kodejdwl]'>
+                                        <span class='glyphicon glyphicon-search'></span> Lihat Journal</a>
+                                      </center></td>";
+                echo "</tr>";
+                $no++;
+              }
+              if (isset($_GET[hapus])) {
+                mysqli_query($koneksi, "DELETE FROM journal_list where id_journal='$_GET[hapus]'");
+                echo "<script>document.location='index.php?view=journalkbm';</script>";
+              }
+              ?>
           <tbody>
         </table>
       </div><!-- /.box-body -->
-      <?php
-        if ($_GET[kelas] == '' and $_GET[tahun] == '') {
-          echo "<center style='padding:60px; color:red'>Silahkan Memilih Kelas dan Tahun akademik Terlebih dahulu...</center>";
-        }
-        ?>
     </div>
   </div>
 
@@ -211,8 +237,7 @@
               </div>
               <div class='box-footer'>
                     <button type='submit' name='tambah' class='btn btn-info'>Tambahkan</button>
-                    <a href='#'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
-                    
+                    <a href='index.php?view=journalkbm'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>                
                   </div>
               </form>
             </div>";

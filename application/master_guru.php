@@ -30,7 +30,6 @@
                                               ORDER BY a.nip DESC");
                     $no = 1;
                     while($r=mysqli_fetch_array($tampil)){
-                    $tanggal = tgl_indo($r[tgl_posting]);
                     echo "<tr><td>$no</td>
                               <td>$r[nip]</td>
                               <td>$r[nama_guru]</td>
@@ -40,13 +39,17 @@
                               <td>$r[jenis_ptk]</td>";
                               if($_SESSION[level]!='kepala'){
                         echo "<td><center>
-                                <a class='btn btn-info btn-xs' title='Lihat Detail' href='?view=guru&act=detailguru&id=$r[nip]'><span class='glyphicon glyphicon-search'></span></a>
-                                <a class='btn btn-success btn-xs' title='Edit Data' href='?view=guru&act=editguru&id=$r[nip]'><span class='glyphicon glyphicon-edit'></span></a>
-                                <a class='btn btn-danger btn-xs' title='Delete Data' href='?view=guru&hapus=$r[nip]'><span class='glyphicon glyphicon-remove'></span></a>
+                                <a class='btn btn-info btn-xs' title='Lihat Detail' href='?view=guru&act=detailguru&id=$r[nip]'>
+                                <span class='glyphicon glyphicon-search'></span></a>
+                                <a class='btn btn-success btn-xs' title='Edit Data' href='?view=guru&act=editguru&id=$r[nip]'>
+                                <span class='glyphicon glyphicon-edit'></span></a>
+                                <a class='btn btn-danger btn-xs' title='Delete Data' href='?view=guru&hapus=$r[nip]'>
+                                <span class='glyphicon glyphicon-remove'></span></a>
                               </center></td>";
                               }else{
                                 echo "<td><center>
-                                <a class='btn btn-info btn-xs' title='Lihat Detail' href='?view=guru&act=detailguru&id=$r[nip]'><span class='glyphicon glyphicon-search'></span></a>
+                                <a class='btn btn-info btn-xs' title='Lihat Detail' href='?view=guru&act=detailguru&id=$r[nip]'>
+                                <span class='glyphicon glyphicon-search'></span></a>
                               </center></td>";
                               }
                             echo "</tr>";
@@ -73,10 +76,11 @@
       $filename = basename($_FILES['ax']['name']);
       $filenamee = date("YmdHis").'-'.basename($_FILES['ax']['name']);
       $uploadfile = $dir_gambar . $filenamee;
+      $ae = tgl_simpan($_POST[ae]);
       if ($filename != ''){      
         if (move_uploaded_file($_FILES['ax']['tmp_name'], $uploadfile)) {
           mysqli_query($koneksi,"INSERT INTO guru VALUES('$_POST[aa]','$_POST[ab]','$_POST[ac]','$_POST[af]','$_POST[ad]',
-                           '$_POST[ae]','$_POST[ba]','$_POST[bv]','$_POST[aq]','$_POST[au]','$_POST[as]','$_POST[ar]', 
+                           '$ae','$_POST[ba]','$_POST[bv]','$_POST[aq]','$_POST[au]','$_POST[as]','$_POST[ar]', 
                            '$_POST[ag]','$_POST[ak]','$rt','$rw','$_POST[am]','$_POST[an]','$_POST[ao]','$_POST[ap]',
                            '$_POST[ai]','$_POST[ah]','$_POST[aj]','$_POST[at]','$_POST[av]','$_POST[bb]','$_POST[bc]', 
                            '$_POST[bd]','$_POST[be]','$_POST[bf]','$_POST[bi]','$_POST[bh]','$_POST[bj]',
@@ -85,7 +89,7 @@
         }
       }else{
           mysqli_query($koneksi,"INSERT INTO guru VALUES('$_POST[aa]','$_POST[ab]','$_POST[ac]','$_POST[af]','$_POST[ad]',
-                           '$_POST[ae]','$_POST[ba]','$_POST[bv]','$_POST[aq]','$_POST[au]','$_POST[as]','$_POST[ar]', 
+                           '$ae','$_POST[ba]','$_POST[bv]','$_POST[aq]','$_POST[au]','$_POST[as]','$_POST[ar]', 
                            '$_POST[ag]','$_POST[ak]','$rt','$rw','$_POST[am]','$_POST[an]','$_POST[ao]','$_POST[ap]',
                            '$_POST[ai]','$_POST[ah]','$_POST[aj]','$_POST[at]','$_POST[av]','$_POST[bb]','$_POST[bc]', 
                            '$_POST[bd]','$_POST[be]','$_POST[bf]','$_POST[bi]','$_POST[bh]','$_POST[bj]',
@@ -110,7 +114,7 @@
                     <tr><th scope='row'>Password</th>               <td><input type='text' class='form-control' name='ab'></td></tr>
                     <tr><th scope='row'>Nama Lengkap</th>           <td><input type='text' class='form-control' name='ac'></td></tr>
                     <tr><th scope='row'>Tempat Lahir</th>           <td><input type='text' class='form-control' name='ad'></td></tr>
-                    <tr><th scope='row'>Tanggal Lahir</th>          <td><input type='text' class='form-control' name='ae'></td></tr>
+                    <tr><th scope='row'>Tanggal Lahir</th>          <td><input type='text' style='border-radius:0px; padding-left:12px' class='datepicker form-control' value='" . date('d-m-Y') . "' name='ae' data-date-format='dd-mm-yyyy'></td></tr>
                     <tr><th scope='row'>Jenis Kelamin</th>          <td><select class='form-control' name='af'> 
                                                                           <option value='0' selected>- Pilih Jenis Kelamin -</option>"; 
                                                                             $jk = mysqli_query($koneksi,"SELECT * FROM jenis_kelamin");
@@ -210,7 +214,7 @@
                 <div style='clear:both'></div>
                         <div class='box-footer'>
                           <button type='submit' name='tambah' class='btn btn-info'>Tambahkan</button>
-                          <a href='index.php?view=siswa'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
+                          <a href='index.php?view=guru'><button type='button' class='btn btn-danger'>Kembali</button></a>
                         </div> 
               </div>
             </form>
@@ -224,6 +228,7 @@
       $filename = basename($_FILES['ax']['name']);
       $filenamee = date("YmdHis").'-'.basename($_FILES['ax']['name']);
       $uploadfile = $dir_gambar . $filenamee;
+      $ae = tgl_simpan($_POST[ae]);
       if ($filename != ''){      
         if (move_uploaded_file($_FILES['ax']['tmp_name'], $uploadfile)) {
           mysqli_query($koneksi,"UPDATE guru SET 
@@ -231,7 +236,7 @@
                            password     = '$_POST[ab]',
                            nama_guru         = '$_POST[ac]',
                            tempat_lahir       = '$_POST[ad]',
-                           tanggal_lahir = '$_POST[ae]',
+                           tanggal_lahir = '$ae',
                            id_jenis_kelamin       = '$_POST[af]',
                            id_agama           = '$_POST[ag]',
                            hp         = '$_POST[ah]',
@@ -282,7 +287,7 @@
                            password     = '$_POST[ab]',
                            nama_guru         = '$_POST[ac]',
                            tempat_lahir       = '$_POST[ad]',
-                           tanggal_lahir = '$_POST[ae]',
+                           tanggal_lahir = '$ae',
                            id_jenis_kelamin       = '$_POST[af]',
                            id_agama           = '$_POST[ag]',
                            hp         = '$_POST[ah]',
@@ -355,7 +360,7 @@
                     <tr><th scope='row'>Password</th>               <td><input type='text' class='form-control' value='$s[password]' name='ab'></td></tr>
                     <tr><th scope='row'>Nama Lengkap</th>           <td><input type='text' class='form-control' value='$s[nama_guru]' name='ac'></td></tr>
                     <tr><th scope='row'>Tempat Lahir</th>           <td><input type='text' class='form-control' value='$s[tempat_lahir]' name='ad'></td></tr>
-                    <tr><th scope='row'>Tanggal Lahir</th>          <td><input type='text' class='form-control' value='$s[tanggal_lahir]' name='ae'></td></tr>
+                    <tr><th scope='row'>Tanggal Lahir</th>          <td><input type='text' style='border-radius:0px; padding-left:12px' class='datepicker form-control' value='" . tgl_view($s[tanggal_lahir]) . "' name='ae' data-date-format='dd-mm-yyyy'></td></tr>
                     <tr><th scope='row'>Jenis Kelamin</th>          <td><select class='form-control' name='af'> 
                                                                           <option value='0' selected>- Pilih Jenis Kelamin -</option>"; 
                                                                             $jk = mysqli_query($koneksi,"SELECT * FROM jenis_kelamin");
@@ -479,7 +484,7 @@
                 <div style='clear:both'></div>
                         <div class='box-footer'>
                           <button type='submit' name='update1' class='btn btn-info'>Update</button>
-                          <a href='index.php?view=siswa'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
+                          <a href='index.php?view=guru'><button type='button' class='btn btn-danger'>Kembali</button></a>
                         </div> 
               </div>
             </form>
@@ -513,6 +518,7 @@
                         }
                       if($_SESSION[level]!='kepala'){
                         echo "<a href='index.php?view=guru&act=editguru&id=$_GET[id]' class='btn btn-success btn-block'>Edit Profile</a>";
+                        echo"<a href='index.php?view=guru'><button type='button' class='btn btn-danger btn-block'>Kembali</button></a>";
                       }
                         echo "</th>
                     </tr>
@@ -520,7 +526,7 @@
                     <tr><th scope='row'>Password</th>               <td>$s[password]</td></tr>
                     <tr><th scope='row'>Nama Lengkap</th>           <td>$s[nama_guru]</td></tr>
                     <tr><th scope='row'>Tempat Lahir</th>           <td>$s[tempat_lahir]</td></tr>
-                    <tr><th scope='row'>Tanggal Lahir</th>          <td>$s[tanggal_lahir]</td></tr>
+                    <tr><th scope='row'>Tanggal Lahir</th>          <td>" . tgl_indo($s[tanggal_lahir]) . "</td></tr>
                     <tr><th scope='row'>Jenis Kelamin</th>          <td>$s[jenis_kelamin]</td></tr>
                     <tr><th scope='row'>Agama</th>                  <td>$s[nama_agama]</td></tr>
                     <tr><th scope='row'>No Hp</th>                  <td>$s[hp]</td></tr>

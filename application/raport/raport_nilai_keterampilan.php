@@ -1,21 +1,21 @@
-<?php 
-    if (isset($_POST[simpan])){
-            if ($_POST[status]=='Update'){
-              mysqli_query($koneksi,"UPDATE nilai_keterampilan SET kd='$_POST[a]', nilai1='$_POST[b]', nilai2='$_POST[c]', nilai3='$_POST[d]', nilai4='$_POST[e]', nilai5='$_POST[f]', nilai6='$_POST[g]', deskripsi='$_POST[h]' where id_nilai_keterampilan='$_POST[id]'");
-            }else{
-              mysqli_query($koneksi,"INSERT INTO nilai_keterampilan VALUES('','$_GET[jdwl]','$_POST[nisn]','$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[e]','$_POST[f]','$_POST[g]','$_POST[h]','$_SESSION[id]','".date('Y-m-d H:i:s')."')");
-            }
-        echo "<script>document.location='index.php?view=raport&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]#$_POST[nisn]';</script>";
-    }
+<?php
+if (isset($_POST[simpan])) {
+  if ($_POST[status] == 'Update') {
+    mysqli_query($koneksi, "UPDATE nilai_keterampilan SET kd='$_POST[a]', nilai1='$_POST[b]', nilai2='$_POST[c]', nilai3='$_POST[d]', nilai4='$_POST[e]', nilai5='$_POST[f]', nilai6='$_POST[g]', deskripsi='$_POST[h]' where id_nilai_keterampilan='$_POST[id]'");
+  } else {
+    mysqli_query($koneksi, "INSERT INTO nilai_keterampilan VALUES('','$_GET[jdwl]','$_POST[nisn]','$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[e]','$_POST[f]','$_POST[g]','$_POST[h]','$_SESSION[id]','" . date('Y-m-d H:i:s') . "')");
+  }
+  echo "<script>document.location='index.php?view=raport&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]#$_POST[nisn]';</script>";
+}
 
-    if (isset($_GET[delete])){
-        mysqli_query($koneksi,"DELETE FROM nilai_keterampilan where id_nilai_keterampilan='$_GET[delete]'");
-        echo "<script>document.location='index.php?view=raport&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]#$_GET[nisn]';</script>";
-    }
+if (isset($_GET[delete])) {
+  mysqli_query($koneksi, "DELETE FROM nilai_keterampilan where id_nilai_keterampilan='$_GET[delete]'");
+  echo "<script>document.location='index.php?view=raport&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]#$_GET[nisn]';</script>";
+}
 
-    $d = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM kelas where kode_kelas='$_GET[id]'"));
-    $m = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM mata_pelajaran where kode_pelajaran='$_GET[kd]'"));
-    echo "<div class='col-md-12'>
+$d = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kelas where kode_kelas='$_GET[id]'"));
+$m = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mata_pelajaran where kode_pelajaran='$_GET[kd]'"));
+echo "<div class='col-md-12'>
               <div class='box box-info'>
                 <div class='box-header with-border'>
                   <h3 class='box-title'>Input Nilai Keterampilan Siswa</b></h3>
@@ -51,17 +51,17 @@
                                   <th style='border:1px solid #e3e3e3; width:110px' colspan=2><center>Portofolio</center></th>
                                 </tr>
                               <tbody>";
-                              $no = 1;
-                              $tampil = mysqli_query($koneksi,"SELECT * FROM siswa where kode_kelas='$_GET[id]' ORDER BY id_siswa");
-                              while($r=mysqli_fetch_array($tampil)){
-                                  if (isset($_GET[edit])){
-                                      $e = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM nilai_keterampilan where id_nilai_keterampilan='$_GET[edit]'"));
-                                      $name = 'Update';
-                                  }else{
-                                      $name = 'Simpan';
-                                  }
-                                  if ($_GET[nisn]==$r[nisn]){
-                                    echo "<form action='index.php?view=raport&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]' method='POST'>
+$no = 1;
+$tampil = mysqli_query($koneksi, "SELECT * FROM siswa where kode_kelas='$_GET[id]' ORDER BY id_siswa");
+while ($r = mysqli_fetch_array($tampil)) {
+  if (isset($_GET[edit])) {
+    $e = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM nilai_keterampilan where id_nilai_keterampilan='$_GET[edit]'"));
+    $name = 'Update';
+  } else {
+    $name = 'Simpan';
+  }
+  if ($_GET[nisn] == $r[nisn]) {
+    echo "<form action='index.php?view=raport&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]' method='POST'>
                                       <tr>
                                         <td>$no</td>
                                         <td style='font-size:12px' id='$r[nisn]'>$r[nama]</td>
@@ -78,11 +78,12 @@
                                         <td align=center><input type='text' style='width:35px; background:#e3e3e3; border:1px solid #e3e3e3;' disabled></td>
                                         <td align=center><input type='text' style='width:35px; background:#e3e3e3; border:1px solid #e3e3e3;' disabled></td>
                                         <td align=center><input type='text' name='h' value='$e[deskripsi]' style='width:100%; padding:0px'></td>
-                                        <td align=center><input type='submit' name='simpan' class='btn btn-xs btn-primary' style='width:65px' value='$name'></td>
+                                        <td align=center><input type='submit' name='simpan' class='btn btn-xs btn-primary' style='width:65px' value='$name'>
+                                        <button type='reset' class='btn btn-xs btn-warning' style='width:65px'>Batal</button></td>
                                       </tr>
                                       </form>";
-                                  }else{
-                                    echo "<form action='index.php?view=raport&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]' method='POST'>
+  } else {
+    echo "<form action='index.php?view=raport&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]' method='POST'>
                                       <tr>
                                         <td>$no</td>
                                         <td style='font-size:12px' id='$r[nisn]'>$r[nama]</td>
@@ -99,22 +100,23 @@
                                         <td align=center><input type='text' style='width:35px; background:#e3e3e3; border:1px solid #e3e3e3;' disabled></td>
                                         <td align=center><input type='text' style='width:35px; background:#e3e3e3; border:1px solid #e3e3e3;' disabled></td>
                                         <td align=center><input type='text' name='h' style='width:100%; padding:0px'></td>
-                                        <td align=center><input type='submit' name='simpan' class='btn btn-xs btn-primary' style='width:65px' value='$name'></td>
+                                        <td align=center><input type='submit' name='simpan' class='btn btn-xs btn-primary' style='width:65px' value='$name'>
+                                        <button type='reset' class='btn btn-xs btn-warning' style='width:65px'>Batal</button></td>
                                       </tr>
                                       </form>";
-                                  }
+  }
 
-                                    $pe = mysqli_query($koneksi,"SELECT * FROM nilai_keterampilan where kodejdwl='$_GET[jdwl]' AND nisn='$r[nisn]'");
-                                    while ($n = mysqli_fetch_array($pe)){
-                                    $ratarata = max($n[nilai1],$n[nilai2],$n[nilai3],$n[nilai4],$n[nilai5],$n[nilai6]);
-                                    $cekpredikat = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM predikat where kode_kelas='$_GET[id]'"));
-                                      if ($cekpredikat >= 1){
-                                        $grade1 = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM `predikat` where (".number_format($ratarata)." >=nilai_a) AND (".number_format($ratarata)." <= nilai_b) AND kode_kelas='$_GET[id]'"));
-                                      }else{
-                                        $grade1 = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM `predikat` where (".number_format($ratarata)." >=nilai_a) AND (".number_format($ratarata)." <= nilai_b) AND kode_kelas='0'"));
-                                      }
-                                    
-                                      echo "<tr>
+  $pe = mysqli_query($koneksi, "SELECT * FROM nilai_keterampilan where kodejdwl='$_GET[jdwl]' AND nisn='$r[nisn]'");
+  while ($n = mysqli_fetch_array($pe)) {
+    $ratarata = max($n[nilai1], $n[nilai2], $n[nilai3], $n[nilai4], $n[nilai5], $n[nilai6]);
+    $cekpredikat = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='$_GET[id]'"));
+    if ($cekpredikat >= 1) {
+      $grade1 = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM `predikat` where (" . number_format($ratarata) . " >=nilai_a) AND (" . number_format($ratarata) . " <= nilai_b) AND kode_kelas='$_GET[id]'"));
+    } else {
+      $grade1 = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM `predikat` where (" . number_format($ratarata) . " >=nilai_a) AND (" . number_format($ratarata) . " <= nilai_b) AND kode_kelas='0'"));
+    }
+
+    echo "<tr>
                                         <td></td>
                                         <td></td>
                                         <td align=center>$n[kd]</td>
@@ -124,49 +126,53 @@
                                         <td align=center>$n[nilai4]</td>
                                         <td align=center>$n[nilai5]</td>
                                         <td align=center>$n[nilai6]</td>
-                                        <td align=center>".number_format($ratarata)."</td>
+                                        <td align=center>" . number_format($ratarata) . "</td>
                                         <td align=center>$grade1[grade]</td>
                                         <td>$n[deskripsi]</td>
-                                        <td align=center><a href='index.php?view=raport&act=listsiswaketerampilan&jdwl=".$_GET[jdwl]."&kd=".$_GET[kd]."&id=".$_GET[id]."&tahun=".$_GET[tahun]."&edit=".$n[id_nilai_keterampilan]."&nisn=".$r[nisn]."#$r[nisn]' class='btn btn-xs btn-success'><span class='glyphicon glyphicon-edit'></span></a>
-                                                        <a href='index.php?view=raport&act=listsiswaketerampilan&jdwl=".$_GET[jdwl]."&kd=".$_GET[kd]."&id=".$_GET[id]."&tahun=".$_GET[tahun]."&delete=".$n[id_nilai_keterampilan]."&nisn=".$r[nisn]."' class='btn btn-xs btn-danger' onclick=\"return confirm('Apa anda yakin untuk hapus Data ini?')\"><span class='glyphicon glyphicon-remove'></span></a></td>
+                                        <td align=center><a href='index.php?view=raport&act=listsiswaketerampilan&jdwl=" . $_GET[jdwl] . "&kd=" . $_GET[kd] . "&id=" . $_GET[id] . "&tahun=" . $_GET[tahun] . "&edit=" . $n[id_nilai_keterampilan] . "&nisn=" . $r[nisn] . "#$r[nisn]' class='btn btn-xs btn-success'><span class='glyphicon glyphicon-edit'></span></a>
+                                                        <a href='index.php?view=raport&act=listsiswaketerampilan&jdwl=" . $_GET[jdwl] . "&kd=" . $_GET[kd] . "&id=" . $_GET[id] . "&tahun=" . $_GET[tahun] . "&delete=" . $n[id_nilai_keterampilan] . "&nisn=" . $r[nisn] . "' class='btn btn-xs btn-danger' onclick=\"return confirm('Apa anda yakin untuk hapus Data ini?')\"><span class='glyphicon glyphicon-remove'></span></a></td>
                                       </tr>";
-                                    }
-                                      $maxn = mysqli_fetch_array(mysqli_query($koneksi,"SELECT deskripsi, GREATEST(nilai1,nilai2,nilai3,nilai4,nilai5,nilai6) as tertinggi FROM nilai_keterampilan where kodejdwl='$_GET[jdwl]' AND nisn='$r[nisn]' ORDER BY tertinggi DESC LIMIT 1"));
-                                      $cekpredikat1 = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM predikat where kode_kelas='$_GET[id]'"));
-                                      if ($cekpredikat1 >= 1){
-                                        $grade2 = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM `predikat` where (".number_format($maxn[tertinggi])." >=nilai_a) AND (".number_format($maxn[tertinggi])." <= nilai_b) AND kode_kelas='$_GET[id]'"));
-                                      }else{
-                                        $grade2 = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM `predikat` where (".number_format($maxn[tertinggi])." >=nilai_a) AND (".number_format($maxn[tertinggi])." <= nilai_b) AND kode_kelas='0'"));
-                                      }
+  }
+  $maxn = mysqli_fetch_array(mysqli_query($koneksi, "SELECT deskripsi, GREATEST(nilai1,nilai2,nilai3,nilai4,nilai5,nilai6) as tertinggi FROM nilai_keterampilan where kodejdwl='$_GET[jdwl]' AND nisn='$r[nisn]' ORDER BY tertinggi DESC LIMIT 1"));
+  $cekpredikat1 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='$_GET[id]'"));
+  if ($cekpredikat1 >= 1) {
+    $grade2 = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM `predikat` where (" . number_format($maxn[tertinggi]) . " >=nilai_a) AND (" . number_format($maxn[tertinggi]) . " <= nilai_b) AND kode_kelas='$_GET[id]'"));
+  } else {
+    $grade2 = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM `predikat` where (" . number_format($maxn[tertinggi]) . " >=nilai_a) AND (" . number_format($maxn[tertinggi]) . " <= nilai_b) AND kode_kelas='0'"));
+  }
 
-                                      
-                                      $rapn = mysqli_fetch_array(mysqli_query($koneksi,"SELECT sum(GREATEST(nilai1,nilai2,nilai3,nilai4,nilai5,nilai6))/count(nisn) as raport FROM nilai_keterampilan where kodejdwl='$_GET[jdwl]' AND nisn='$r[nisn]'"));
-                                      $cekpredikat2 = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM predikat where kode_kelas='$_GET[id]'"));
-                                      if ($cekpredikat2 >= 1){
-                                        $grade3 = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM `predikat` where (".number_format($rapn[raport])." >=nilai_a) AND (".number_format($rapn[raport])." <= nilai_b) AND kode_kelas='$_GET[id]'"));
-                                      }else{
-                                        $grade3 = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM `predikat` where (".number_format($rapn[raport])." >=nilai_a) AND (".number_format($rapn[raport])." <= nilai_b) AND kode_kelas='0'"));
-                                      }
 
-                                      echo "<tr>
+  $rapn = mysqli_fetch_array(mysqli_query($koneksi, "SELECT sum(GREATEST(nilai1,nilai2,nilai3,nilai4,nilai5,nilai6))/count(nisn) as raport FROM nilai_keterampilan where kodejdwl='$_GET[jdwl]' AND nisn='$r[nisn]'"));
+  $cekpredikat2 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='$_GET[id]'"));
+  if ($cekpredikat2 >= 1) {
+    $grade3 = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM `predikat` where (" . number_format($rapn[raport]) . " >=nilai_a) AND (" . number_format($rapn[raport]) . " <= nilai_b) AND kode_kelas='$_GET[id]'"));
+  } else {
+    $grade3 = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM `predikat` where (" . number_format($rapn[raport]) . " >=nilai_a) AND (" . number_format($rapn[raport]) . " <= nilai_b) AND kode_kelas='0'"));
+  }
+
+  echo "<tr>
                                               <td></td><td></td>
                                               <td align=center colspan='7'>Nilai Max/Min</td>
-                                              <td align=center>".number_format($maxn[tertinggi])."</td>
+                                              <td align=center>" . number_format($maxn[tertinggi]) . "</td>
                                               <td align=center>$grade2[grade]</td><td></td>
                                             </tr>
                                             <tr>
                                               <td></td><td></td>
                                               <td align=center colspan='7'>Raport</td>
-                                              <td align=center>".number_format($rapn[raport])."</td>
+                                              <td align=center>" . number_format($rapn[raport]) . "</td>
                                               <td align=center>$grade3[grade]</td><td>$maxn[deskripsi]</td>
                                             </tr>";
-                                  $no++;
-                                }
+  $no++;
+}
 
-                                echo "</tbody>
-                            </table>
+echo "</tbody>
+</table>
+              </div>
+              <div style='clear:both'>
+              </div>
+              <div class='box-footer'>
+                <a href='index.php?view=raport'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>
               </div>
           </div>
         </div>
       </div>";
-?>

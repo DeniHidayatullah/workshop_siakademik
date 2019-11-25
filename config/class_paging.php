@@ -231,5 +231,3 @@ $link_halaman .= " ";
 return $link_halaman;
 }
 }
-
-?>

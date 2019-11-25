@@ -60,11 +60,11 @@
 } elseif ($_GET[act] == 'edit') {
   if (isset($_POST[update])) {
     mysqli_query($koneksi, "UPDATE ruangan SET kode_ruangan = '$_POST[a]',
-                                         nama_ruangan = '$_POST[c]',
-                                         kapasitas_belajar = '$_POST[d]',
-                                         kapasitas_ujian = '$_POST[e]',
-                                         keterangan = '$_POST[f]',
-                                         aktif = '$_POST[g]' where kode_ruangan='$_POST[id]'");
+                                              nama_ruangan = '$_POST[c]',
+                                              kapasitas_belajar = '$_POST[d]',
+                                              kapasitas_ujian = '$_POST[e]',
+                                              keterangan = '$_POST[f]',
+                                              aktif = '$_POST[g]' where kode_ruangan='$_POST[id]'");
     echo "<script>document.location='index.php?view=ruangan';</script>";
   }
   $edit = mysqli_query($koneksi, "SELECT * FROM ruangan where kode_ruangan='$_GET[id]'");
@@ -81,19 +81,22 @@
                   <tbody>
                     <input type='hidden' name='id' value='$s[kode_ruangan]'>
                     <tr><th width='120px' scope='row'>Kode Ruangan</th> 
-                    <td><input type='text' class='form-control' name='a' value='$s[kode_ruangan]'> </td></tr>
-                                                                         
-                    <tr><th scope='row'>Nama Ruangan</th>        <td><input type='text' class='form-control' name='c' value='$s[nama_ruangan]'></td></tr>
-                    <tr><th scope='row'>Kapasitas Belajar</th>              <td><input type='text' class='form-control' name='d' value='$s[kapasitas_belajar]'></td></tr>
-                    <tr><th scope='row'>Kapasitas Ujian</th>               <td><input type='text' class='form-control' name='e' value='$s[kapasitas_ujian]'></td></tr>
-                    <tr><th scope='row'>Keterangan</th>           <td><input type='text' class='form-control' name='f' value='$s[keterangan]'></td></tr>
+                    <td><input type='text' class='form-control' name='a' value='$s[kode_ruangan]'></td></tr>
+                    <tr><th scope='row'>Nama Ruangan</th>        
+                    <td><input type='text' class='form-control' name='c' value='$s[nama_ruangan]'></td></tr>
+                    <tr><th scope='row'>Kapasitas Belajar</th>              
+                    <td><input type='text' class='form-control' name='d' value='$s[kapasitas_belajar]'></td></tr>
+                    <tr><th scope='row'>Kapasitas Ujian</th>               
+                    <td><input type='text' class='form-control' name='e' value='$s[kapasitas_ujian]'></td></tr>
+                    <tr><th scope='row'>Keterangan</th>           
+                    <td><input type='text' class='form-control' name='f' value='$s[keterangan]'></td></tr>
                     <tr><th scope='row'>Aktif</th>                <td>";
   if ($s[aktif] == 'Ya') {
     echo "<input type='radio' name='g' value='Ya' checked> Ya
-                                                                             <input type='radio' name='g' value='Tidak'> Tidak";
+    <input type='radio' name='g' value='Tidak'> Tidak";
   } else {
     echo "<input type='radio' name='g' value='Ya'>
-                                                                             <input type='radio' name='g' value='Tidak' checked> Tidak";
+    <input type='radio' name='g' value='Tidak' checked> Tidak";
   }
   echo "</td></tr>
                   </tbody>
@@ -102,7 +105,7 @@
               </div>
               <div class='box-footer'>
                     <button type='submit' name='update' class='btn btn-info'>Update</button>
-                    <a href='index.php?view=ruangan'><button class='btn btn-default pull-right'>Cancel</button></a>
+                    <a href='index.php?view=ruangan'><button type='button' class='btn btn-danger'>Kembali</button></a>
                     
                   </div>
               </form>
@@ -123,20 +126,26 @@
                 <div class='col-md-12'>
                   <table class='table table-condensed table-bordered'>
                   <tbody>
-                    <tr><th width='120px' scope='row'>Kode Ruangan</th> <td><input type='text' class='form-control' name='a'> </td></tr>
-                    <tr><th scope='row'>Nama Ruangan</th>        <td><input type='text' class='form-control' name='c'></td></tr>
-                    <tr><th scope='row'>Kapasitas Belajar</th>              <td><input type='text' class='form-control' name='d'></td></tr>
-                    <tr><th scope='row'>Kapasitas Ujian</th>               <td><input type='text' class='form-control' name='e'></td></tr>
-                    <tr><th scope='row'>Keterangan</th>           <td><input type='text' class='form-control' name='f'></td></tr>
-                    <tr><th scope='row'>Aktif</th>                <td><input type='radio' name='g' value='Ya'> Ya
-                                                                             <input type='radio' name='g' value='Tidak'> Tidak</td></tr>
+                    <tr><th width='120px' scope='row'>Kode Ruangan</th> 
+                    <td><input type='text' class='form-control' name='a'></td></tr>
+                    <tr><th scope='row'>Nama Ruangan</th>        
+                    <td><input type='text' class='form-control' name='c'></td></tr>
+                    <tr><th scope='row'>Kapasitas Belajar</th>              
+                    <td><input type='text' class='form-control' name='d'></td></tr>
+                    <tr><th scope='row'>Kapasitas Ujian</th>               
+                    <td><input type='text' class='form-control' name='e'></td></tr>
+                    <tr><th scope='row'>Keterangan</th>           
+                    <td><input type='text' class='form-control' name='f'></td></tr>
+                    <tr><th scope='row'>Aktif</th>                
+                    <td><input type='radio' name='g' value='Ya'> Ya
+                    <input type='radio' name='g' value='Tidak'> Tidak</td></tr>
                   </tbody>
                   </table>
                 </div>
               </div>
               <div class='box-footer'>
                     <button type='submit' name='tambah' class='btn btn-info'>Tambahkan</button>
-                    <a href='index.php?view=ruangan'><button class='btn btn-default pull-right'>Cancel</button></a>
+                    <a href='index.php?view=ruangan'><button type='button' class='btn btn-danger'>Kembali</button></a>
                     
                   </div>
               </form>
