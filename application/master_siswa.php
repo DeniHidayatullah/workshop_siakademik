@@ -450,6 +450,7 @@ if ($_GET[act]==''){
   if (isset($_POST[update2])){
            mysqli_query($koneksi,"UPDATE siswa SET 
                                nama_ayah        = '$_POST[ca]',
+                               nama_ayah        = '$_POST[ca]',
                                tahun_lahir_ayah   = '$_POST[cb]',
                                pendidikan_ayah         = '$_POST[cc]',
                                pekerjaan_ayah       = '$_POST[cd]',
@@ -471,7 +472,7 @@ if ($_GET[act]==''){
                                pekerjaan_wali       = '$_POST[cr]',
                                penghasilan_wali    = '$_POST[cs]' where nisn='$_POST[id]'");
 
-            echo "<script>document.location='index.php?view=siswa&act=editsiswa&id=".$_POST[id]."';</script>";
+            echo "<script>document.location='index.php?view=siswa&act=editsiswa&id=".$_POST[ab]."';</script>";
   }
     if ($_SESSION[level] == 'siswa'){
         $nisn = $_SESSION[id];

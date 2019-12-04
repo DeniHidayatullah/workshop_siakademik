@@ -110,7 +110,7 @@
                       <td>$r[id_tahun_akademik]</td>";
                 if ($_SESSION[level] != 'kepala') {
                   echo "<td style='width:70px !important'><center>
-<a class='btn btn-success btn-xs' title='Tampil List Absensi' href='index.php?view=absensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]&jdwl=$r[kodejdwl]'><span class='glyphicon glyphicon-th'></span> Tampilkan</a>
+<a class='btn btn-warning btn-xs' title='Tampil List Absensi' href='index.php?view=absensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]&jdwl=$r[kodejdwl]'><span class='glyphicon glyphicon-th'></span> Tampilka</a>
 </center></td>";
                 }
                 echo "</tr>";
@@ -209,7 +209,7 @@
               </table>
               </div>
 
-              <form action='index.php?view=absensiswa&act=tampilabsen&id=$_GET[id]&kd=$_GET[kd]' method='POST' class='col-md-7 pull-right' style='margin-bottom:5px'>
+              <form action='index.php?view=absensiswa&act=tampilabsen&id=$_GET[id]&kd=$_GET[kd]&jdwl=$_GET[jdwl]' method='POST' class='col-md-7 pull-right' style='margin-bottom:5px'>
                 <div class='col-xs-3'><select name='tgl' class='form-control'><option selected>- Tanggal -</option>";
     for ($n = 1; $n <= 31; $n++) {
       if ($tgle == $n) {
@@ -332,12 +332,6 @@
             } elseif ($a[$i] == 'I') {
               $statush = 'Izin';
             }
-            $isi_pesan = "Diberitahukan kepada Yth Bpk/Ibk, Bahwa anak anda $cs[nama], $cs[nama_kelas] absensi Hari ini Tanggal $g-$f-$e : $statush";
-            if ($cs[no_telpon_ayah] != '') {
-              mysqli_query($koneksi, "INSERT INTO sms VALUES('','$cs[no_telpon_ayah]','$isi_pesan')");
-            } elseif ($cs[no_telpon_ibu] != '') {
-              mysqli_query($koneksi, "INSERT INTO sms VALUES('','$cs[no_telpon_ibu]','$isi_pesan')");
-            }
           }
         } else {
           mysqli_query($koneksi, "INSERT INTO absensi_siswa VALUES('','$_POST[jdwl]','" . $nisn[$i] . "','" . $a[$i] . "','" . $e . "-" . $f . "-" . $g . "','" . date('Y-m-d H:i:s') . "')");
@@ -349,12 +343,6 @@
               $statush = 'Sakit';
             } elseif ($a[$i] == 'I') {
               $statush = 'Izin';
-            }
-            $isi_pesan = "Diberitahukan kepada Yth Bpk/Ibk, Bahwa anak anda $cs[nama], $cs[nama_kelas] absensi Hari ini Tanggal $g-$f-$e : $statush";
-            if ($cs[no_telpon_ayah] != '') {
-              mysqli_query($koneksi, "INSERT INTO sms VALUES('','$cs[no_telpon_ayah]','$isi_pesan')");
-            } elseif ($cs[no_telpon_ibu] != '') {
-              mysqli_query($koneksi, "INSERT INTO sms VALUES('','$cs[no_telpon_ibu]','$isi_pesan')");
             }
           }
         }
@@ -479,7 +467,7 @@
                               <td>$r[jam_mulai] WIB</td>
                               <td>$r[jam_selesai] WIB</td>
                               <td style='width:70px !important'><center>
-                                <a class='btn btn-success btn-xs' title='Tampil List Absensi' href='index.php?view=absensiswa&act=tampilabsen&id=$r[kodekelas]&kd=$r[kodepelajaran]'><span class='glyphicon glyphicon-th'></span> Tampilkan Absensi</a>
+                                <a class='btn btn-warning btn-xs' title='Tampil List Absensi' href='index.php?view=absensiswa&act=tampilabsen&id=$r[kodekelas]&kd=$r[kodepelajaran]'><span class='glyphicon glyphicon-th'></span> Tampilkan Absensi</a>
                               </center></td>";
         echo "</tr>";
         $no++;

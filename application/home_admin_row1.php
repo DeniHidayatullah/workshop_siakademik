@@ -1,51 +1,65 @@
-            <a style='color:#000' href='index.php?view=siswa'>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box">
-                  <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
-                  <div class="info-box-content">
-                    <?php $siswa = mysqli_fetch_array(mysqli_query($koneksi, "SELECT count(*) as total FROM siswa")); ?>
-                    <span class="info-box-text">Siswa</span>
-                    <span class="info-box-number"><?php echo $siswa[total]; ?></span>
-                  </div><!-- /.info-box-content -->
-                </div><!-- /.info-box -->
-              </div><!-- /.col -->
-            </a>
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3>
+          <?php $siswa = mysqli_fetch_array(mysqli_query($koneksi, "SELECT count(*) as total FROM siswa")); ?>
+          <?php echo $siswa[total]; ?></h3>
 
-            <a style='color:#000' href='index.php?view=guru'>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box">
-                  <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
-                  <div class="info-box-content">
-                    <?php $guru = mysqli_fetch_array(mysqli_query($koneksi, "SELECT count(*) as total FROM guru")); ?>
-                    <span class="info-box-text">Guru</span>
-                    <span class="info-box-number"><?php echo $guru[total]; ?></span>
-                  </div><!-- /.info-box-content -->
-                </div><!-- /.info-box -->
-              </div><!-- /.col -->
-            </a>
+        <p>Siswa</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-users"></i>
+      </div>
+      <a href="index.php?view=siswa" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right "></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-green">
+      <div class="inner">
+        <h3><?php $guru = mysqli_fetch_array(mysqli_query($koneksi, "SELECT count(*) as total FROM guru")); ?>
+          <?php echo $guru[total]; ?></h3>
 
-            <a style='color:#000' href='index.php?view=bahantugas'>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box">
-                  <span class="info-box-icon bg-yellow"><i class="fa fa-building-o"></i></span>
-                  <div class="info-box-content">
-                    <?php $jurusan = mysqli_fetch_array(mysqli_query($koneksi, "SELECT count(*) as total FROM jurusan")); ?>
-                    <span class="info-box-text">Jurusan</span>
-                    <span class="info-box-number"><?php echo $jurusan[total]; ?></span>
-                  </div><!-- /.info-box-content -->
-                </div><!-- /.info-box -->
-              </div><!-- /.col -->
-            </a>
+        <p>Guru</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-user"></i>
+      </div>
+      <a href="index.php?view=guru" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-orange">
+      <div class="inner">
+        <h3><?php $jurusan = mysqli_fetch_array(mysqli_query($koneksi, "SELECT count(*) as total FROM jurusan")); ?>
+          <?php echo $jurusan[total]; ?></h3>
 
-            <a style='color:#000' href='index.php?view=kelas'>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box">
-                  <span class="info-box-icon bg-red"><i class="fa fa-institution"></i></span>
-                  <div class="info-box-content">
-                    <?php $kelas = mysqli_fetch_array(mysqli_query($koneksi, "SELECT count(*) as total FROM kelas")); ?>
-                    <span class="info-box-text">Kelas</span>
-                    <span class="info-box-number"><?php echo $kelas[total]; ?></span>
-                  </div><!-- /.info-box-content -->
-                </div><!-- /.info-box -->
-              </div><!-- /.col -->
-            </a>
+        <p>Jurusan</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-building-o"></i>
+      </div>
+      <a href="index.php?view=jurusan" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-red">
+      <div class="inner">
+        <h3><?php $kelas = mysqli_fetch_array(mysqli_query($koneksi, "SELECT count(*) as total FROM kelas")); ?>
+          <?php echo $kelas[total]; ?></h3>
+
+        <p>Kelas</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-institution"></i>
+      </div>
+      <a href="index.php?view=kelas" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->

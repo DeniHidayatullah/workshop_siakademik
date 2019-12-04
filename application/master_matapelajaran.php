@@ -68,12 +68,10 @@
     kode_jurusan = '$_POST[c]',
     nip = '$_POST[d]',
     namamatapelajaran = '$_POST[f]',
-    namamatapelajaran_en = '$_POST[g]',
     tingkat = '$_POST[h]',
     kompetensi_umum = '$_POST[i]',
     kompetensi_khusus = '$_POST[j]',
     jumlah_jam = '$_POST[k]',
-    sesi = '$_POST[n]',
     urutan = '$_POST[l]',
     aktif = '$_POST[m]' where kode_pelajaran='$_POST[id]'");
     echo "<script>document.location='index.php?view=matapelajaran';</script>";
@@ -92,9 +90,10 @@
                   <tbody>
                     <input type='hidden' name='id' value='$s[kode_pelajaran]'>
                     
-                    <tr><th scope='row'>Kode Pelajaran</th>       <td><input type='text' class='form-control' name='a' value='$s[kode_pelajaran]'> </td></tr>
-                    <tr><th scope='row'>Nama Mapel</th>           <td><input type='text' class='form-control' name='f' value='$s[namamatapelajaran]'></td></tr>
-                    <tr><th scope='row'>Nama Mapel En</th>        <td><input type='text' class='form-control' name='g' value='$s[namamatapelajaran_en]'></td></tr>
+                    <tr><th scope='row'>Kode Pelajaran</th>       
+                    <td><input type='text' class='form-control' name='a' value='$s[kode_pelajaran]'> </td></tr>
+                    <tr><th scope='row'>Nama Mapel</th>           
+                    <td><input type='text' class='form-control' name='f' value='$s[namamatapelajaran]'></td></tr>
                     <tr><th scope='row'>Jurusan</th> <td><select class='form-control' name='c'> 
                              <option value='0' selected>- Pilih Jurusan -</option>";
   $jurusan = mysqli_query($koneksi, "SELECT * FROM jurusan");
@@ -124,7 +123,6 @@
                     <tr><th scope='row'>Kompetensi Khusus</th>           <td><input type='text' class='form-control' name='j' value='$s[kompetensi_khusus]'></td></tr>
                     <tr><th scope='row'>Jumlah Jam</th>           <td><input type='text' class='form-control' name='k' value='$s[jumlah_jam]'></td></tr>
                     <tr><th scope='row'>Urutan</th>           <td><input type='text' class='form-control' name='l' value='$s[urutan]'></td></tr>
-                    <tr><th scope='row'>Sesi</th>           <td><input type='text' class='form-control' name='n' value='$s[sesi]'></td></tr>
                     <tr><th scope='row'>Kelompok</th> <td><select class='form-control' name='b'> 
                              <option value='0' selected>- Pilih Kelompok Mata Pelajaran -</option>";
   $kelompok = mysqli_query($koneksi, "SELECT * FROM kelompok_mata_pelajaran");
@@ -158,8 +156,8 @@
             </div>";
 } elseif ($_GET[act] == 'tambah') {
   if (isset($_POST[tambah])) {
-    mysqli_query($koneksi, "INSERT INTO mata_pelajaran VALUES('$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[f]',
-                                                          '$_POST[g]','$_POST[h]','$_POST[i]','$_POST[j]','$_POST[k]','$_POST[n]','$_POST[l]','$_POST[m]')");
+    mysqli_query($koneksi, "INSERT INTO mata_pelajaran VALUES
+    ('$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[f]','$_POST[h]','$_POST[i]','$_POST[j]','$_POST[k]','$_POST[l]','$_POST[m]')");
     echo "<script>document.location='index.php?view=matapelajaran';</script>";
   }
 
@@ -175,7 +173,6 @@
                   <tbody>
                     <tr><th scope='row'>Kode Pelajaran</th>       <td><input type='text' class='form-control' name='a' value='$s[kode_pelajaran]'> </td></tr>
                     <tr><th scope='row'>Nama Mapel</th>           <td><input type='text' class='form-control' name='f' value='$s[namamatapelajaran]'></td></tr>
-                    <tr><th scope='row'>Nama Mapel En</th>        <td><input type='text' class='form-control' name='g' value='$s[namamatapelajaran_en]'></td></tr>
                     <tr><th scope='row'>Jurusan</th> <td><select class='form-control' name='c'> 
                              <option value='0' selected>- Pilih Jurusan -</option>";
   $jurusan = mysqli_query($koneksi, "SELECT * FROM jurusan");
@@ -197,7 +194,6 @@
                     <tr><th scope='row'>Kompetensi Khusus</th>           <td><input type='text' class='form-control' name='j' value='$s[kompetensi_khusus]'></td></tr>
                     <tr><th scope='row'>Jumlah Jam</th>           <td><input type='text' class='form-control' name='k' value='$s[jumlah_jam]'></td></tr>
                     <tr><th scope='row'>Urutan</th>           <td><input type='text' class='form-control' name='l' value='$s[urutan]'></td></tr>
-                    <tr><th scope='row'>Sesi</th>           <td><input type='text' class='form-control' name='n'></td></tr>
                     <tr><th scope='row'>Kelompok</th> <td><select class='form-control' name='b'> 
                              <option value='0' selected>- Pilih Kelompok Mata Pelajaran -</option>";
   $kelompok = mysqli_query($koneksi, "SELECT * FROM kelompok_mata_pelajaran");
@@ -237,7 +233,6 @@
                   <tbody>
                     <tr><th scope='row'>Kode Pelajaran</th>       <td>$s[kode_pelajaran] </td></tr>
                     <tr><th scope='row'>Nama Mapel</th>           <td>$s[namamatapelajaran]</td></tr>
-                    <tr><th scope='row'>Nama Mapel En</th>        <td>$s[namamatapelajaran_en]</td></tr>
                     <tr><th scope='row'>Jurusan</th>              <td>$s[nama_jurusan]</td></tr>
                     <tr><th scope='row'>Guru Pengampu</th>        <td>$s[nama_guru]</td></tr>
                     <tr><th scope='row'>Tingkat</th>              <td>$s[tingkat]</td></tr>
@@ -245,7 +240,6 @@
                     <tr><th scope='row'>Kompetensi Khusus</th>    <td>$s[kompetensi_khusus]</td></tr>
                     <tr><th scope='row'>Jumlah Jam</th>           <td>$s[jumlah_jam]</td></tr>
                     <tr><th scope='row'>Urutan</th>               <td>$s[urutan]</td></tr>
-                    <tr><th scope='row'>Sesi</th>                 <td>$s[sesi]</td></tr>
                     <tr><th scope='row'>Kelompok</th>             <td>$s[nama_kelompok_mata_pelajaran]</td></tr>
                     <tr><th scope='row'>Aktif</th>                <td>$s[aktif]</td></tr>
                   </tbody>

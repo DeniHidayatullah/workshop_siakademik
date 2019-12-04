@@ -15,8 +15,6 @@
               <th>Kode Ruangan</th>
               <th>Nama Ruangan</th>
               <th>Kapasitas Belajar</th>
-              <th>Kapasitas Ujian</th>
-              <th>Keterangan</th>
               <th>Aktif</th>
               <?php if ($_SESSION[level] != 'kepala') { ?>
                 <th style='width:70px'>Action</th>
@@ -33,8 +31,6 @@
                               <td>$r[kode_ruangan]</td>
                               <td>$r[nama_ruangan]</td>
                               <td>$r[kapasitas_belajar] Orang</td>
-                              <td>$r[kapasitas_ujian] Orang</td>
-                              <td>$r[keterangan]</td>
                               <td>$r[aktif]</td>";
                 if ($_SESSION[level] != 'kepala') {
                   echo "<td><center>
@@ -62,8 +58,6 @@
     mysqli_query($koneksi, "UPDATE ruangan SET kode_ruangan = '$_POST[a]',
                                               nama_ruangan = '$_POST[c]',
                                               kapasitas_belajar = '$_POST[d]',
-                                              kapasitas_ujian = '$_POST[e]',
-                                              keterangan = '$_POST[f]',
                                               aktif = '$_POST[g]' where kode_ruangan='$_POST[id]'");
     echo "<script>document.location='index.php?view=ruangan';</script>";
   }
@@ -86,10 +80,6 @@
                     <td><input type='text' class='form-control' name='c' value='$s[nama_ruangan]'></td></tr>
                     <tr><th scope='row'>Kapasitas Belajar</th>              
                     <td><input type='text' class='form-control' name='d' value='$s[kapasitas_belajar]'></td></tr>
-                    <tr><th scope='row'>Kapasitas Ujian</th>               
-                    <td><input type='text' class='form-control' name='e' value='$s[kapasitas_ujian]'></td></tr>
-                    <tr><th scope='row'>Keterangan</th>           
-                    <td><input type='text' class='form-control' name='f' value='$s[keterangan]'></td></tr>
                     <tr><th scope='row'>Aktif</th>                <td>";
   if ($s[aktif] == 'Ya') {
     echo "<input type='radio' name='g' value='Ya' checked> Ya
@@ -112,7 +102,7 @@
             </div>";
 } elseif ($_GET[act] == 'tambah') {
   if (isset($_POST[tambah])) {
-    mysqli_query($koneksi, "INSERT INTO ruangan VALUES('$_POST[a]','$_POST[c]','$_POST[d]','$_POST[e]','$_POST[f]','$_POST[g]')");
+    mysqli_query($koneksi, "INSERT INTO ruangan VALUES('$_POST[a]','$_POST[c]','$_POST[d]','$_POST[g]')");
     echo "<script>document.location='index.php?view=ruangan';</script>";
   }
 
@@ -132,10 +122,6 @@
                     <td><input type='text' class='form-control' name='c'></td></tr>
                     <tr><th scope='row'>Kapasitas Belajar</th>              
                     <td><input type='text' class='form-control' name='d'></td></tr>
-                    <tr><th scope='row'>Kapasitas Ujian</th>               
-                    <td><input type='text' class='form-control' name='e'></td></tr>
-                    <tr><th scope='row'>Keterangan</th>           
-                    <td><input type='text' class='form-control' name='f'></td></tr>
                     <tr><th scope='row'>Aktif</th>                
                     <td><input type='radio' name='g' value='Ya'> Ya
                     <input type='radio' name='g' value='Tidak'> Tidak</td></tr>

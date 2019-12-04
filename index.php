@@ -102,7 +102,7 @@ if (isset($_SESSION[id])) {
     </script>
   </head>
 
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
       <header class="main-header">
         <?php include "main-header.php"; ?>
@@ -137,6 +137,7 @@ if (isset($_SESSION[id])) {
               } else {
                 echo "<div class='row'>";
                 include "application/home_admin_row1.php";
+                include "application/home_admin_row2.php";
                 echo "</div>";
               }
             } elseif ($_GET[view] == 'journalkbm') {
@@ -208,6 +209,11 @@ if (isset($_SESSION[id])) {
               echo "<div class='row'>";
               include "application/master_jadwalpelajaran.php";
               echo "</div>";
+            } elseif ($_GET[view] == 'jadwalmapel') {
+              cek_session_siswa();
+              echo "<div class='row'>";
+              include "application/jadwal.php";
+              echo "</div>";
             } elseif ($_GET[view] == 'jurusan') {
               cek_session_admin();
               echo "<div class='row'>";
@@ -239,14 +245,16 @@ if (isset($_SESSION[id])) {
               include "application/master_kompetensidasar.php";
               echo "</div>";
             } elseif ($_GET[view] == 'absensiswa') {
-              cek_session_guru();
               echo "<div class='row'>";
               include "application/absensi_siswa.php";
               echo "</div>";
             } elseif ($_GET[view] == 'rekapabsensiswa') {
-              cek_session_guru();
               echo "<div class='row'>";
               include "application/absensi_siswa_rekap.php";
+              echo "</div>";
+            } elseif ($_GET[view] == 'absensi') {
+              echo "<div class='row'>";
+              include "application/absensi.php";
               echo "</div>";
             } elseif ($_GET[view] == 'raport') {
               echo "<div class='row'>";

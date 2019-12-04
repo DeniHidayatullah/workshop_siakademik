@@ -81,7 +81,7 @@
                               <td>$r[id_tahun_akademik]</td>";
                 if ($_SESSION[level] != 'kepala') {
                   echo "<td style='width:70px !important'><center>
-                                <a class='btn btn-success btn-xs' title='Tampil List Absensi' href='index.php?view=rekapabsensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]&jdwl=$r[kodejdwl]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th'></span> Tampilkan</a>
+                                <a class='btn btn-warning btn-xs' title='Tampil List Absensi' href='index.php?view=rekapabsensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]&jdwl=$r[kodejdwl]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th'></span> Tampilkan</a>
                               </center></td>";
                 }
                 echo "</tr>";
@@ -110,7 +110,7 @@
                               <td>$r[id_tahun_akademik]</td>";
                 if ($_SESSION[level] != 'kepala') {
                   echo "<td style='width:70px !important'><center>
-                                <a class='btn btn-success btn-xs' title='Tampil List Absensi' href='index.php?view=rekapabsensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]&jdwl=$r[kodejdwl]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th'></span> Tampilkan</a>
+                                <a class='btn btn-warning btn-xs' title='Tampil List Absensi' href='index.php?view=rekapabsensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]&jdwl=$r[kodejdwl]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th'></span> Tampilkan</a>
                               </center></td>";
                 }
                 echo "</tr>";
@@ -172,7 +172,10 @@
     $sakit = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$_GET[jdwl]' AND nisn='$r[nisn]' AND kode_kehadiran='S'"));
     $izin = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$_GET[jdwl]' AND nisn='$r[nisn]' AND kode_kehadiran='I'"));
     $alpa = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$_GET[jdwl]' AND nisn='$r[nisn]' AND kode_kehadiran='A'"));
-    $persen = $hadir / ($total) * 100;
+    $bobotsakit = 0.5;
+    $bobotalpa = 0;
+    $kehadiran = $hadir + ($bobotsakit * $sakit) + ($bobotsakit * $izin) + ($bobotalpa * $alpa);
+    $persen = $kehadiran / ($total) * 100;
     echo "<tr bgcolor=$warna>
                             <td>$no</td>
                             <td>$r[nisn]</td>
@@ -194,5 +197,8 @@
                 </div>
               </div>
             </div>";
+} elseif ($_GET[act] == 'detailsiswa') {
+  cek_session_siswa();
+  include "absensi.php";
 }
 ?>

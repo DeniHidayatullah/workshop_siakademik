@@ -8,6 +8,7 @@
                                                 echo "Jadwal Pelajaran Pada Tahun " . date('Y');
                                             } ?></h3>
                 <form style='margin-right:5px; margin-top:0px' class='pull-right' action='' method='GET'>
+                    <input type='hidden' name='view' value='jadwalmapel'>
                     <select name='tahun' style='padding:4px'>
                         <?php
                             echo "<option value=''>- Pilih Tahun Akademik -</option>";
@@ -43,6 +44,7 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         <?php
                             if (isset($_GET[tahun])) {
                                 $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
@@ -71,12 +73,13 @@
                               <td>$r[jam_selesai]</td>
                               <td>$r[nama_ruangan]</td>
                               <td>$r[id_tahun_akademik]</td>
-                              <td><a class='btn btn-success btn-xs' title='Lihat Data' href='index.php?view=home&act=kompetensidasar&kodejdwl=$r[kodejdwl]'><span class='glyphicon glyphicon-list'></span> Kompetensi</a></td>
+                              <td><a class='btn btn-success btn-xs' title='Lihat Data' href='index.php?view=jadwalmapel&act=kompetensidasar&kodejdwl=$r[kodejdwl]'><span class='glyphicon glyphicon-list'></span> Kompetensi</a></td>
                           </tr>";
                                 $no++;
                             }
                             ?>
                     </tbody>
+
                 </table>
             </div><!-- /.box-body -->
         </div>

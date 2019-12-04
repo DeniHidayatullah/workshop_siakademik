@@ -84,12 +84,13 @@
                               <td>$r[jam_selesai]</td>
                               <td>$r[nama_ruangan]</td>";
                 if ($_SESSION[level] != 'kepala') {
-                  echo "<td><a class='btn btn-xs btn-warning' href='index.php?view=absensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]'>Buka Absensi Siswa</a></td>";
+                  echo "<td><a class='btn btn-xs btn-warning' href='index.php?view=absensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]&jdwl=$r[kodejdwl]'>Buka Absensi Siswa</a></td>";
                 }
                 if ($_SESSION[level] != 'kepala') {
                   echo "<td style='width:70px !important'><center>
-                                        <a class='btn btn-success btn-xs' title='Edit Jadwal' href='index.php?view=jadwalpelajaran&act=edit&id=$r[kodejdwl]'><span class='glyphicon glyphicon-edit'></span></a>
-                                        <a class='btn btn-danger btn-xs' title='Hapus Jadwal' href='index.php?view=jadwalpelajaran&hapus=$r[kodejdwl]' onclick=\"return confirm('Apakah anda Yakin Data ini Dihapus?')\"><span class='glyphicon glyphicon-remove'></span></a>
+                  <a class='btn btn-primary btn-xs' title='Detail Data' href='?view=jadwalpelajaran&act=detail&id=$r[kodejdwl]'><span class='glyphicon glyphicon-search'></span></a>
+                  <a class='btn btn-success btn-xs' title='Edit Jadwal' href='index.php?view=jadwalpelajaran&act=edit&id=$r[kodejdwl]'><span class='glyphicon glyphicon-edit'></span></a>
+                  <a class='btn btn-danger btn-xs' title='Hapus Jadwal' href='index.php?view=jadwalpelajaran&hapus=$r[kodejdwl]' onclick=\"return confirm('Apakah anda Yakin Data ini Dihapus?')\"><span class='glyphicon glyphicon-remove'></span></a>
                                       </center></td>";
                 }
                 echo "</tr>";
@@ -121,12 +122,13 @@
                         <td>$r[jam_selesai]</td>
                         <td>$r[nama_ruangan]</td>";
                 if ($_SESSION[level] != 'kepala') {
-                  echo "<td><a class='btn btn-xs btn-warning' href='index.php?view=absensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]'>Buka Absensi Siswa</a></td>";
+                  echo "<td><a class='btn btn-xs btn-warning' href='index.php?view=absensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]&jdwl=$r[kodejdwl]'>Buka Absensi Siswa</a></td>";
                 }
                 if ($_SESSION[level] != 'kepala') {
                   echo "<td style='width:70px !important'><center>
-                                  <a class='btn btn-success btn-xs' title='Edit Jadwal' href='index.php?view=jadwalpelajaran&act=edit&id=$r[kodejdwl]'><span class='glyphicon glyphicon-edit'></span></a>
-                                  <a class='btn btn-danger btn-xs' title='Hapus Jadwal' href='index.php?view=jadwalpelajaran&hapus=$r[kodejdwl]' onclick=\"return confirm('Apakah anda Yakin Data ini Dihapus?')\"><span class='glyphicon glyphicon-remove'></span></a>
+                  <a class='btn btn-primary btn-xs' title='Detail Data' href='?view=jadwalpelajaran&act=detail&id=$r[kodejdwl]'><span class='glyphicon glyphicon-search'></span></a>
+                  <a class='btn btn-success btn-xs' title='Edit Jadwal' href='index.php?view=jadwalpelajaran&act=edit&id=$r[kodejdwl]'><span class='glyphicon glyphicon-edit'></span></a>
+                  <a class='btn btn-danger btn-xs' title='Hapus Jadwal' href='index.php?view=jadwalpelajaran&hapus=$r[kodejdwl]' onclick=\"return confirm('Apakah anda Yakin Data ini Dihapus?')\"><span class='glyphicon glyphicon-remove'></span></a>
                                 </center></td>";
                 }
                 echo "</tr>";
@@ -148,7 +150,7 @@
 <?php
 } elseif ($_GET[act] == 'tambah') {
   if (isset($_POST[tambah])) {
-    mysqli_query($koneksi, "INSERT INTO jadwal_pelajaran VALUES('','$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[e]','$_POST[f]','$_POST[g]','$_POST[h]','$_POST[i]','$_POST[j]','$_POST[k]')");
+    mysqli_query($koneksi, "INSERT INTO jadwal_pelajaran VALUES('','$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[e]','$_POST[h]','$_POST[i]','$_POST[j]','$_POST[k]')");
     echo "<script>document.location='index.php?view=jadwalpelajaran';</script>";
   }
 
@@ -202,8 +204,6 @@
   }
   echo "</select>
                     </td></tr>
-                    <tr><th scope='row'>Jadwal Paralel</th>  <td><input type='text' class='form-control' name='f'></td></tr>
-                    <tr><th scope='row'>Jadwal Serial</th>  <td><input type='text' class='form-control' name='g'></td></tr>
                     <tr><th scope='row'>Jam Mulai</th>  <td><input type='text' class='form-control' name='h' placeholder='hh:ii:ss' value='" . date('H:i:s') . "'></td></tr>
                     <tr><th scope='row'>Jam Selesai</th><td><input type='text' class='form-control' name='i' placeholder='hh:ii:ss' value='" . date('H:i:s') . "'></td></tr>
                     <tr><th scope='row'>Hari</th>  <td><select class='form-control' name='j'>
@@ -236,8 +236,6 @@
                                                     kode_pelajaran = '$_POST[c]',
                                                     kode_ruangan = '$_POST[d]',
                                                     nip = '$_POST[e]',
-                                                    paralel = '$_POST[f]',
-                                                    jadwal_serial = '$_POST[g]',
                                                     jam_mulai = '$_POST[h]',
                                                     jam_selesai = '$_POST[i]',
                                                     hari = '$_POST[j]',
@@ -268,8 +266,9 @@
   }
   echo "</select>
                     </td></tr>
-                    <tr><th scope='row'>Kelas</th>   <td><select class='form-control' name='b'> 
-                                                <option value='0' selected>- Pilih Kelas -</option>";
+                    <tr><th scope='row'>Kelas</th>   
+                    <td><select class='form-control' name='b'>
+                    <option value='0' selected>- Pilih Kelas -</option>";
   $kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
   while ($a = mysqli_fetch_array($kelas)) {
     if ($e[kode_kelas] == $a[kode_kelas]) {
@@ -280,8 +279,9 @@
   }
   echo "</select>
                     </td></tr>
-                    <tr><th scope='row'>Mata Pelajaran</th>   <td><select class='form-control' name='c'> 
-                                                <option value='0' selected>- Pilih Mata Pelajaran -</option>";
+                    <tr><th scope='row'>Mata Pelajaran</th>   
+                    <td><select class='form-control' name='c'>
+                    <option value='0' selected>- Pilih Mata Pelajaran -</option>";
   $mapel = mysqli_query($koneksi, "SELECT * FROM mata_pelajaran");
   while ($a = mysqli_fetch_array($mapel)) {
     if ($e[kode_pelajaran] == $a[kode_pelajaran]) {
@@ -292,8 +292,9 @@
   }
   echo "</select>
                     </td></tr>
-                    <tr><th scope='row'>Ruangan</th>   <td><select class='form-control' name='d'> 
-                                                <option value='0' selected>- Pilih Ruangan -</option>";
+                    <tr><th scope='row'>Ruangan</th>   
+                    <td><select class='form-control' name='d'>
+                    <option value='0' selected>- Pilih Ruangan -</option>";
   $ruangan = mysqli_query($koneksi, "SELECT * FROM ruangan ");
   while ($a = mysqli_fetch_array($ruangan)) {
     if ($e[kode_ruangan] == $a[kode_ruangan]) {
@@ -316,8 +317,6 @@
   }
   echo "</select>
                     </td></tr>
-                    <tr><th scope='row'>Jadwal Paralel</th>  <td><input type='text' class='form-control' name='f' value='$e[paralel]'></td></tr>
-                    <tr><th scope='row'>Jadwal Serial</th>  <td><input type='text' class='form-control' name='g' value='$e[jadwal_serial]'></td></tr>
                     <tr><th scope='row'>Jam Mulai</th>  <td><input type='text' class='form-control' name='h' placeholder='hh:ii:ss' value='$e[jam_mulai]'></td></tr>
                     <tr><th scope='row'>Jam Selesai</th><td><input type='text' class='form-control' name='i' placeholder='hh:ii:ss' value='$e[jam_selesai]'></td></tr>
                     <tr><th scope='row'>Hari</th>  <td><select class='form-control' name='j'>
@@ -346,6 +345,42 @@
               <div class='box-footer'>
                     <button type='submit' name='update' class='btn btn-info'>Update</button>
                     <a href='index.php?view=jadwalpelajaran'><button type='button' class='btn btn-danger'>Kembali</button></a>
+                  </div>
+              </form>
+            </div>";
+} elseif ($_GET[act] == 'detail') {
+  $detail = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
+  JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran
+    JOIN guru c ON a.nip=c.nip 
+      JOIN ruangan d ON a.kode_ruangan=d.kode_ruangan
+        JOIN kelas e ON a.kode_kelas=e.kode_kelas
+        where a.kodejdwl='$_GET[id]'");
+  $s = mysqli_fetch_array($detail);
+  echo "<div class='col-md-12'>
+              <div class='box box-info'>
+                <div class='box-header with-border'>
+                  <h3 class='box-title'>Detail Data Jadwal Pelajaran</h3>
+                </div>
+              <div class='box-body'>
+              <form method='POST' class='form-horizontal' action='' enctype='multipart/form-data'>
+                <div class='col-md-12'>
+                  <table class='table table-condensed table-bordered'>
+                  <tbody>
+                    <tr><th scope='row'>Nama Mapel</th>           <td>$s[namamatapelajaran]</td></tr>
+                    <tr><th scope='row'>Nama Kelas</th>           <td>$s[nama_kelas]</td></tr>
+                    <tr><th scope='row'>Guru Pengampu</th>        <td>$s[nama_guru]</td></tr>
+                    <tr><th scope='row'>Hari</th>                 <td>$s[hari]</td></tr>
+                    <tr><th scope='row'>Jam Mulai</th>            <td>$s[jam_mulai]</td></tr>
+                    <tr><th scope='row'>Jam Selesai</th>          <td>$s[jam_selesai]</td></tr>
+                    <tr><th scope='row'>Ruangan</th>              <td>$s[nama_ruangan]</td></tr>
+                    <tr><th scope='row'>Aktif</th>                <td>$s[aktif]</td></tr>
+                  </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class='box-footer'>
+                    <a href='index.php?view=jadwalpelajaran'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>
+                    
                   </div>
               </form>
             </div>";

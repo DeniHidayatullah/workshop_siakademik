@@ -29,7 +29,7 @@
 <div class="box box-success">
     <div class="box-header">
         <i class="fa fa-comments-o"></i>
-        <h3 class="box-title">Grafik Kunjungan Siswa dan Guru</h3>
+        <h3 class="box-title">Grafik Jumlah Siswa Jurusan Per Angkatan </h3>
         <div class="box-tools pull-right">
             <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
             <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
@@ -52,7 +52,7 @@
             </thead>
             <tbody>
                 <?php
-                $grafik = mysqli_query($koneksi, "SELECT * FROM users_aktivitas GROUP BY tanggal ORDER BY tanggal ASC LIMIT 5");
+                $grafik = mysqli_query($koneksi, "SELECT * FROM jurusan GROUP BY tanggal ORDER BY tanggal ASC LIMIT 5");
                 while ($r = mysqli_fetch_array($grafik)) {
                     $ale = tgl_grafik($r[tanggal]);
                     $siswa = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM users_aktivitas where status='siswa' AND tanggal='$r[tanggal]'"));
