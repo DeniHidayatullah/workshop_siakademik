@@ -34,7 +34,7 @@ if ($_GET[act] == '') {
   }
   echo "</th>
 </tr>
-<tr><th width='120px' scope='row'>Kode Guru</th>      <td>$s[nip]</td></tr>
+<tr><th width='120px' scope='row'>NIP</th>      <td>$s[nip]</td></tr>
 <tr><th scope='row'>Password</th>               <td>$s[password]</td></tr>
 <tr><th scope='row'>Nama Lengkap</th>           <td>$s[nama_guru]</td></tr>
 <tr><th scope='row'>Tempat Lahir</th>           <td>$s[tempat_lahir]</td></tr>
