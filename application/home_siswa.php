@@ -38,10 +38,7 @@ if ($_GET[act] == '') {
   } else {
     echo "<img class='img-thumbnail' style='width:155px' src='foto_siswa/$s[foto]'>";
   }
-  if ($_SESSION[level] != 'kepala') {
-    echo "<a href='index.php?view=siswa&act=editsiswa&id=$_GET[id]' class='btn btn-success btn-block'>Edit Profile</a>";
-    echo "<a href='index.php?view=siswa'><button type='button' class='btn btn-danger btn-block'>Kembali</button></a>";
-  }
+
   echo "</th>
 </tr>
 <tr><th width='120px' scope='row'>NIPD</th> <td>$s[nipd]</td></tr>
@@ -96,10 +93,7 @@ if ($_GET[act] == '') {
   } else {
     echo "<img class='img-thumbnail' style='width:155px' src='foto_siswa/$s[foto]'>";
   }
-  if ($_SESSION[level] != 'kepala') {
-    echo "<a href='index.php?view=siswa&act=editsiswa&id=$_GET[id]' class='btn btn-success btn-block'>Edit Profile</a>";
-    echo "<a href='index.php?view=siswa'><button type='button' class='btn btn-danger btn-block'>Kembali</button></a>";
-  }
+
   echo "</th>
                             </tr>
                             <tr bgcolor=#e3e3e3><th width='120px' scope='row'>Nama Ayah</th> <td>$s[nama_ayah]</td></tr>

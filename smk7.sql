@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Des 2019 pada 07.37
+-- Waktu pembuatan: 05 Des 2019 pada 02.18
 -- Versi server: 10.1.35-MariaDB
 -- Versi PHP: 7.2.9
 
@@ -77,6 +77,25 @@ INSERT INTO `agama` (`id_agama`, `nama_agama`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `golongan`
+--
+
+CREATE TABLE `golongan` (
+  `id_golongan` int(5) NOT NULL,
+  `nama_golongan` varchar(150) NOT NULL,
+  `keterangan` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `golongan`
+--
+
+INSERT INTO `golongan` (`id_golongan`, `nama_golongan`, `keterangan`) VALUES
+(0, 'IV/a', 'Golongan I/a');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `guru`
 --
 
@@ -104,20 +123,21 @@ CREATE TABLE `guru` (
   `id_status_kepegawaian` int(5) NOT NULL,
   `id_jenis_ptk` int(5) NOT NULL,
   `id_status_keaktifan` int(5) NOT NULL,
-  `foto` varchar(255) NOT NULL
+  `foto` varchar(255) NOT NULL,
+  `id_golongan` int(5) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `guru`
 --
 
-INSERT INTO `guru` (`nip`, `password`, `nama_guru`, `tempat_lahir`, `tanggal_lahir`, `id_jenis_kelamin`, `id_agama`, `telepon`, `email`, `alamat_jalan`, `rt`, `rw`, `nama_dusun`, `desa_kelurahan`, `kecamatan`, `kabupaten`, `kode_pos`, `nuptk`, `nik`, `tmt`, `id_status_kepegawaian`, `id_jenis_ptk`, `id_status_keaktifan`, `foto`) VALUES
-('196608201993032006', '7473038696', 'Lili Suyani', 'Jember', '1966-08-20', 2, 1, '0751461692', '@gmail.com', 'simpang empat padang lua', '0', '0', 'padang lua', 'banuhampu', 'Kec. sumberbaru', '', 0, '8152744647300033', '1374025104571989', '1994-06-01', 3, 4, 1, ''),
-('195806161984000016', '11435453225', 'Agus Musanib', 'Lumajang', '1950-02-02', 2, 1, '0751461692', 'dankrez48@gmail.com', 'Prof.M.Yamin, SH', '4', '4', '', 'Tarok Dipo', 'Kec. jatiroto', '', 0, '', '1374025104571989', '2004-05-05', 1, 1, 1, ''),
-('198406142009012003', '12241237914', 'Dellya', 'Jember', '1984-06-14', 2, 1, '0751461692', '@gmail.com', 'Parak Kongsi Jorong Parik Putuih', '0', '0', '', 'Ampang Gadang', 'Kec. sumberbaru', '', 0, '3946762664210112', '1374025104571989', '2009-01-01', 3, 4, 1, ''),
-('195806161984000001', '12177967191', 'Aina Yonavia', 'Jember', '1989-02-28', 1, 1, '0751461692', 'dankrez48@gmail.com', 'Jl.bonjo Baru By Pass', '3', '5', '', 'Tarok DIpo', 'Kec. Sumberagung', '', 26122, '', '1374025104571989', '2015-07-13', 2, 2, 1, ''),
-('1234', '1234', 'Aisyah', 'Jember', '1958-06-16', 2, 1, '0751461692', 'dankrez48@gmail.com', 'Birugo Puhun 80.266', '0', '0', '', 'Tarok Dipo', 'Kec. sumberbaru', '', 0, '3948736639300012', '1374025104571989', '1983-03-01', 3, 2, 1, ''),
-('195704111980032004', '195704111980032004', 'April Daniati', 'Lumajang', '1957-04-11', 2, 1, '0751461692', 'dankrez48@gmail.com', 'Jl.Perintis Kemerdekaan No.121 B', '3', '0', '', 'Balai-Balai', 'Kec. jatiroto', '', 27114, '1743735636300012', '1374025104571989', '1980-03-01', 3, 2, 1, '');
+INSERT INTO `guru` (`nip`, `password`, `nama_guru`, `tempat_lahir`, `tanggal_lahir`, `id_jenis_kelamin`, `id_agama`, `telepon`, `email`, `alamat_jalan`, `rt`, `rw`, `nama_dusun`, `desa_kelurahan`, `kecamatan`, `kabupaten`, `kode_pos`, `nuptk`, `nik`, `tmt`, `id_status_kepegawaian`, `id_jenis_ptk`, `id_status_keaktifan`, `foto`, `id_golongan`) VALUES
+('196608201993032006', '7473038696', 'Lili Suyani', 'Jember', '1966-08-20', 2, 1, '0751461692', '@gmail.com', 'simpang empat padang lua', '0', '0', 'padang lua', 'banuhampu', 'Kec. sumberbaru', '', 0, '8152744647300033', '1374025104571989', '1994-06-01', 3, 4, 1, '', 0),
+('195806161984000016', '11435453225', 'Agus Musanib', 'Lumajang', '1950-02-02', 2, 1, '0751461692', 'dankrez48@gmail.com', 'Prof.M.Yamin, SH', '4', '4', '', 'Tarok Dipo', 'Kec. jatiroto', '', 0, '', '1374025104571989', '2004-05-05', 1, 1, 1, '', 0),
+('198406142009012003', '12241237914', 'Dellya', 'Jember', '1984-06-14', 2, 1, '0751461692', '@gmail.com', 'Parak Kongsi Jorong Parik Putuih', '', '', '', 'Ampang Gadang', 'Kec. sumberbaru', '', 0, '3946762664210112', '1374025104571989', '2009-01-01', 3, 4, 1, '', 0),
+('195806161984000001', '11', 'Aina Yonavia', 'Jember', '1989-02-28', 1, 1, '0751461692', 'dankrez48@gmail.com', 'Jl.bonjo Baru By Pass', '3', '5', '', 'Tarok DIpo', 'Kec. Sumberagung', '', 26122, '', '1374025104571989', '2015-07-13', 2, 2, 1, '', 0),
+('1234', '1234', 'Aisyah', 'Jember', '1958-06-16', 2, 1, '0751461692', 'dankrez48@gmail.com', 'Birugo Puhun 80.266', '', '', '', 'Tarok Dipo', 'Kec. sumberbaru', '', 0, '3948736639300012', '1374025104571989', '1983-03-01', 3, 2, 1, '', 0),
+('195704111980032004', '12', 'April Daniati', 'Lumajang', '1957-04-11', 2, 1, '0751461692', 'dankrez48@gmail.com', 'Jl.Perintis Kemerdekaan No.121 B', '', '', '', 'Balai-Balai', 'Kec. jatiroto', '', 27114, '1743735636300012', '1374025104571989', '1980-03-01', 3, 2, 1, '', 0);
 
 -- --------------------------------------------------------
 
@@ -173,7 +193,7 @@ CREATE TABLE `jadwal_pelajaran` (
 
 INSERT INTO `jadwal_pelajaran` (`kodejdwl`, `id_tahun_akademik`, `kode_kelas`, `kode_pelajaran`, `kode_ruangan`, `nip`, `jam_mulai`, `jam_selesai`, `hari`, `aktif`) VALUES
 (13, 20161, 'X.TKJ.1', 'MK01', 'R003', '195704111980032004', '09:00:00', '11:30:00', 'Senin', 'Ya'),
-(14, 20161, 'X.TKJ.1', 'MK01', 'R004', '195806161984000001', '08:00:00', '10:30:00', 'Selasa', 'Ya'),
+(42, 20161, 'X.TKJ.1', 'MK01', 'R004', '195704111980032004', '08:06:08', '08:06:08', 'Senin', 'Ya'),
 (34, 20161, 'X.TKJ.1', 'MK02', 'R004', '195806161984000001', '12:00:00', '12:30:00', 'Senin', 'Ya'),
 (37, 20161, 'X.TSM.2', 'MK03', 'R002', '198406142009012003', '09:44:40', '09:44:40', 'Senin', 'Ya');
 
@@ -780,7 +800,7 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`id_siswa`, `nipd`, `password`, `nama`, `id_jenis_kelamin`, `nisn`, `tempat_lahir`, `tanggal_lahir`, `nik`, `id_agama`, `kebutuhan_khusus`, `alamat`, `rt`, `rw`, `dusun`, `kelurahan`, `kecamatan`, `kode_pos`, `jenis_tinggal`, `alat_transportasi`, `telepon`, `hp`, `email`, `skhun`, `penerima_kps`, `no_kps`, `foto`, `nama_ayah`, `tahun_lahir_ayah`, `pendidikan_ayah`, `pekerjaan_ayah`, `penghasilan_ayah`, `kebutuhan_khusus_ayah`, `no_telpon_ayah`, `nama_ibu`, `tahun_lahir_ibu`, `pendidikan_ibu`, `pekerjaan_ibu`, `penghasilan_ibu`, `kebutuhan_khusus_ibu`, `no_telpon_ibu`, `nama_wali`, `tahun_lahir_wali`, `pendidikan_wali`, `pekerjaan_wali`, `penghasilan_wali`, `angkatan`, `status_awal`, `status_siswa`, `tingkat`, `kode_kelas`, `kode_jurusan`, `id_sesi`) VALUES
-(1, '14422', '123', 'DENI HIDAYATULLAH', '1', '123', 'Jember', '1999-11-14', '1306066910090000', '1', 'Tidak ada', 'PERUMNAS KUBANG PUTIH JL. MERPATI NO.301', '0', '0', 'qweqwe@gmail.com', 'Yosorati', 'Sumberbaru', 26181, '', 'Sepeda motor', '0751-7835083', '082385418021', 'deni@GMAIL.COM', '2-12-02-002-002-7   ', 'TIDAK', '', '20191125185205-IMG-20180831-WA0010.jpg', 'WASLIM', 1968, 'SMP / sederajat', 'Lainnya', 'Rp. 1,000,000 - Rp. 1,999,999', 'Tidak ada', '', 'aku', 1973, 'SMP / sederajat', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2019, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.1', 'TKJ', 1),
+(1, '14422', '123', 'DENI HIDAYATULLAH', '1', '123', 'Jember', '1999-11-14', '1306066910090000', '1', 'Tidak ada', 'PERUMNAS KUBANG PUTIH JL. MERPATI NO.301', '10', '10', 'qweqwe@gmail.com', 'Yosorati', 'Sumberbaru', 26181, '', 'Sepeda motor', '0751-7835083', '082385418021', 'deni@GMAIL.COM', '2-12-02-002-002-7   ', 'TIDAK', '', '20191125185205-IMG-20180831-WA0010.jpg', 'WASLIM', 1968, 'SMP / sederajat', 'Lainnya', 'Rp. 1,000,000 - Rp. 1,999,999', 'Tidak ada', '12412412', 'aku', 1973, 'SMP / sederajat', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2019, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.1', 'TKJ', 1),
 (63, '14423', '0151379251', 'M Hanafi Abror', '1', '0151379251', 'Jember', '2015-06-27', '1375012610990000', '1', 'Tidak ada', 'JALAN PANORAMA NO 4B', '4', '2', '', 'Jatiroto', 'Lumajang', 0, 'Bersama orang tua', 'Angkutan umum/bus/pete-pete', '75221487', '085766422330', 'mha@YAHOO.COM', '2-12-02-001-007-2   ', 'TIDAK', '', '', 'EFDIWARMAN', 1964, 'SMA / sederajat', 'Wiraswasta', 'Rp. 2,000,000 - Rp. 4,999,999', 'Tidak ada', '', 'ASYULIANTI', 1969, 'SMA / sederajat', '', 'Rp. 2,000,000 - Rp. 4,999,999', 'Tidak ada', '', '', 1900, '', '', '', 2019, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.1', 'TKJ', 1),
 (105, '14424', '0004107204', 'ANDRE THOMOK SIDABUTAR', '1', '0004107204', 'LUBUK BASUNG', '2000-05-16', '', '1', 'Tidak ada', 'MANGGIS GANTING', '0', '0', '', 'MANGGIS', '', 0, 'Bersama orang tua', 'Angkutan umum/bus/pete-pete', '', '', '', '2/12/2002', 'TIDAK', '', '', 'UNTUNG SARAGI SIDABUTAR', 1966, 'SMA / sederajat', 'PNS/TNI/Polri', 'Rp. 2,000,000 - Rp. 4,999,999', 'Tidak ada', '', 'RONA TAMPUBOLON', 1977, 'SMA / sederajat', 'Tidak bekerja', '', 'Tidak ada', '', '', 1900, '', '', '', 2019, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.2', 'TKJ', 1),
 (143, '14425', '9998218087', 'ANNISA SERLINA', '2', '9998218087', 'PEKAN KAMIS', '2000-10-15', '1306095510000000', '1', 'Tidak ada', 'GANTING KOTO TANGAN', '0', '0', '', '', '', 0, 'Bersama orang tua', 'Angkutan umum/bus/pete-pete', '', '083180361912', '', '2/12/2002', 'TIDAK', '', '', 'NOVIARDI', 1965, 'SMA / sederajat', 'Petani', 'Rp. 500,000 - Rp. 999,999', 'Tidak ada', '', 'SESNIAR', 1966, 'SMA / sederajat', 'Lainnya', 'Rp. 500,000 - Rp. 999,999', 'Tidak ada', '', '', 1900, '', '', '', 2019, 'Baru', 'Aktif', '(SLTA)', 'X.TKJ.2', 'TKJ', 1),
@@ -1107,7 +1127,7 @@ ALTER TABLE `agama`
 -- AUTO_INCREMENT untuk tabel `jadwal_pelajaran`
 --
 ALTER TABLE `jadwal_pelajaran`
-  MODIFY `kodejdwl` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `kodejdwl` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT untuk tabel `jenis_kelamin`
@@ -1203,7 +1223,7 @@ ALTER TABLE `sesi`
 -- AUTO_INCREMENT untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1274;
+  MODIFY `id_siswa` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1276;
 
 --
 -- AUTO_INCREMENT untuk tabel `status_keaktifan`

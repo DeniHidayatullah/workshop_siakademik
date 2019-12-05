@@ -1,77 +1,74 @@
-            <div class="col-xs-12">  
-              <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title"><?php if (isset($_GET[tahun])){ echo "Jadwal Mengajar Anda"; }else{ echo "Jadwal Mengajar Anda ".date('Y'); } ?></h3>
-                  <form style='margin-right:5px; margin-top:0px' class='pull-right' action='' method='GET'>
-                    <select name='tahun' style='padding:4px'>
-                        <?php 
-                            echo "<option value=''>- Pilih Tahun Akademik -</option>";
-                            $tahun = mysqli_query($koneksi,"SELECT * FROM tahun_akademik");
-                            while ($k = mysqli_fetch_array($tahun)){
-                              if ($_GET[tahun]==$k[id_tahun_akademik]){
-                                echo "<option value='$k[id_tahun_akademik]' selected>$k[nama_tahun]</option>";
-                              }else{
-                                echo "<option value='$k[id_tahun_akademik]'>$k[nama_tahun]</option>";
-                              }
-                            }
-                        ?>
-                    </select>
-                    <input type="submit" style='margin-top:-4px' class='btn btn-success btn-sm' value='Lihat'>
-                  </form>
+<?php
+if ($_GET[act] == '') {
+  cek_session_guru();
+  if ($_SESSION[level] == 'guru') {
+    $nip = $_SESSION[id];
+  } else {
+    $nip = $_GET[id];
+  }
+  $detail = mysqli_query($koneksi, "SELECT a.*, b.jenis_kelamin, c.status_kepegawaian, d.jenis_ptk, e.nama_agama, g.nama_golongan, f.nama_status_keaktifan 
+  FROM guru a LEFT JOIN jenis_kelamin b ON a.id_jenis_kelamin=b.id_jenis_kelamin 
+    LEFT JOIN status_kepegawaian c ON a.id_status_kepegawaian=c.id_status_kepegawaian 
+      LEFT JOIN jenis_ptk d ON a.id_jenis_ptk=d.id_jenis_ptk 
+        LEFT JOIN agama e ON a.id_agama=e.id_agama 
+          LEFT JOIN status_keaktifan f ON a.id_status_keaktifan=f.id_status_keaktifan 
+          LEFT JOIN golongan g ON a.id_golongan=g.id_golongan
+              where a.nip='$nip'");
+  $s = mysqli_fetch_array($detail);
+  echo "<div class='col-md-12'>
+<div class='box box-info'>
+<div class='box-header with-border'>
+<h3 class='box-title'>Detail Data Guru</h3>
+</div>
+<div class='box-body'>
+<form method='POST' class='form-horizontal' action='' enctype='multipart/form-data'>
+<div class='col-md-7'>
+<table class='table table-condensed table-bordered'>
+<tbody>
+<input type='hidden' name='id' value='$s[nip]'>
+<tr><th style='background-color:#E7EAEC' width='160px' rowspan='25'>";
+  if (trim($s[foto]) == '') {
+    echo "<img class='img-thumbnail' style='width:155px' src='foto_siswa/no-image.jpg'>";
+  } else {
+    echo "<img class='img-thumbnail' style='width:155px' src='foto_pegawai/$s[foto]'>";
+  }
+  echo "</th>
+</tr>
+<tr><th width='120px' scope='row'>Kode Guru</th>      <td>$s[nip]</td></tr>
+<tr><th scope='row'>Password</th>               <td>$s[password]</td></tr>
+<tr><th scope='row'>Nama Lengkap</th>           <td>$s[nama_guru]</td></tr>
+<tr><th scope='row'>Tempat Lahir</th>           <td>$s[tempat_lahir]</td></tr>
+<tr><th scope='row'>Tanggal Lahir</th>          <td>" . tgl_indo($s[tanggal_lahir]) . "</td></tr>
+<tr><th scope='row'>Jenis Kelamin</th>          <td>$s[jenis_kelamin]</td></tr>
+<tr><th scope='row'>Agama</th>                  <td>$s[nama_agama]</td></tr>
+<tr><th scope='row'>No Telpon</th>              <td>$s[telepon]</td></tr>
+<tr><th scope='row'>Alamat Email</th>           <td>$s[email]</td></tr>
+<tr><th scope='row'>Alamat</th>                 <td>$s[alamat_jalan]</td></tr>
+<tr><th scope='row'>RT/RW</th>                  <td>$s[rt]/$s[rw]</td></tr>
+<tr><th scope='row'>Dusun</th>                  <td>$s[nama_dusun]</td></tr>
+<tr><th scope='row'>Kelurahan</th>              <td>$s[desa_kelurahan]</td></tr>
+<tr><th scope='row'>Kecamatan</th>              <td>$s[kecamatan]</td></tr>
+<tr><th scope='row'>Kabupaten</th>              <td>$s[kabupaten]</td></tr>
+<tr><th scope='row'>Kode Pos</th>               <td>$s[kode_pos]</td></tr>
+<tr><th scope='row'>NUPTK</th>                  <td>$s[nuptk]</td></tr>
+<tr><th width='150px' scope='row'>NIP</th>      <td>$s[nik]</td></tr>
+</tbody>
+</table>
+</div>
 
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th style='width:20px'>No</th>
-                        <th>Kode Pelajaran</th>
-                        <th>Jadwal Pelajaran</th>
-                        <th>Kelas</th>
-                        <th>Guru</th>
-                        <th>Hari</th>
-                        <th>Mulai</th>
-                        <th>Selesai</th>
-                        <th>Ruangan</th>
-                        <th>Semester</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                  <?php
-                    if (isset($_GET[tahun])){
-                      $tampil = mysqli_query($koneksi,"SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
-                                            JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran
-                                              JOIN guru c ON a.nip=c.nip 
-                                                JOIN ruangan d ON a.kode_ruangan=d.kode_ruangan
-                                                  JOIN kelas e ON a.kode_kelas=e.kode_kelas 
-                                                  where a.nip='$_SESSION[id]' AND a.id_tahun_akademik='$_GET[tahun]' ORDER BY a.hari DESC");
-                    
-                    }else{
-                      $tampil = mysqli_query($koneksi,"SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
-                                            JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran
-                                              JOIN guru c ON a.nip=c.nip 
-                                                JOIN ruangan d ON a.kode_ruangan=d.kode_ruangan
-                                                JOIN kelas e ON a.kode_kelas=e.kode_kelas 
-                                                  where a.nip='$_SESSION[id]' AND a.id_tahun_akademik LIKE '".date('Y')."%' ORDER BY a.hari DESC");
-                    }
-                    $no = 1;
-                    while($r=mysqli_fetch_array($tampil)){
-                    echo "<tr><td>$no</td>
-                              <td>$r[kode_pelajaran]</td>
-                              <td>$r[namamatapelajaran]</td>
-                              <td>$r[nama_kelas]</td>
-                              <td>$r[nama_guru]</td>
-                              <td>$r[hari]</td>
-                              <td>$r[jam_mulai]</td>
-                              <td>$r[jam_selesai]</td>
-                              <td>$r[nama_ruangan]</td>
-                              <td>$r[id_tahun_akademik]</td>
-                          </tr>";
-                      $no++;
-                      }
-                  ?>
-                    </tbody>
-                  </table>
-                </div><!-- /.box-body -->
-                </div>
-            </div>
+<div class='col-md-5'>
+<table class='table table-condensed table-bordered'>
+<tbody>
+<tr><th scope='row'>TMT</th>                   <td>$s[tmt]</td></tr>
+<tr><th scope='row'>Jenis PTK</th>              <td>$s[jenis_ptk]</td></tr>
+<tr><th scope='row'>Status Pegawai</th>         <td>$s[status_kepegawaian]</td></tr>
+<tr><th scope='row'>Status Keaktifan</th>       <td>$s[nama_status_keaktifan]</td></tr>
+<tr><th scope='row'>Golongan</th>               <td>$s[nama_golongan]</td></tr>
+
+</tbody>
+</table>
+</div> 
+</div>
+</form>
+</div>";
+}

@@ -1,4 +1,7 @@
-<?php if ($_GET[act] == '') { ?>
+<?php
+if ($_GET[act] == '') {
+  cek_session_admin();
+  ?>
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
@@ -52,9 +55,13 @@
               <th>Selesai</th>
               <th>Ruangan</th>
               <th>Semester</th>
-              <?php if ($_SESSION[level] != 'kepala') { ?>
-                <th>Action</th>
-              <?php } ?>
+              <?php
+                if (isset($_GET[tahun]) and isset($_GET[tahun])) {
+                  if ($_SESSION[level] != 'kepala') {
+                    echo "<th>Action</th>";
+                  }
+                }
+                ?>
             </tr>
           </thead>
           <tbody>
@@ -88,7 +95,6 @@
                 $no++;
               }
               ?>
-
             <?php
               if ($_GET[kelas] == '' and $_GET[tahun] == '') {
                 $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 

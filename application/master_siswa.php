@@ -111,13 +111,13 @@ if ($_GET[act]==''){
                               <td>$r[nama_kelas]</td>";
                               if($_SESSION[level]!='kepala'){
                                 echo "<td><center>
-                                  <a class='btn btn-default btn-xs' title='Lihat Detail' href='?view=siswa&act=detailsiswa&id=$r[nisn]'><span class='glyphicon glyphicon-search'></span></a>
+                                  <a class='btn btn-default btn-xs' title='Lihat Detail' href='?view=siswa&act=detailsiswa&id=$r[nipd]'><span class='glyphicon glyphicon-search'></span></a>
                                   <a class='btn btn-info btn-xs' title='Edit Siswa' href='?view=siswa&act=editsiswa&id=$r[nisn]'><span class='glyphicon glyphicon-edit'></span></a>
                                   <a class='btn btn-danger btn-xs' title='Delete Siswa' href='?view=siswa&hapus=$r[nisn]' onclick=\"return confirm('Apa anda yakin untuk hapus Data ini?')\"><span class='glyphicon glyphicon-remove'></span></a>
                                 </center></td>";
                               }else{
                                   echo "<td><center>
-                                  <a class='btn btn-default btn-xs' title='Lihat Detail' href='?view=siswa&act=detailsiswa&id=$r[nisn]'><span class='glyphicon glyphicon-search'></span></a>
+                                  <a class='btn btn-default btn-xs' title='Lihat Detail' href='?view=siswa&act=detailsiswa&id=$r[nipd]'><span class='glyphicon glyphicon-search'></span></a>
                                 </center></td>";
                               }
                             echo "</tr>";
@@ -135,6 +135,7 @@ if ($_GET[act]==''){
                     LEFT JOIN kelas b ON a.kode_kelas=b.kode_kelas 
                     LEFT JOIN jenis_kelamin c ON a.id_jenis_kelamin=c.id_jenis_kelamin 
                       LEFT JOIN jurusan d ON b.kode_jurusan=d.kode_jurusan  ORDER BY a.id_siswa");
+                      $id_siswa = [id_siswa];
                     $no = 1;
                     while($r=mysqli_fetch_array($tampil)){
                     echo "<tr><td>$no</td>
@@ -146,8 +147,8 @@ if ($_GET[act]==''){
                     <td>$r[nama_kelas]</td>";
                               if($_SESSION[level]!='kepala'){
                                 echo "<td><center>
-                                  <a class='btn btn-default btn-xs' title='Lihat Detail' href='?view=siswa&act=detailsiswa&id=$r[nisn]'><span class='glyphicon glyphicon-search'></span></a>
-                                  <a class='btn btn-info btn-xs' title='Edit Siswa' href='?view=siswa&act=editsiswa&id=$r[nisn]'><span class='glyphicon glyphicon-edit'></span></a>
+                                  <a class='btn btn-default btn-xs' title='Lihat Detail' href='?view=siswa&act=detailsiswa&id=$r[nipd]'><span class='glyphicon glyphicon-search'></span></a>
+                                  <a class='btn btn-info btn-xs' title='Edit Siswa' href='?view=siswa&act=editsiswa&id=$r[nipd]'><span class='glyphicon glyphicon-edit'></span></a>
                                   <a class='btn btn-danger btn-xs' title='Delete Siswa' href='?view=siswa&hapus=$r[nisn]' onclick=\"return confirm('Apa anda yakin untuk hapus Data ini?')\"><span class='glyphicon glyphicon-remove'></span></a>
                                 </center></td>";
                               }else{
@@ -224,7 +225,7 @@ if ($_GET[act]==''){
                                '$_POST[cp]','$_POST[cq]','$_POST[cr]','$_POST[cs]','$_POST[af]','$_POST[an]','$_POST[bo]',
                                '','$_POST[ae]','$_POST[ag]','0')");
       }
-          echo "<script>document.location='index.php?view=siswa&act=detailsiswa&id=".$_POST[ab]."';</script>";
+          echo "<script>document.location='index.php?view=siswa&act=detailsiswa&id=".$_POST[aa]."';</script>";
   }
 
     echo "<div class='col-md-12'>
@@ -444,7 +445,7 @@ if ($_GET[act]==''){
                                no_kps = '$_POST[bn]',
                                status_siswa = '$_POST[bo]' where nipd='$_POST[id]'");
       }
-          echo "<script>document.location='index.php?view=siswa&act=editsiswa&id=".$_POST[ab]."';</script>";
+          echo "<script>document.location='index.php?view=siswa&act=editsiswa&id=".$_POST[aa]."';</script>";
   }
 
   if (isset($_POST[update2])){
@@ -470,22 +471,22 @@ if ($_GET[act]==''){
                                tahun_lahir_wali   = '$_POST[cp]',
                                pendidikan_wali         = '$_POST[cq]',
                                pekerjaan_wali       = '$_POST[cr]',
-                               penghasilan_wali    = '$_POST[cs]' where nisn='$_POST[id]'");
+                               penghasilan_wali    = '$_POST[cs]' where nipd='$_POST[id]'");
 
-            echo "<script>document.location='index.php?view=siswa&act=editsiswa&id=".$_POST[ab]."';</script>";
+            echo "<script>document.location='index.php?view=siswa&act=editsiswa&id=".$_POST[id]."';</script>";
   }
     if ($_SESSION[level] == 'siswa'){
-        $nisn = $_SESSION[id];
+        $nipd = $_SESSION[id];
         $close = 'readonly=on';
     }else{
-        $nisn = $_GET[id];
+        $nipd = $_GET[id];
         $close = '';
     }
     $edit = mysqli_query($koneksi,"SELECT * FROM siswa a LEFT JOIN kelas b ON a.kode_kelas=b.kode_kelas 
                               LEFT JOIN jenis_kelamin c ON a.id_jenis_kelamin=c.id_jenis_kelamin 
                                   LEFT JOIN jurusan d ON b.kode_jurusan=d.kode_jurusan
                                     LEFT JOIN agama e ON a.id_agama=e.id_agama 
-                                      where a.nisn='$nisn'");
+                                      where a.nipd='$nipd'");
     $s = mysqli_fetch_array($edit);
     echo "<div class='col-md-12'>
               <div class='box box-info'>
@@ -686,16 +687,16 @@ if ($_GET[act]==''){
 }elseif($_GET[act]=='detailsiswa'){
   cek_session_siswa();
     if ($_SESSION[level] == 'siswa'){
-        $nisn = $_SESSION[id];
+        $nipd = $_SESSION[id];
     }else{
-        $nisn = $_GET[id];
+        $nipd = $_GET[id];
     }
     $detail = mysqli_query($koneksi,"SELECT * FROM siswa a
      LEFT JOIN kelas b ON a.kode_kelas=b.kode_kelas 
                               LEFT JOIN jenis_kelamin c ON a.id_jenis_kelamin=c.id_jenis_kelamin 
                                   LEFT JOIN jurusan d ON b.kode_jurusan=d.kode_jurusan
                                     LEFT JOIN agama e ON a.id_agama=e.id_agama 
-                                      where a.nisn='$nisn'");
+                                      where a.nipd='$nipd'");
     $s = mysqli_fetch_array($detail);
     echo "<div class='col-md-12'>
 <div class='box box-info'>

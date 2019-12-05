@@ -194,6 +194,11 @@ if (isset($_SESSION[id])) {
               echo "<div class='row'>";
               include "application/master_ruangan.php";
               echo "</div>";
+            } elseif ($_GET[view] == 'golongan') {
+              cek_session_admin();
+              echo "<div class='row'>";
+              include "application/master_golongan.php";
+              echo "</div>";
             } elseif ($_GET[view] == 'ptk') {
               cek_session_admin();
               echo "<div class='row'>";
@@ -213,6 +218,11 @@ if (isset($_SESSION[id])) {
               cek_session_siswa();
               echo "<div class='row'>";
               include "application/jadwal.php";
+              echo "</div>";
+            } elseif ($_GET[view] == 'jadwalguru') {
+              cek_session_guru();
+              echo "<div class='row'>";
+              include "application/jadwalguru.php";
               echo "</div>";
             } elseif ($_GET[view] == 'jurusan') {
               cek_session_admin();

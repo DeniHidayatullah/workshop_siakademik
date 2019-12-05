@@ -12,7 +12,7 @@
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>NIP</th>
+                        <th>Kode Guru</th>
                         <th>Nama Lengkap</th>
                         <th>Jenis Kelamin</th>
                         <th>No Telpon</th>
@@ -34,7 +34,7 @@
                               <td>$r[nip]</td>
                               <td>$r[nama_guru]</td>
                               <td>$r[jenis_kelamin]</td>
-                              <td>$r[hp]</td>
+                              <td>$r[telepon]</td>
                               <td>$r[status_kepegawaian]</td>
                               <td>$r[jenis_ptk]</td>";
                               if($_SESSION[level]!='kepala'){
@@ -82,13 +82,13 @@
           mysqli_query($koneksi,"INSERT INTO guru VALUES('$_POST[aa]','$_POST[ab]','$_POST[ac]','$_POST[ad]','$ae','$_POST[af]',
           '$_POST[ag]','$_POST[ah]','$_POST[ai]','$_POST[aj]','$rt','$rw','$_POST[al]','$_POST[am]','$_POST[an]',
           '$_POST[ao]','$_POST[ap]','$_POST[aq]','$_POST[ar]','$_POST[ba]','$_POST[bb]','$_POST[bc]', 
-          '$_POST[bd]','$filenamee')");
+          '$_POST[bd]','$_POST[be]','$filenamee')");
         }
       }else{
           mysqli_query($koneksi,"INSERT INTO guru VALUES('$_POST[aa]','$_POST[ab]','$_POST[ac]','$_POST[ad]','$ae','$_POST[af]',
           '$_POST[ag]','$_POST[ah]','$_POST[ai]','$_POST[aj]','$rt','$rw','$_POST[al]','$_POST[am]','$_POST[an]',
           '$_POST[ao]','$_POST[ap]','$_POST[aq]','$_POST[ar]','$_POST[ba]','$_POST[bb]','$_POST[bc]', 
-          '$_POST[bd]','')");
+          '$_POST[bd]','$_POST[be]','')");
       }
       echo "<script>document.location='index.php?view=guru&act=detailguru&id=".$_POST[aa]."';</script>";
   }
@@ -104,7 +104,7 @@
                   <table class='table table-condensed table-bordered'>
                   <tbody>
                     <input type='hidden' name='id' value='$s[nip]'>
-                    <tr><th width='120px' scope='row'>Nip</th>      <td><input type='text' class='form-control' name='aa'></td></tr>
+                    <tr><th width='120px' scope='row'>Kode Guru</th>      <td><input type='text' class='form-control' name='aa'></td></tr>
                     <tr><th scope='row'>Password</th>               <td><input type='text' class='form-control' name='ab'></td></tr>
                     <tr><th scope='row'>Nama Lengkap</th>           <td><input type='text' class='form-control' name='ac'></td></tr>
                     <tr><th scope='row'>Tempat Lahir</th>           <td><input type='text' class='form-control' name='ad'></td></tr>
@@ -133,7 +133,7 @@
                     <tr><th scope='row'>Kabupaten</th>              <td><input type='text' class='form-control' name='ao'></td></tr>
                     <tr><th scope='row'>Kode Pos</th>               <td><input type='text' class='form-control' name='ap'></td></tr>
                     <tr><th scope='row'>NUPTK</th>                  <td><input type='text' class='form-control' name='aq'></td></tr>
-                    <tr><th width='150px' scope='row'>NIK</th>      <td><input type='text' class='form-control' name='ar'></td></tr>
+                    <tr><th width='150px' scope='row'>NIP</th>      <td><input type='text' class='form-control' name='ar'></td></tr>
                     <tr><th scope='row'>Foto</th>             <td><div style='position:relative;''>
                                                                           <a class='btn btn-primary' href='javascript:;'>
                                                                             <span class='glyphicon glyphicon-search'></span> Browse..."; ?>
@@ -170,6 +170,13 @@
                                                                                 echo "<option value='$a[id_status_keaktifan]'>$a[nama_status_keaktifan]</option>";
                                                                             }
                                                                   echo "</select></td></tr>
+                    <tr><th scope='row'>Golongan</th>               <td><select class='form-control' name='be'> 
+                    <option value='0' selected>- Pilih Golongan -</option>"; 
+                      $golongan = mysqli_query($koneksi,"SELECT * FROM golongan");
+                      while($a = mysqli_fetch_array($golongan)){
+                          echo "<option value='$a[id_golongan]'>$a[nama_golongan]</option>";
+                      }
+                                  echo "</select></td></tr>
                     </tbody>
                   </table>
                 </div> 
@@ -218,7 +225,8 @@
                            tmt = '$_POST[ba]',
                            id_jenis_ptk = '$_POST[bb]',
                            id_status_kepegawaian = '$_POST[bc]',
-                           id_status_keaktifan = '$_POST[bd]' where nip='$_POST[id]'");
+                           id_status_keaktifan = '$_POST[bd]',
+                           id_golongan = '$_POST[bg]' where nip='$_POST[id]'");
         }
       }else{
           mysqli_query($koneksi,"UPDATE guru SET 
@@ -245,7 +253,8 @@
                            tmt = '$_POST[ba]',
                            id_jenis_ptk = '$_POST[bb]',
                            id_status_kepegawaian = '$_POST[bc]',
-                           id_status_keaktifan = '$_POST[bd]' where nip='$_POST[id]'");
+                           id_status_keaktifan = '$_POST[bd]',
+                           id_golongan = '$_POST[bg]' where nip='$_POST[id]'");
       }
       echo "<script>document.location='index.php?view=guru&act=detailguru&id=".$_POST[id]."';</script>";
   }
@@ -272,7 +281,7 @@
                         echo "</th>
                     </tr>
                     <input type='hidden' name='id' value='$s[nip]'>
-                    <tr><th width='120px' scope='row'>Nip</th>      <td><input type='text' class='form-control' value='$s[nip]' name='aa'></td></tr>
+                    <tr><th width='120px' scope='row'>Kode_guru</th>      <td><input type='text' class='form-control' value='$s[nip]' name='aa'></td></tr>
                     <tr><th scope='row'>Password</th>               <td><input type='text' class='form-control' value='$s[password]' name='ab'></td></tr>
                     <tr><th scope='row'>Nama Lengkap</th>           <td><input type='text' class='form-control' value='$s[nama_guru]' name='ac'></td></tr>
                     <tr><th scope='row'>Tempat Lahir</th>           <td><input type='text' class='form-control' value='$s[tempat_lahir]' name='ad'></td></tr>
@@ -309,7 +318,7 @@
                     <tr><th scope='row'>Kabupaten</th>              <td><input type='text' class='form-control' value='$s[kabupaten]' name='ao'></td></tr>
                     <tr><th scope='row'>Kode Pos</th>               <td><input type='text' class='form-control' value='$s[kode_pos]' name='ap'></td></tr>
                     <tr><th scope='row'>NUPTK</th>                  <td><input type='text' class='form-control' value='$s[nuptk]' name='aq'></td></tr>
-                    <tr><th width='150px' scope='row'>NIK</th>      <td><input type='text' class='form-control' value='$s[nik]' name='ar'></td></tr>
+                    <tr><th width='150px' scope='row'>NIP</th>      <td><input type='text' class='form-control' value='$s[nik]' name='ar'></td></tr>
                     <tr><th scope='row'>Ganti Foto</th>             <td><div style='position:relative;''>
                                                                           <a class='btn btn-primary' href='javascript:;'>
                                                                             <span class='glyphicon glyphicon-search'></span> Browse..."; ?>
@@ -358,6 +367,17 @@
                                                                               }
                                                                             }
                                                                   echo "</select></td></tr>
+                    <tr><th scope='row'>Golongan</th>               <td><select class='form-control' name='be'> 
+                    <option value='0' selected>- Pilih Golongan -</option>"; 
+                                                                    $golongan = mysqli_query($koneksi,"SELECT * FROM golongan");
+                                                                    while($a = mysqli_fetch_array($golongan)){
+                                                                      if ($a[id_golongan] == $s[id_golongan]){
+                                                                        echo "<option value='$a[id_golongan]' selected>$a[nama_golongan]</option>";
+                                                                      }else{
+                                                                        echo "<option value='$a[id_golongan]'>$a[nama_golongan]</option>";
+                                                                      }
+                                                                    }
+                                                          echo "</select></td></tr>
                   </tbody>
                   </table>
                 </div> 
@@ -370,13 +390,14 @@
             </form>
             </div>";
 }elseif($_GET[act]=='detailguru'){
-    $detail = mysqli_query($koneksi,"SELECT a.*, b.jenis_kelamin, c.status_kepegawaian, d.jenis_ptk, e.nama_agama, f.nama_status_keaktifan 
+    $detail = mysqli_query($koneksi,"SELECT a.*, b.jenis_kelamin, c.status_kepegawaian, d.jenis_ptk, e.nama_agama, g.nama_golongan, f.nama_status_keaktifan 
                                 FROM guru a LEFT JOIN jenis_kelamin b ON a.id_jenis_kelamin=b.id_jenis_kelamin 
                                   LEFT JOIN status_kepegawaian c ON a.id_status_kepegawaian=c.id_status_kepegawaian 
                                     LEFT JOIN jenis_ptk d ON a.id_jenis_ptk=d.id_jenis_ptk 
                                       LEFT JOIN agama e ON a.id_agama=e.id_agama 
                                         LEFT JOIN status_keaktifan f ON a.id_status_keaktifan=f.id_status_keaktifan 
-                                              where a.nip='$_GET[id]'");
+                                        LEFT JOIN golongan g ON a.id_golongan=g.id_golongan
+                                            where a.nip='$_GET[id]'");
     $s = mysqli_fetch_array($detail);
     echo "<div class='col-md-12'>
               <div class='box box-info'>
@@ -401,7 +422,7 @@
                       }
                         echo "</th>
                     </tr>
-                    <tr><th width='120px' scope='row'>Nip</th>      <td>$s[nip]</td></tr>
+                    <tr><th width='120px' scope='row'>Kode Guru</th>      <td>$s[nip]</td></tr>
                     <tr><th scope='row'>Password</th>               <td>$s[password]</td></tr>
                     <tr><th scope='row'>Nama Lengkap</th>           <td>$s[nama_guru]</td></tr>
                     <tr><th scope='row'>Tempat Lahir</th>           <td>$s[tempat_lahir]</td></tr>
@@ -418,7 +439,7 @@
                     <tr><th scope='row'>Kabupaten</th>              <td>$s[kabupaten]</td></tr>
                     <tr><th scope='row'>Kode Pos</th>               <td>$s[kode_pos]</td></tr>
                     <tr><th scope='row'>NUPTK</th>                  <td>$s[nuptk]</td></tr>
-                    <tr><th width='150px' scope='row'>NIK</th>      <td>$s[nik]</td></tr>
+                    <tr><th width='150px' scope='row'>NIP</th>      <td>$s[nik]</td></tr>
                   </tbody>
                   </table>
                 </div>
@@ -426,10 +447,11 @@
                 <div class='col-md-5'>
                   <table class='table table-condensed table-bordered'>
                   <tbody>
-                    <tr><th scope='row'>NPWP</th>                   <td>$s[npwp]</td></tr>
+                    <tr><th scope='row'>TMT</th>                   <td>$s[tmt]</td></tr>
                     <tr><th scope='row'>Jenis PTK</th>              <td>$s[jenis_ptk]</td></tr>
                     <tr><th scope='row'>Status Pegawai</th>         <td>$s[status_kepegawaian]</td></tr>
                     <tr><th scope='row'>Status Keaktifan</th>       <td>$s[nama_status_keaktifan]</td></tr>
+                    <tr><th scope='row'>Golongan</th>               <td>$s[nama_golongan]</td></tr>
 
                   </tbody>
                   </table>

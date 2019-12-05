@@ -10,11 +10,11 @@ echo "<div class='col-xs-12'>
                         <option value=''>- Pilih Tahun Akademik -</option>";
 $tahun = mysqli_query($koneksi, "SELECT * FROM tahun_akademik");
 while ($k = mysqli_fetch_array($tahun)) {
-    if ($_GET[tahun] == $k[id_tahun_akademik]) {
-        echo "<option value='$k[id_tahun_akademik]' selected>$k[nama_tahun]</option>";
-    } else {
-        echo "<option value='$k[id_tahun_akademik]'>$k[nama_tahun]</option>";
-    }
+  if ($_GET[tahun] == $k[id_tahun_akademik]) {
+    echo "<option value='$k[id_tahun_akademik]' selected>$k[nama_tahun]</option>";
+  } else {
+    echo "<option value='$k[id_tahun_akademik]'>$k[nama_tahun]</option>";
+  }
 }
 
 echo "</select>
@@ -35,32 +35,32 @@ echo "</select>
             <th style='border:1px solid #ffffff; background-color:lightblue' colspan='2' ><center>% Kehadiran</center></th>
           </tr>";
 if ($_GET[tahun] == '') {
-    echo "<td colspan=9><center style='padding:60px; color:red'>Silahkan Memilih Tahun akademik Terlebih dahulu...</center></td></tr>";
+  echo "<td colspan=9><center style='padding:60px; color:red'>Silahkan Memilih Tahun akademik Terlebih dahulu...</center></td></tr>";
 }
 $kelompok = mysqli_query($koneksi, "SELECT * FROM kelompok_mata_pelajaran");
 while ($k = mysqli_fetch_array($kelompok)) {
-    echo "<tr>
+  echo "<tr>
             <td style='border:1px solid #e3e3e3' colspan='9'><b>$k[nama_kelompok_mata_pelajaran]</b></td>
           </tr>";
-    $mapel = mysqli_query($koneksi, "SELECT * FROM  jadwal_pelajaran a 
+  $mapel = mysqli_query($koneksi, "SELECT * FROM  jadwal_pelajaran a 
           JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran 
             where a.kode_kelas='$_SESSION[kode_kelas]' 
               AND a.id_tahun_akademik='$_GET[tahun]' 
                 AND b.id_kelompok_mata_pelajaran='$k[id_kelompok_mata_pelajaran]'");
 
-    $no = 1;
-    while ($m = mysqli_fetch_array($mapel)) {
-        $n = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$m[kodejdwl]' AND nisn='$iden[nisn]'"));
-        $total = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$_GET[jdwl]' GROUP BY tanggal"));
-        $hadir = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$_GET[jdwl]' AND nisn='$n[nisn]' AND kode_kehadiran='H'"));
-        $sakit = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$_GET[jdwl]' AND nisn='$n[nisn]' AND kode_kehadiran='S'"));
-        $izin = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$_GET[jdwl]' AND nisn='$n[nisn]' AND kode_kehadiran='I'"));
-        $alpa = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$_GET[jdwl]' AND nisn='$n[nisn]' AND kode_kehadiran='A'"));
-        $bobotsakit = 0.5;
-        $bobotalpa = 0;
-        $kehadiran = $hadir + ($bobotsakit * $sakit) + ($bobotsakit * $izin) + ($bobotalpa * $alpa);
-        $persen = $kehadiran / ($total) * 100;
-        echo "<tr bgcolor=$warna>
+  $no = 1;
+  while ($m = mysqli_fetch_array($mapel)) {
+    $n = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$m[kodejdwl]' AND nisn='$iden[nisn]'"));
+    $total = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$m[kodejdwl]' GROUP BY tanggal"));
+    $hadir = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$m[kodejdwl]' AND nisn='$n[nisn]' AND kode_kehadiran='H'"));
+    $sakit = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$m[kodejdwl]' AND nisn='$n[nisn]' AND kode_kehadiran='S'"));
+    $izin = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$m[kodejdwl]' AND nisn='$n[nisn]' AND kode_kehadiran='I'"));
+    $alpa = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where kodejdwl='$m[kodejdwl]' AND nisn='$n[nisn]' AND kode_kehadiran='A'"));
+    $bobotsakit = 0.5;
+    $bobotalpa = 0;
+    $kehadiran = $hadir + ($bobotsakit * $sakit) + ($bobotsakit * $izin) + ($bobotalpa * $alpa);
+    $persen = $kehadiran / ($total) * 100;
+    echo "<tr bgcolor=$warna>
                                     <td>$no</td>
                                     <td colspan='2'>$m[namamatapelajaran]</td>
                                     <td align=center>$total</td>
@@ -69,9 +69,9 @@ while ($k = mysqli_fetch_array($kelompok)) {
                                     <td align=center>$izin</td>
                                     <td align=center>$alpa</td>
                                     <td align=right>" . number_format($persen, 2) . " %</td>";
-        echo "</tr>";
-        $no++;
-    }
+    echo "</tr>";
+    $no++;
+  }
 }
 
 echo "</table></div></div>";

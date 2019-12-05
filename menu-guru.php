@@ -14,7 +14,7 @@
   <ul class="sidebar-menu">
     <li class="header" style='color:#fff; text-transform:uppercase; border-bottom:2px solid #00c0ef'>MENU <?php echo $level; ?></li>
     <li><a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-    <li><a href="index.php?view=absensiswa&act=detailabsenguru"><i class="fa fa-th-large"></i> <span>Absensi Siswa</span></a></li>
+    <li><a href="index.php?view=jadwalguru"><i class="fa fa-th-large"></i> <span>Jadwal Pelajaran</span></a></li>
     <li><a href="index.php?view=kompetensiguru"><i class="fa fa-tags"></i> <span>Kompetensi Dasar</span></a></li>
     <li><a href="index.php?view=journalguru"><i class="fa fa-list"></i> <span>Journal KBM</span></a></li>
     <li class="treeview">
@@ -24,6 +24,6 @@
         <li><a href="index.php?view=raport&act=detailguru"><i class="fa fa-circle-o"></i> Input Nilai Raport</a></li>
       </ul>
     </li>
-    <li><a href="index.php?view=dokumentasiguru"><i class="fa fa-book"></i> <span>Panduan Penggunaan</span></a></li>
+    <!--<li><a href="index.php?view=dokumentasiguru"><i class="fa fa-book"></i> <span>Panduan Penggunaan</span></a></li>-->
   </ul>
 </section>
