@@ -15,8 +15,10 @@ if ($_GET[act] == '') {
           LEFT JOIN golongan g ON a.id_golongan=g.id_golongan
               where a.nip='$nip'");
   $s = mysqli_fetch_array($detail);
+  
+  /* abror layout */
   echo "<div class='col-md-12'>
-<div class='box box-info'>
+  <div class='box box-info'>
 <div class='box-header with-border'>
 <h3 class='box-title'>Detail Data Guru</h3>
 </div>
