@@ -17,6 +17,7 @@
               <th>Jurusan</th>
               <th>Tingkat</th>
               <th>Guru Pengampu</th>
+              <th>KKM</th>
               <th>Urutan</th>
               <?php if ($_SESSION[level] != 'kepala') { ?>
                 <th style='width:70px'>Action</th>
@@ -38,6 +39,7 @@
                               <td>$r[nama_jurusan]</td>
                               <td>$r[tingkat]</td>
                               <td>$r[nama_guru]</td>
+                              <td>$r[kkm]</td>
                               <td>$r[urutan]</td>";
                 if ($_SESSION[level] != 'kepala') {
                   echo "<td><center>
@@ -69,6 +71,7 @@
     nip = '$_POST[d]',
     namamatapelajaran = '$_POST[f]',
     tingkat = '$_POST[h]',
+    kkm = '$_POST[kkm]',
     kompetensi_umum = '$_POST[i]',
     kompetensi_khusus = '$_POST[j]',
     jumlah_jam = '$_POST[k]',
@@ -119,6 +122,7 @@
   echo "</select>
                     </td></tr>
                     <tr><th scope='row'>Tingkat</th>              <td><input type='text' class='form-control' name='h' value='$s[tingkat]'></td></tr>
+                    <tr><th scope='row'>Tingkat</th>              <td><input type='text' class='form-control' name='kkm' value='$s[kkm]'></td></tr>
                     <tr><th scope='row'>Kompetensi Umum</th>           <td><input type='text' class='form-control' name='i' value='$s[kompetensi_umum]'></td></tr>
                     <tr><th scope='row'>Kompetensi Khusus</th>           <td><input type='text' class='form-control' name='j' value='$s[kompetensi_khusus]'></td></tr>
                     <tr><th scope='row'>Jumlah Jam</th>           <td><input type='text' class='form-control' name='k' value='$s[jumlah_jam]'></td></tr>
@@ -157,7 +161,7 @@
 } elseif ($_GET[act] == 'tambah') {
   if (isset($_POST[tambah])) {
     mysqli_query($koneksi, "INSERT INTO mata_pelajaran VALUES
-    ('$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[f]','$_POST[h]','$_POST[i]','$_POST[j]','$_POST[k]','$_POST[l]','$_POST[m]')");
+    ('$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[f]','$_POST[h]','$_POST[kkm]','$_POST[i]','$_POST[j]','$_POST[k]','$_POST[l]','$_POST[m]')");
     echo "<script>document.location='index.php?view=matapelajaran';</script>";
   }
 
@@ -190,6 +194,7 @@
   echo "</select>
                     </td></tr>
                     <tr><th scope='row'>Tingkat</th>              <td><input type='text' class='form-control' name='h' value='$s[tingkat]'></td></tr>
+                    <tr><th scope='row'>KKM</th>              <td><input type='text' class='form-control' name='kkm' value='$s[kkm]'></td></tr>
                     <tr><th scope='row'>Kompetensi Umum</th>           <td><input type='text' class='form-control' name='i' value='$s[kompetensi_umum]'></td></tr>
                     <tr><th scope='row'>Kompetensi Khusus</th>           <td><input type='text' class='form-control' name='j' value='$s[kompetensi_khusus]'></td></tr>
                     <tr><th scope='row'>Jumlah Jam</th>           <td><input type='text' class='form-control' name='k' value='$s[jumlah_jam]'></td></tr>
@@ -236,6 +241,7 @@
                     <tr><th scope='row'>Jurusan</th>              <td>$s[nama_jurusan]</td></tr>
                     <tr><th scope='row'>Guru Pengampu</th>        <td>$s[nama_guru]</td></tr>
                     <tr><th scope='row'>Tingkat</th>              <td>$s[tingkat]</td></tr>
+                    <tr><th scope='row'>KKM</th>              <td>$s[kkm]</td></tr>
                     <tr><th scope='row'>Kompetensi Umum</th>      <td>$s[kompetensi_umum]</td></tr>
                     <tr><th scope='row'>Kompetensi Khusus</th>    <td>$s[kompetensi_khusus]</td></tr>
                     <tr><th scope='row'>Jumlah Jam</th>           <td>$s[jumlah_jam]</td></tr>

@@ -86,17 +86,13 @@ if (isset($_POST[login])) {
     $_SESSION[id]     = $r[id_user];
     $_SESSION[namalengkap]  = $r[nama_lengkap];
     $_SESSION[level]    = $r[level];
-    include "config/user_agent.php";
-    mysqli_query($koneksi, "INSERT INTO users_aktivitas VALUES('','$r[id_user]','$ip','$user_browser $version','$user_os','$r[level]','" . date('H:i:s') . "','" . date('Y-m-d') . "')");
     echo "<script>document.location='index.php';</script>";
   } elseif ($hitungguru >= 1) {
     $r = mysqli_fetch_array($guru);
     $_SESSION[id]     = $r[nip];
     $_SESSION[namalengkap]  = $r[nama_guru];
     $_SESSION[level]    = 'guru';
-    include "config/user_agent.php";
-    mysqli_query($koneksi, "INSERT INTO users_aktivitas VALUES('','$r[nip]','$ip','$user_browser $version','$user_os','guru','" . date('H:i:s') . "','" . date('Y-m-d') . "')");
-    echo "<script>document.location='index.php';</script>";
+    echo "<script>document.location='index_guru.php';</script>";
   } elseif ($hitungsiswa >= 1) {
     $r = mysqli_fetch_array($siswa);
     $_SESSION[id]     = $r[nisn];
@@ -104,9 +100,7 @@ if (isset($_POST[login])) {
     $_SESSION[kode_kelas]     = $r[kode_kelas];
     $_SESSION[angkatan]     = $r[angkatan];
     $_SESSION[level]    = 'siswa';
-    include "config/user_agent.php";
-    mysqli_query($koneksi, "INSERT INTO users_aktivitas VALUES('','$r[nisn]','$ip','$user_browser $version','$user_os','siswa','" . date('H:i:s') . "','" . date('Y-m-d') . "')");
-    echo "<script>document.location='index.php';</script>";
+    echo "<script>document.location='index_siswa.php';</script>";
   } else {
     echo "<script>window.alert('Maaf, Anda Tidak Memiliki akses');
     window.location=('index.php?view=login')</script>";

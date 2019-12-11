@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Des 2019 pada 02.18
+-- Waktu pembuatan: 11 Des 2019 pada 00.51
 -- Versi server: 10.1.35-MariaDB
 -- Versi PHP: 7.2.9
 
@@ -137,7 +137,7 @@ INSERT INTO `guru` (`nip`, `password`, `nama_guru`, `tempat_lahir`, `tanggal_lah
 ('198406142009012003', '12241237914', 'Dellya', 'Jember', '1984-06-14', 2, 1, '0751461692', '@gmail.com', 'Parak Kongsi Jorong Parik Putuih', '', '', '', 'Ampang Gadang', 'Kec. sumberbaru', '', 0, '3946762664210112', '1374025104571989', '2009-01-01', 3, 4, 1, '', 0),
 ('195806161984000001', '11', 'Aina Yonavia', 'Jember', '1989-02-28', 1, 1, '0751461692', 'dankrez48@gmail.com', 'Jl.bonjo Baru By Pass', '3', '5', '', 'Tarok DIpo', 'Kec. Sumberagung', '', 26122, '', '1374025104571989', '2015-07-13', 2, 2, 1, '', 0),
 ('1234', '1234', 'Aisyah', 'Jember', '1958-06-16', 2, 1, '0751461692', 'dankrez48@gmail.com', 'Birugo Puhun 80.266', '', '', '', 'Tarok Dipo', 'Kec. sumberbaru', '', 0, '3948736639300012', '1374025104571989', '1983-03-01', 3, 2, 1, '', 0),
-('195704111980032004', '12', 'April Daniati', 'Lumajang', '1957-04-11', 2, 1, '0751461692', 'dankrez48@gmail.com', 'Jl.Perintis Kemerdekaan No.121 B', '', '', '', 'Balai-Balai', 'Kec. jatiroto', '', 27114, '1743735636300012', '1374025104571989', '1980-03-01', 3, 2, 1, '', 0);
+('195704111980032004', '12', 'April Daniati', 'Lumajang', '1957-04-11', 2, 1, '0751461692', 'dankrez48@gmail.com', 'Jl.Perintis Kemerdekaan No.121 B', '', '', '', 'Balai-Balai', 'Kec. jatiroto', '', 27114, '1743735636300012', '1374025104571989', '1980-03-01', 3, 4, 1, '', 0);
 
 -- --------------------------------------------------------
 
@@ -193,7 +193,6 @@ CREATE TABLE `jadwal_pelajaran` (
 
 INSERT INTO `jadwal_pelajaran` (`kodejdwl`, `id_tahun_akademik`, `kode_kelas`, `kode_pelajaran`, `kode_ruangan`, `nip`, `jam_mulai`, `jam_selesai`, `hari`, `aktif`) VALUES
 (13, 20161, 'X.TKJ.1', 'MK01', 'R003', '195704111980032004', '09:00:00', '11:30:00', 'Senin', 'Ya'),
-(42, 20161, 'X.TKJ.1', 'MK01', 'R004', '195704111980032004', '08:06:08', '08:06:08', 'Senin', 'Ya'),
 (34, 20161, 'X.TKJ.1', 'MK02', 'R004', '195806161984000001', '12:00:00', '12:30:00', 'Senin', 'Ya'),
 (37, 20161, 'X.TSM.2', 'MK03', 'R002', '198406142009012003', '09:44:40', '09:44:40', 'Senin', 'Ya');
 
@@ -403,6 +402,7 @@ CREATE TABLE `mata_pelajaran` (
   `nip` varchar(30) NOT NULL,
   `namamatapelajaran` varchar(150) NOT NULL,
   `tingkat` varchar(10) NOT NULL,
+  `kkm` int(3) NOT NULL,
   `kompetensi_umum` text NOT NULL,
   `kompetensi_khusus` text NOT NULL,
   `jumlah_jam` varchar(20) NOT NULL,
@@ -414,11 +414,11 @@ CREATE TABLE `mata_pelajaran` (
 -- Dumping data untuk tabel `mata_pelajaran`
 --
 
-INSERT INTO `mata_pelajaran` (`kode_pelajaran`, `id_kelompok_mata_pelajaran`, `kode_jurusan`, `nip`, `namamatapelajaran`, `tingkat`, `kompetensi_umum`, `kompetensi_khusus`, `jumlah_jam`, `urutan`, `aktif`) VALUES
-('MK01', 1, 'TKJ', '195704111980032004', 'Bahasa Indonesia', '2 (SLTA)', 'Isikan Nama Kompetensi Umum', 'Isikan Nama Kompetensi Khusus', '2', 2, 'Ya'),
-('MK02', 1, 'TSM', '195806161984000001', 'Matematika', '2 (SLTA)', 'Isikan Nama Kompetensi Umum', 'Isikan Nama Kompetensi Khusus', '2', 2, 'Ya'),
-('MK03', 2, 'TKJ', '195806161984000016', 'Bahasa Inggris', '2 (SLTA)', 'Isikan Nama Kompetensi Umum', 'Isikan Nama Kompetensi Khusus', '3', 0, 'Ya'),
-('MK9', 2, 'TKJ', '198406142009012003', 'jurusan', '2', 'dasd', 'asdasd', '2', 1, 'Ya');
+INSERT INTO `mata_pelajaran` (`kode_pelajaran`, `id_kelompok_mata_pelajaran`, `kode_jurusan`, `nip`, `namamatapelajaran`, `tingkat`, `kkm`, `kompetensi_umum`, `kompetensi_khusus`, `jumlah_jam`, `urutan`, `aktif`) VALUES
+('MK01', 1, 'TKJ', '195704111980032004', 'Bahasa Indonesia', '2 (SLTA)', 70, 'Isikan Nama Kompetensi Umum', 'Isikan Nama Kompetensi Khusus', '2', 2, 'Ya'),
+('MK03', 2, 'TKJ', '195806161984000016', 'Bahasa Inggris', '2 (SLTA)', 77, 'Isikan Nama Kompetensi Umum', 'Isikan Nama Kompetensi Khusus', '3', 0, 'Ya'),
+('MK9', 2, 'TKJ', '198406142009012003', 'jurusan', '2', 75, 'dasd', 'asdasd', '2', 1, 'Ya'),
+('123', 0, 'TKJ', '196608201993032006', 'asda', 'Ketua Juru', 70, '', '', '', 0, 'Ya');
 
 -- --------------------------------------------------------
 
@@ -504,7 +504,6 @@ CREATE TABLE `nilai_pengetahuan` (
   `nilai2` float NOT NULL,
   `nilai3` float NOT NULL,
   `nilai4` float NOT NULL,
-  `nilai5` float NOT NULL,
   `deskripsi` text NOT NULL,
   `user_akses` varchar(50) NOT NULL,
   `waktu` datetime NOT NULL
@@ -514,25 +513,25 @@ CREATE TABLE `nilai_pengetahuan` (
 -- Dumping data untuk tabel `nilai_pengetahuan`
 --
 
-INSERT INTO `nilai_pengetahuan` (`id_nilai_pengetahuan`, `kodejdwl`, `nisn`, `kd`, `nilai1`, `nilai2`, `nilai3`, `nilai4`, `nilai5`, `deskripsi`, `user_akses`, `waktu`) VALUES
-(1, 5, '9991268756', '4.1', 89, 90, 89, 95, 90, 'Memahami struktur dan kaidah teks cerita pendek, baik melalui lisan maupun tulisan ', '1', '2016-04-11 18:26:32'),
-(2, 5, '9998218087', '4.1', 90, 88, 90, 98, 96, 'Menganalisis teks cerita pendek, baik melalui lisan maupun tulisan ', '1', '2016-04-11 18:26:32'),
-(3, 5, '9998215055', '', 98, 67, 98, 76, 90, '', '1', '2016-04-11 18:26:32'),
-(4, 5, '9998214335', '', 88, 87, 88, 0, 0, '', '1', '2016-04-11 18:26:32'),
-(5, 5, '9998214151', '', 0, 89, 0, 0, 90, '', '1', '2016-04-11 18:26:32'),
-(6, 5, '9997515863', '', 80, 89, 80, 88, 0, '', '1', '2016-04-11 18:26:32'),
-(7, 5, '9991268756', '4.2', 90, 87, 90, 94, 94, 'Membandingkan teks cerita pendek, baik melalui lisan maupun tulisan', '1', '2016-04-14 08:03:27'),
-(8, 5, '9998218087', '4.2', 93, 88, 93, 90, 99, 'Menganalisis teks cerita ulang, baik melalui lisan maupun tulisan ', '1', '2016-04-14 08:03:27'),
-(9, 5, '9998215055', '', 87, 78, 87, 89, 79, '', '1', '2016-04-14 08:03:27'),
-(10, 5, '9991268756', '4.3', 89, 89, 89, 98, 95, 'Menganalisis teks pantun, baik melalui lisan maupun tulisan ', '1', '2016-04-14 08:03:57'),
-(11, 5, '9998218087', '', 87, 78, 87, 89, 88, '', '1', '2016-04-14 08:03:57'),
-(12, 5, '9998215055', '', 78, 70, 78, 87, 90, '', '1', '2016-04-14 08:03:57'),
-(13, 5, '9991268756', '4.4', 89, 90, 89, 87, 90, 'Membandingkan teks cerita ulang, baik melalui lisan maupun tulisan', '1', '2016-04-14 08:04:20'),
-(14, 5, '9998218087', '', 88, 87, 88, 83, 89, '', '1', '2016-04-14 08:04:20'),
-(15, 5, '9991268756', '4.5', 87, 90, 87, 78, 90, 'Menganalisis teks cerita ulang, baik melalui lisan maupun tulisan ', '1', '2016-04-14 08:04:36'),
-(16, 5, '9998218087', '', 98, 99, 98, 89, 90, 'Menganalisis teks pantun, baik melalui lisan maupun tulisan', '1', '2016-04-14 08:04:36'),
-(18, 5, '9991268756', '4.6', 90, 89, 90, 98, 78, 'Memahami struktur dan kaidah teks cerita pendek, baik melalui lisan maupun tulisan', '1', '2016-04-30 10:50:43'),
-(19, 37, '23423', '80', 80, 80, 90, 80, 90, 'fssdf', '1', '2019-11-22 09:57:45');
+INSERT INTO `nilai_pengetahuan` (`id_nilai_pengetahuan`, `kodejdwl`, `nisn`, `kd`, `nilai1`, `nilai2`, `nilai3`, `nilai4`, `deskripsi`, `user_akses`, `waktu`) VALUES
+(1, 5, '9991268756', '4.1', 89, 90, 89, 95, 'Memahami struktur dan kaidah teks cerita pendek, baik melalui lisan maupun tulisan ', '1', '2016-04-11 18:26:32'),
+(2, 5, '9998218087', '4.1', 90, 88, 90, 98, 'Menganalisis teks cerita pendek, baik melalui lisan maupun tulisan ', '1', '2016-04-11 18:26:32'),
+(3, 5, '9998215055', '', 98, 67, 98, 76, '', '1', '2016-04-11 18:26:32'),
+(4, 5, '9998214335', '', 88, 87, 88, 0, '', '1', '2016-04-11 18:26:32'),
+(5, 5, '9998214151', '', 0, 89, 0, 0, '', '1', '2016-04-11 18:26:32'),
+(6, 5, '9997515863', '', 80, 89, 80, 88, '', '1', '2016-04-11 18:26:32'),
+(7, 5, '9991268756', '4.2', 90, 87, 90, 94, 'Membandingkan teks cerita pendek, baik melalui lisan maupun tulisan', '1', '2016-04-14 08:03:27'),
+(8, 5, '9998218087', '4.2', 93, 88, 93, 90, 'Menganalisis teks cerita ulang, baik melalui lisan maupun tulisan ', '1', '2016-04-14 08:03:27'),
+(9, 5, '9998215055', '', 87, 78, 87, 89, '', '1', '2016-04-14 08:03:27'),
+(10, 5, '9991268756', '4.3', 89, 89, 89, 98, 'Menganalisis teks pantun, baik melalui lisan maupun tulisan ', '1', '2016-04-14 08:03:57'),
+(11, 5, '9998218087', '', 87, 78, 87, 89, '', '1', '2016-04-14 08:03:57'),
+(12, 5, '9998215055', '', 78, 70, 78, 87, '', '1', '2016-04-14 08:03:57'),
+(13, 5, '9991268756', '4.4', 89, 90, 89, 87, 'Membandingkan teks cerita ulang, baik melalui lisan maupun tulisan', '1', '2016-04-14 08:04:20'),
+(14, 5, '9998218087', '', 88, 87, 88, 83, '', '1', '2016-04-14 08:04:20'),
+(15, 5, '9991268756', '4.5', 87, 90, 87, 78, 'Menganalisis teks cerita ulang, baik melalui lisan maupun tulisan ', '1', '2016-04-14 08:04:36'),
+(16, 5, '9998218087', '', 98, 99, 98, 89, 'Menganalisis teks pantun, baik melalui lisan maupun tulisan', '1', '2016-04-14 08:04:36'),
+(18, 5, '9991268756', '4.6', 90, 89, 90, 98, 'Memahami struktur dan kaidah teks cerita pendek, baik melalui lisan maupun tulisan', '1', '2016-04-30 10:50:43'),
+(19, 37, '23423', '80', 80, 80, 90, 80, 'fssdf', '1', '2019-11-22 09:57:45');
 
 -- --------------------------------------------------------
 
@@ -1145,13 +1144,13 @@ ALTER TABLE `jenis_ptk`
 -- AUTO_INCREMENT untuk tabel `journal_list`
 --
 ALTER TABLE `journal_list`
-  MODIFY `id_journal` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_journal` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `kalender_akademik`
 --
 ALTER TABLE `kalender_akademik`
-  MODIFY `id_kalender_akademik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kalender_akademik` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `kelompok_mata_pelajaran`
@@ -1163,7 +1162,7 @@ ALTER TABLE `kelompok_mata_pelajaran`
 -- AUTO_INCREMENT untuk tabel `kompetensi_dasar`
 --
 ALTER TABLE `kompetensi_dasar`
-  MODIFY `id_kompetensi_dasar` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kompetensi_dasar` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `nilai_extrakulikuler`
@@ -1175,13 +1174,13 @@ ALTER TABLE `nilai_extrakulikuler`
 -- AUTO_INCREMENT untuk tabel `nilai_keterampilan`
 --
 ALTER TABLE `nilai_keterampilan`
-  MODIFY `id_nilai_keterampilan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_nilai_keterampilan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT untuk tabel `nilai_pengetahuan`
 --
 ALTER TABLE `nilai_pengetahuan`
-  MODIFY `id_nilai_pengetahuan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_nilai_pengetahuan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT untuk tabel `nilai_prestasi`
@@ -1193,7 +1192,7 @@ ALTER TABLE `nilai_prestasi`
 -- AUTO_INCREMENT untuk tabel `nilai_sikap`
 --
 ALTER TABLE `nilai_sikap`
-  MODIFY `id_nilai_sikap` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_nilai_sikap` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT untuk tabel `nilai_sikap_semester`

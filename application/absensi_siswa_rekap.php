@@ -205,6 +205,6 @@ if ($_GET[act] == '') {
             </div>";
 } elseif ($_GET[act] == 'detailsiswa') {
   cek_session_siswa();
-  include "absensi.php";
+  include "siswa/absensi.php";
 }
 ?>

@@ -64,7 +64,7 @@ $frt = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM header_print ORD
       echo "<tr>
                 <td align=center>$no</td>
                 <td>$m[namamatapelajaran]</td>
-                <td align=center>77</td>
+                <td align=center>$m[kkm]</td>
                 <td align=center>" . number_format($n[angka_pengetahuan]) . "</td>
                 <td align=center>$grade1[grade]</td>
                 <td align=center>" . number_format($n[angka_keterampilan]) . "</td>
@@ -107,7 +107,7 @@ $frt = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM header_print ORD
     <tr>
       <td width="260" align="left">Orang Tua / Wali</td>
       <td width="520" align="center">Mengetahui <br> Kepala SMK Negeri 7 Jember</td>
-      <td width="260" align="left">Padang, <?php echo tgl_raport(date("Y-m-d")); ?> <br> Wali Kelas</td>
+      <td width="260" align="left">Jember, <?php echo tgl_raport(date("Y-m-d")); ?> <br> Wali Kelas</td>
     </tr>
     <tr>
       <td align="left"><br /><br /><br /><br /><br />

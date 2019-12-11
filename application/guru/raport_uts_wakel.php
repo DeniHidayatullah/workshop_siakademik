@@ -1,17 +1,18 @@
 <?php
 if ($_GET[act] == '') {
-  cek_session_admin();
+  cek_session_guru();
   ?>
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
-        <h3 class="box-title"><?php if (isset($_GET[kelas]) and isset($_GET[tahun])) {
-                                  echo "Jadwal Pelajaran";
-                                } else {
-                                  echo "Jadwal Pelajaran Pada Tahun " . date('Y');
-                                } ?></h3>
+        <h3 class="box-title">
+        <?php if (isset($_GET[tahun])) {
+          echo "Jadwal Pelajaran";
+        } else {
+          echo "Jadwal Pelajaran Pada Tahun " . date('Y');
+        } ?></h3>
         <form style='margin-right:5px; margin-top:0px' class='pull-right' action='' method='GET'>
-          <input type="hidden" name='view' value='raportuts'>
+          <input type="hidden" name='view' value='raportuts_wakel'>
           <select name='tahun' style='padding:4px'>
             <?php
               echo "<option value=''>- Pilih Tahun Akademik -</option>";
@@ -25,19 +26,6 @@ if ($_GET[act] == '') {
               }
               ?>
           </select>
-          <select name='kelas' style='padding:4px'>
-            <?php
-              echo "<option value=''>- Pilih Kelas -</option>";
-              $kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
-              while ($k = mysqli_fetch_array($kelas)) {
-                if ($_GET[kelas] == $k[kode_kelas]) {
-                  echo "<option value='$k[kode_kelas]' selected>$k[kode_kelas] - $k[nama_kelas]</option>";
-                } else {
-                  echo "<option value='$k[kode_kelas]'>$k[kode_kelas] - $k[nama_kelas]</option>";
-                }
-              }
-              ?>
-          </select>
           <input type="submit" style='margin-top:-4px' class='btn btn-success btn-sm' value='Lihat'>
         </form>
 
@@ -46,38 +34,44 @@ if ($_GET[act] == '') {
         <table id="example" class="table table-bordered table-striped">
           <thead>
             <tr>
-              <th style='width:20px'>No</th>
-              <th>Jadwal Pelajaran</th>
-              <th>Kelas</th>
-              <th>Guru</th>
-              <th>Hari</th>
-              <th>Mulai</th>
-              <th>Selesai</th>
-              <th>Ruangan</th>
-              <th>Aktif</th>
-              <?php
-                if (isset($_GET[tahun]) and isset($_GET[tahun])) {
-                  if ($_SESSION[level] != 'kepala') {
-                    echo "<th>Action</th>";
-                  }
-                }
-                ?>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-              if (isset($_GET[kelas]) and isset($_GET[tahun])) {
-                $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
+            <th style='width:20px'>No</th>
+                        <th>Jadwal Pelajaran</th>
+                        <th>Kelas</th>
+                        <th>Guru</th>
+                        <th>Hari</th>
+                        <th>Mulai</th>
+                        <th>Selesai</th>
+                        <th>Ruangan</th>
+                        <th>Semester</th>
+                        <?php
+                        if (isset($_GET[tahun])) {
+                          echo "<th>Action</th>";
+                        }
+                        ?>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      if (isset($_GET[tahun])) {
+                        $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
                                             JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran
                                               JOIN guru c ON a.nip=c.nip 
                                                 JOIN ruangan d ON a.kode_ruangan=d.kode_ruangan
                                                   JOIN kelas e ON a.kode_kelas=e.kode_kelas 
-                                                  where a.kode_kelas='$_GET[kelas]' 
+                                                  where e.nip='$_SESSION[id]' 
                                                     AND a.id_tahun_akademik='$_GET[tahun]'  ORDER BY a.hari DESC");
-              }
-              $no = 1;
-              while ($r = mysqli_fetch_array($tampil)) {
-                echo "<tr><td>$no</td>
+                      } else {
+                        $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
+                                            JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran
+                                              JOIN guru c ON a.nip=c.nip 
+                                                JOIN ruangan d ON a.kode_ruangan=d.kode_ruangan
+                                                JOIN kelas e ON a.kode_kelas=e.kode_kelas 
+                                                  where a.nip='$_SESSION[id]' 
+                                                      AND a.id_tahun_akademik LIKE '" . date('Y') . "%' ORDER BY a.hari DESC");
+                      }
+                      $no = 1;
+                      while ($r = mysqli_fetch_array($tampil)) {
+                        echo "<tr><td>$no</td>
                               <td>$r[namamatapelajaran]</td>
                               <td>$r[nama_kelas]</td>
                               <td>$r[nama_guru]</td>
@@ -85,32 +79,28 @@ if ($_GET[act] == '') {
                               <td>$r[jam_mulai]</td>
                               <td>$r[jam_selesai]</td>
                               <td>$r[nama_ruangan]</td>
-                              <td>$r[aktif]</td>";
-                if (isset($_GET[tahun]) and isset($_GET[kelas])) {
-                  if ($_SESSION[level] != 'kepala') {
-                    echo "<td style='width:70px !important'><center>
-                                          <a class='btn btn-success btn-xs' title='Lihat Siswa' href='index.php?view=raportuts&act=listsiswa&jdwl=$r[kodejdwl]&kd=$r[kode_pelajaran]&id=$r[kode_kelas]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th-list'></span> Input Nilai</a>
+                              <td>$r[id_tahun_akademik]</td>";
+                        if (isset($_GET[tahun])) {
+                          echo "<td style='width:70px !important'><center>
+                                          <a class='btn btn-success btn-xs' title='Lihat Siswa' href='index_guru.php?view=raportuts&act=listsiswa&jdwl=$r[kodejdwl]&kd=$r[kode_pelajaran]&id=$r[kode_kelas]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th-list'></span> Input Nilai</a>
                                         </center></td>";
-                  }
-                }
-                echo "</tr>";
-                $no++;
-              }
-              ?>
+                        }
+
+                        echo "</tr>";
+                        $no++;
+                      }
+                      ?>
           </tbody>
         </table>
       </div><!-- /.box-body -->
       <?php
-        if ($_GET[kelas] == '' and $_GET[tahun] == '') {
-          echo "<center style='padding:60px; color:red'>Silahkan Memilih Tahun akademik dan Kelas Terlebih dahulu...</center>";
+        if ($_GET[tahun] == '') {
+          echo "<center style='padding:60px; color:red'>Silahkan Memilih Tahun akademik Terlebih dahulu...</center>";
         }
         ?>
     </div>
   </div>
 <?php
-} elseif ($_GET[act] == 'detailguru') {
-  cek_session_guru();
-  include "application/guru/raport_uts_halaman_guru.php";
 } elseif ($_GET[act] == 'listsiswa') {
   cek_session_guru();
   if (isset($_POST[simpan])) {
@@ -128,7 +118,7 @@ if ($_GET[act] == '') {
         }
       }
     }
-    echo "<script>document.location='index.php?view=raportuts&act=listsiswa&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]';</script>";
+    echo "<script>document.location='index_guru.php?view=raportuts_wakel&act=listsiswa&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]';</script>";
   }
 
   $d = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kelas where kode_kelas='$_GET[id]'"));
@@ -202,13 +192,10 @@ if ($_GET[act] == '') {
                 <div style='clear:both'></div>
                                 <div class='box-footer'>
                                   <button type='submit' name='simpan' class='btn btn-info'>Simpan</button>
-                                  <a href='index_guru.php?view=raportuts&act=detailguru'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>
+                                  <a href='index_guru.php?view=raportuts_wakel&act=detailguru'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>
                                 </div>
                 </form>
 
             </div>";
-} elseif ($_GET[act] == 'detailsiswa') {
-  cek_session_siswa();
-  include "siswa/raport_uts_halaman_siswa.php";
 }
 ?>

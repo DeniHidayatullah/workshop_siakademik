@@ -17,7 +17,7 @@
   <!-- ./col -->
   <div class="col-lg-3 col-6">
     <!-- small box -->
-    <div class="small-box bg-green">
+    <div class="small-box bg-red">
       <div class="inner">
         <h3><?php $guru = mysqli_fetch_array(mysqli_query($koneksi, "SELECT count(*) as total FROM guru")); ?>
           <?php echo $guru[total]; ?></h3>
@@ -49,7 +49,7 @@
   <!-- ./col -->
   <div class="col-lg-3 col-6">
     <!-- small box -->
-    <div class="small-box bg-red">
+    <div class="small-box bg-green">
       <div class="inner">
         <h3><?php $kelas = mysqli_fetch_array(mysqli_query($koneksi, "SELECT count(*) as total FROM kelas")); ?>
           <?php echo $kelas[total]; ?></h3>

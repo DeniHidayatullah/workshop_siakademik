@@ -36,6 +36,7 @@ function cek_session_admin()
 function cek_session_guru()
 {
 	$level = $_SESSION[level];
+	$guru = $_SESSION[nip];
 	if ($level != 'guru' and $level != 'superuser' and $level != 'kepala') {
 		echo "<script>document.location='index.php';</script>";
 	}

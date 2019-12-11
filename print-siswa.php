@@ -63,7 +63,7 @@ $frt = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM header_print ORD
     <tr>
       <td width="260" align="left">Orang Tua / Wali</td>
       <td width="520" align="center">Mengetahui <br> Kepala SMK Negeri 7 Jember</td>
-      <td width="260" align="left">Padang, <?php echo tgl_raport(date("Y-m-d")); ?> <br> Wali Kelas</td>
+      <td width="260" align="left">Jember, <?php echo tgl_raport(date("Y-m-d")); ?> <br> Wali Kelas</td>
     </tr>
     <tr>
       <td align="left"><br /><br /><br /><br /><br />

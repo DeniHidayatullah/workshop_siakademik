@@ -157,15 +157,17 @@
                   <table class='table table-condensed table-bordered'>
                   <tbody>
                     <tr><th width='120px' scope='row'>Kode Kelas</th> <td><input type='text' class='form-control' name='a'> </td></tr>
-                    <tr><th scope='row'>Wali Kelas</th>               <td><select class='form-control' name='b'> 
-                                                                          <option value='0' selected>- Pilih Wali Kelas -</option>";
+                    <tr><th scope='row'>Wali Kelas</th>               
+                    <td><select class='form-control' name='b'>
+                    <option value='0' selected>- Pilih Wali Kelas -</option>";
   $wali = mysqli_query($koneksi, "SELECT * FROM guru");
   while ($a = mysqli_fetch_array($wali)) {
     echo "<option value='$a[nip]'>$a[nama_guru]</option>";
   }
   echo "</select></td></tr>
-                    <tr><th scope='row'>Jurusan</th>               <td><select class='form-control' name='c'> 
-                                                                          <option value='0' selected>- Pilih Jurusan -</option>";
+                    <tr><th scope='row'>Jurusan</th>               
+                    <td><select class='form-control' name='c'> 
+                    <option value='0' selected>- Pilih Jurusan -</option>";
   $jur = mysqli_query($koneksi, "SELECT * FROM jurusan");
   while ($a = mysqli_fetch_array($jur)) {
     echo "<option value='$a[kode_jurusan]'>$a[nama_jurusan]</option>";
