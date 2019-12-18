@@ -131,6 +131,10 @@
                   </table>
                 </div>
                 </div>
-            </div>";
+                <a href='index_siswa.php?view=jadwalmapel&tahun=$_GET[tahun]'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>                
+            
+            </div>
+            ";
+            
 }
 ?>

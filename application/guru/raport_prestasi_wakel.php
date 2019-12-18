@@ -6,12 +6,12 @@ if ($_GET[act] == '') {
     } else {
       mysqli_query($koneksi, "INSERT INTO nilai_prestasi VALUES('','$_GET[tahun]','$_POST[nisn]','$_GET[kelas]','$_POST[a]','$_POST[b]','$_SESSION[id]','" . date('Y-m-d H:i:s') . "')");
     }
-    echo "<script>document.location='index.php?view=prestasi&tahun=$_GET[tahun]&kelas=$_GET[kelas]#$_POST[nisn]';</script>";
+    echo "<script>document.location='index_guru.php?view=prestasi_wakel&tahun=$_GET[tahun]&kelas=$_GET[kelas]#$_POST[nisn]';</script>";
   }
 
   if (isset($_GET[delete])) {
     mysqli_query($koneksi, "DELETE FROM nilai_prestasi where id_nilai_prestasi='$_GET[delete]'");
-    echo "<script>document.location='index.php?view=prestasi&tahun=$_GET[tahun]&kelas=$_GET[kelas]#$_POST[nisn]';</script>";
+    echo "<script>document.location='index_guru.php?view=prestasi_wakel&tahun=$_GET[tahun]&kelas=$_GET[kelas]#$_POST[nisn]';</script>";
   }
   ?>
   <div class="col-xs-12">
@@ -19,7 +19,7 @@ if ($_GET[act] == '') {
       <div class="box-header">
         <h3 class="box-title">Input Prestasi Siswa</h3>
         <form style='margin-right:5px; margin-top:0px' class='pull-right' action='' method='GET'>
-          <input type="hidden" name='view' value='prestasi'>
+          <input type="hidden" name='view' value='prestasi_wakel'>
           <select name='tahun' style='padding:4px'>
             <?php
               echo "<option value=''>- Pilih Tahun Akademik -</option>";
@@ -79,7 +79,7 @@ if ($_GET[act] == '') {
             }
 
             if ($_GET[nisn] == $r[nisn]) {
-              echo "<form action='index.php?view=prestasi&tahun=$_GET[tahun]&kelas=$_GET[kelas]' method='POST'>
+              echo "<form action='index_guru.php?view=prestasi_wakel&tahun=$_GET[tahun]&kelas=$_GET[kelas]' method='POST'>
                             <tr><td>$no</td>
                               <td>$r[nisn]</td>
                               <td style='font-size:12px' id='$r[nisn]'>$r[nama]</td>
@@ -93,7 +93,7 @@ if ($_GET[act] == '') {
                             </tr>
                           </form>";
             } else {
-              echo "<form action='index.php?view=prestasi&tahun=$_GET[tahun]&kelas=$_GET[kelas]' method='POST'>
+              echo "<form action='index_guru.php?view=prestasi_wakel&tahun=$_GET[tahun]&kelas=$_GET[kelas]' method='POST'>
                             <tr><td>$no</td>
                               <td>$r[nisn]</td>
                               <td style='font-size:12px' id='$r[nisn]'>$r[nama]</td>
@@ -115,8 +115,8 @@ if ($_GET[act] == '') {
                                         <td></td>
                                         <td>$n[jenis_kegiatan]</td>
                                         <td>$n[keterangan]</td>
-                                        <td width='90px' align=center><a href='index.php?view=prestasi&tahun=" . $_GET[tahun] . "&kelas=" . $_GET[kelas] . "&edit=" . $n[id_nilai_prestasi] . "&nisn=" . $r[nisn] . "#$r[nisn]' class='btn btn-xs btn-success'><span class='glyphicon glyphicon-edit'></span></a>
-                                                        <a href='index.php?view=prestasi&tahun=" . $_GET[tahun] . "&kelas=" . $_GET[kelas] . "&delete=" . $n[id_nilai_prestasi] . "&nisn=" . $r[nisn] . "' class='btn btn-xs btn-danger' onclick=\"return confirm('Apa anda yakin untuk hapus Data ini?')\"><span class='glyphicon glyphicon-remove'></span></a></td>
+                                        <td width='90px' align=center><a href='index_guru.php?view=prestasi_wakel&tahun=" . $_GET[tahun] . "&kelas=" . $_GET[kelas] . "&edit=" . $n[id_nilai_prestasi] . "&nisn=" . $r[nisn] . "#$r[nisn]' class='btn btn-xs btn-success'><span class='glyphicon glyphicon-edit'></span></a>
+                                                        <a href='index_guru.php?view=prestasi_wakel&tahun=" . $_GET[tahun] . "&kelas=" . $_GET[kelas] . "&delete=" . $n[id_nilai_prestasi] . "&nisn=" . $r[nisn] . "' class='btn btn-xs btn-danger' onclick=\"return confirm('Apa anda yakin untuk hapus Data ini?')\"><span class='glyphicon glyphicon-remove'></span></a></td>
                                       </tr>";
             }
             $no++;

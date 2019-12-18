@@ -7,7 +7,7 @@
       <div class="box-header">
         <h3 class="box-title">Cetak Raport Semester Siswa <?php echo $_GET[tahun]; ?></h3>
         <form style='margin-right:5px; margin-top:0px' class='pull-right' action='' method='GET'>
-          <input type="hidden" name='view' value='raportcetak'>
+          <input type="hidden" name='view' value='raportcetak_wakel'>
           <select name='tahun' style='padding:4px'>
             <?php
               echo "<option value=''>- Pilih Tahun Akademik -</option>";

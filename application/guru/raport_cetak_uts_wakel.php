@@ -51,7 +51,7 @@
           </thead>
           <tbody>
             <?php
-              $tampil = mysqli_query($koneksi, "SELECT a.* , c.nama_kelas FROM siswa a JOIN jenis_kelamin b ON a.id_jenis_kelamin=b.id_jenis_kelamin JOIN kelas c ON c.kode_kelas=a.kode_kelas where a.kode_kelas='X.TKJ.1' ORDER BY a.id_siswa");
+              $tampil = mysqli_query($koneksi, "SELECT a.* , c.nama_kelas FROM siswa a JOIN jenis_kelamin b ON a.id_jenis_kelamin=b.id_jenis_kelamin JOIN kelas c ON c.kode_kelas=a.kode_kelas where a.kode_kelas='$_GET[id]' ORDER BY a.id_siswa");
               $no = 1;
               while ($r = mysqli_fetch_array($tampil)) {
                 echo "<tr><td width=40px>$no</td>

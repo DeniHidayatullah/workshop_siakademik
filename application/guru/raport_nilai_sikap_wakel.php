@@ -15,7 +15,7 @@ if (isset($_POST[simpan])) {
       }
     }
   }
-  echo "<script>document.location='index_guru.php?view=raport&act=listsiswasikap&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]';</script>";
+  echo "<script>document.location='index_guru.php?view=raport_wakel&act=listsiswasikap&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]';</script>";
 }elseif (isset($_POST[reset])) {
 
 }
@@ -50,7 +50,7 @@ echo "<div class='col-md-12'>
 // Ini Halaman unutk Nilai Spiritual
 echo "<div role='tabpanel' class='tab-pane fade active in' id='spiritual' aria-labelledby='spiritual-tab'>";
 echo "<div class='col-md-12'>
-                            <form action='index_guru.php?view=raport&act=listsiswasikap&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]' method='POST'>
+                            <form action='index_guru.php?view=raport_wakel&act=listsiswasikap&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]' method='POST'>
                             <input type='hidden' value='spiritual' name='status'>
                             <table class='table table-bordered table-striped'>
                                 <tr>
@@ -87,7 +87,7 @@ echo "</tbody>
                             <div style='clear:both'></div>
                                 <div class='box-footer'>
                                   <button type='submit' name='simpan' class='btn btn-info'>Simpan</button>
-                                  <a href='index_guru.php?view=raport&act=detailguru'><button type='button' class='btn btn-danger'>Kembali</button></a>
+                                  <a href='index_guru.php?view=raport_wakel'><button type='button' class='btn btn-danger'>Kembali</button></a>
                                   <button type='reset' class='btn btn-default '>Batal</button>
                                 </div>
                             </form>
@@ -97,7 +97,7 @@ echo "</tbody>
 // Ini Halaman unutk Nilai Sosial
 echo "<div role='tabpanel' class='tab-pane fade' id='sosial' aria-labelledby='sosial-tab'>
                       <div class='col-md-12'>
-                            <form action='index_guru.php?view=raport&act=listsiswasikap&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]' method='POST'>
+                            <form action='index_guru.php?view=raport_wakel&act=listsiswasikap&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]' method='POST'>
                             <input type='hidden' value='sosial' name='status'>
                             <table class='table table-bordered table-striped'>
                                 <tr>
@@ -134,7 +134,7 @@ echo "</tbody>
                             <div style='clear:both'></div>
                                 <div class='box-footer'>
                                   <button type='submit' name='simpan' class='btn btn-info'>Simpan</button>
-                                  <a href='index_guru.php?view=raport&act=detailguru'><button type='button' class='btn btn-danger'>Kembali</button></a>
+                                  <a href='index_guru.php?view=raport_wakel'><button type='button' class='btn btn-danger'>Kembali</button></a>
                                   <button type='reset' class='btn btn-default '>Batal</button>
                                 </div>
                             </form>

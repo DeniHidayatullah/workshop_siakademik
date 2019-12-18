@@ -1,16 +1,16 @@
 <?php
 if (isset($_POST[simpan])) {
   if ($_POST[status] == 'Update') {
-    mysqli_query($koneksi, "UPDATE nilai_keterampilan SET kd='$_POST[a]', nilai1='$_POST[b]', nilai2='$_POST[c]', nilai3='$_POST[d]', nilai4='$_POST[e]', nilai5='$_POST[f]', nilai6='$_POST[g]', deskripsi='$_POST[h]' where id_nilai_keterampilan='$_POST[id]'");
+    mysqli_query($koneksi, "UPDATE nilai_keterampilan SET nilai1='$_POST[b]', nilai2='$_POST[c]', nilai3='$_POST[d]', nilai4='$_POST[e]', nilai5='$_POST[f]', nilai6='$_POST[g]', deskripsi='$_POST[h]' where id_nilai_keterampilan='$_POST[id]'");
   } else {
-    mysqli_query($koneksi, "INSERT INTO nilai_keterampilan VALUES('','$_GET[jdwl]','$_POST[nisn]','$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[e]','$_POST[f]','$_POST[g]','$_POST[h]','$_SESSION[id]','" . date('Y-m-d H:i:s') . "')");
+    mysqli_query($koneksi, "INSERT INTO nilai_keterampilan VALUES('','$_GET[jdwl]','$_POST[nisn]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[e]','$_POST[f]','$_POST[g]','$_POST[h]','$_SESSION[id]','" . date('Y-m-d H:i:s') . "')");
   }
-  echo "<script>document.location='index_guru.php?view=raport&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]#$_POST[nisn]';</script>";
+  echo "<script>document.location='index_guru.php?view=raport_wakel&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]#$_POST[nisn]';</script>";
 }
 
 if (isset($_GET[delete])) {
   mysqli_query($koneksi, "DELETE FROM nilai_keterampilan where id_nilai_keterampilan='$_GET[delete]'");
-  echo "<script>document.location='index_guru.php?view=raport&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]#$_GET[nisn]';</script>";
+  echo "<script>document.location='index_guru.php?view=raport_wakel&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]#$_GET[nisn]';</script>";
 }
 
 $d = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kelas where kode_kelas='$_GET[id]'"));
@@ -38,7 +38,7 @@ echo "<div class='col-md-12'>
                                 <tr>
                                   <th style='border:1px solid #e3e3e3' width='30px' rowspan='2'>No</th>
                                   <th style='border:1px solid #e3e3e3' width='170px' rowspan='2'>Nama Lengkap</th>
-                                  <th style='border:1px solid #e3e3e3; width:55px' rowspan='2'><center>KD</center></th>
+                                  <th style='border:1px solid #e3e3e3; width:55px' rowspan='2'><center>KKM</center></th>
                                   <th style='border:1px solid #e3e3e3' colspan='6'><center>Penilaian</center></th>
                                   <th style='border:1px solid #e3e3e3; width:55px' rowspan='2'><center>Nilai</center></th>
                                   <th style='border:1px solid #e3e3e3; width:55px' rowspan='2'><center>Grade</center></th>
@@ -61,14 +61,14 @@ while ($r = mysqli_fetch_array($tampil)) {
     $name = 'Simpan';
   }
   if ($_GET[nisn] == $r[nisn]) {
-    echo "<form action='index_guru.php?view=raport&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]' method='POST'>
+    echo "<form action='index_guru.php?view=raport_wakel&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]' method='POST'>
                                       <tr>
                                         <td>$no</td>
                                         <td style='font-size:12px' id='$r[nisn]'>$r[nama]</td>
                                         <input type='hidden' name='nisn' value='$r[nisn]'>
                                         <input type='hidden' name='id' value='$e[id_nilai_keterampilan]'>
                                         <input type='hidden' name='status' value='$name'>
-                                        <td align=center><input type='text' name='a' value='$e[kd]' style='width:35px; text-align:center; padding:0px'></td>
+                                        <td align=center>$m[kkm]</td>
                                         <td align=center><input type='text' name='b' value='$e[nilai1]' style='width:35px; text-align:center; padding:0px'></td>
                                         <td align=center><input type='text' name='c' value='$e[nilai2]' style='width:35px; text-align:center; padding:0px'></td>
                                         <td align=center><input type='text' name='d' value='$e[nilai3]' style='width:35px; text-align:center; padding:0px'></td>
@@ -83,14 +83,14 @@ while ($r = mysqli_fetch_array($tampil)) {
                                       </tr>
                                       </form>";
   } else {
-    echo "<form action='index_guru.php?view=raport&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]' method='POST'>
+    echo "<form action='index_guru.php?view=raport_wakel&act=listsiswaketerampilan&jdwl=$_GET[jdwl]&kd=$_GET[kd]&id=$_GET[id]&tahun=$_GET[tahun]' method='POST'>
                                       <tr>
                                         <td>$no</td>
                                         <td style='font-size:12px' id='$r[nisn]'>$r[nama]</td>
                                         <input type='hidden' name='nisn' value='$r[nisn]'>
                                         <input type='hidden' name='id' value='$e[id_nilai_pengetahuan]'>
                                         <input type='hidden' name='status' value='$name'>
-                                        <td align=center><input type='text' name='a' style='width:35px; text-align:center; padding:0px'></td>
+                                        <td align=center>$m[kkm]</td>
                                         <td align=center><input type='text' name='b' style='width:35px; text-align:center; padding:0px'></td>
                                         <td align=center><input type='text' name='c' style='width:35px; text-align:center; padding:0px'></td>
                                         <td align=center><input type='text' name='d' style='width:35px; text-align:center; padding:0px'></td>
@@ -119,7 +119,7 @@ while ($r = mysqli_fetch_array($tampil)) {
     echo "<tr>
                                         <td></td>
                                         <td></td>
-                                        <td align=center>$n[kd]</td>
+                                        <td align=center>$m[kkm]</td>
                                         <td align=center>$n[nilai1]</td>
                                         <td align=center>$n[nilai2]</td>
                                         <td align=center>$n[nilai3]</td>
@@ -129,8 +129,8 @@ while ($r = mysqli_fetch_array($tampil)) {
                                         <td align=center>" . number_format($ratarata) . "</td>
                                         <td align=center>$grade1[grade]</td>
                                         <td>$n[deskripsi]</td>
-                                        <td align=center><a href='index_guru.php?view=raport&act=listsiswaketerampilan&jdwl=" . $_GET[jdwl] . "&kd=" . $_GET[kd] . "&id=" . $_GET[id] . "&tahun=" . $_GET[tahun] . "&edit=" . $n[id_nilai_keterampilan] . "&nisn=" . $r[nisn] . "#$r[nisn]' class='btn btn-xs btn-success'><span class='glyphicon glyphicon-edit'></span></a>
-                                                        <a href='index_guru.php?view=raport&act=listsiswaketerampilan&jdwl=" . $_GET[jdwl] . "&kd=" . $_GET[kd] . "&id=" . $_GET[id] . "&tahun=" . $_GET[tahun] . "&delete=" . $n[id_nilai_keterampilan] . "&nisn=" . $r[nisn] . "' class='btn btn-xs btn-danger' onclick=\"return confirm('Apa anda yakin untuk hapus Data ini?')\"><span class='glyphicon glyphicon-remove'></span></a></td>
+                                        <td align=center><a href='index_guru.php?view=raport_wakel&act=listsiswaketerampilan&jdwl=" . $_GET[jdwl] . "&kd=" . $_GET[kd] . "&id=" . $_GET[id] . "&tahun=" . $_GET[tahun] . "&edit=" . $n[id_nilai_keterampilan] . "&nisn=" . $r[nisn] . "#$r[nisn]' class='btn btn-xs btn-success'><span class='glyphicon glyphicon-edit'></span></a>
+                                                        <a href='index_guru.php?view=raport_wakel&act=listsiswaketerampilan&jdwl=" . $_GET[jdwl] . "&kd=" . $_GET[kd] . "&id=" . $_GET[id] . "&tahun=" . $_GET[tahun] . "&delete=" . $n[id_nilai_keterampilan] . "&nisn=" . $r[nisn] . "' class='btn btn-xs btn-danger' onclick=\"return confirm('Apa anda yakin untuk hapus Data ini?')\"><span class='glyphicon glyphicon-remove'></span></a></td>
                                       </tr>";
   }
   $maxn = mysqli_fetch_array(mysqli_query($koneksi, "SELECT deskripsi, GREATEST(nilai1,nilai2,nilai3,nilai4,nilai5,nilai6) as tertinggi FROM nilai_keterampilan where kodejdwl='$_GET[jdwl]' AND nisn='$r[nisn]' ORDER BY tertinggi DESC LIMIT 1"));
@@ -171,7 +171,7 @@ echo "</tbody>
               <div style='clear:both'>
               </div>
               <div class='box-footer'>
-                <a href='index_guru.php?view=raport&act=detailguru'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>
+                <a href='index_guru.php?view=raport_wakel'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>
               </div>
           </div>
         </div>

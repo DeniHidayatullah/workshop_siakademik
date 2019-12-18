@@ -141,6 +141,12 @@ if (isset($_SESSION[id])) {
               include "application/raport_uts.php";
               echo "</div>";
             }
+            elseif ($_GET[view] == 'kalender') {
+              cek_session_siswa();
+              echo "<div class='row'>";
+              include "application/siswa/kalender_akademik.php";
+              echo "</div>";
+            }
             ?>
         </section>
       </div><!-- /.content-wrapper -->

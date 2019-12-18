@@ -82,7 +82,7 @@ if ($_GET[act] == '') {
                               <td>$r[id_tahun_akademik]</td>";
                         if (isset($_GET[tahun])) {
                           echo "<td style='width:70px !important'><center>
-                                          <a class='btn btn-success btn-xs' title='Lihat Siswa' href='index_guru.php?view=raportuts&act=listsiswa&jdwl=$r[kodejdwl]&kd=$r[kode_pelajaran]&id=$r[kode_kelas]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th-list'></span> Input Nilai</a>
+                                          <a class='btn btn-success btn-xs' title='Lihat Siswa' href='index_guru.php?view=raportuts_wakel&act=listsiswa&jdwl=$r[kodejdwl]&kd=$r[kode_pelajaran]&id=$r[kode_kelas]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th-list'></span> Input Nilai</a>
                                         </center></td>";
                         }
 
@@ -192,7 +192,7 @@ if ($_GET[act] == '') {
                 <div style='clear:both'></div>
                                 <div class='box-footer'>
                                   <button type='submit' name='simpan' class='btn btn-info'>Simpan</button>
-                                  <a href='index_guru.php?view=raportuts_wakel&act=detailguru'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>
+                                  <a href='index_guru.php?view=raportuts_wakel&tahun=$_GET[tahun]'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>
                                 </div>
                 </form>
 

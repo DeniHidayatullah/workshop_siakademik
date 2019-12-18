@@ -157,20 +157,25 @@ if (isset($_SESSION[id])) {
               echo "<div class='row'>";
               include "application/guru/raport_cetak_uts_wakel.php";
               echo "</div>";
-            } elseif ($_GET[view] == 'capaianhasilbelajar') {
+            } elseif ($_GET[view] == 'capaianhasilbelajar_wakel') {
               cek_session_guru();
               echo "<div class='row'>";
-              include "application/raport/raport_capaian_hasil_belajar.php";
+              include "application/guru/raport_capaian_hasil_belajar_wakel.php";
               echo "</div>";
-            } elseif ($_GET[view] == 'extrakulikuler') {
+            } elseif ($_GET[view] == 'extrakulikuler_wakel') {
               cek_session_guru();
               echo "<div class='row'>";
-              include "application/raport/raport_extrakulikuler.php";
+              include "application/guru/raport_extrakulikuler_wakel.php";
               echo "</div>";
-            } elseif ($_GET[view] == 'prestasi') {
+            } elseif ($_GET[view] == 'prestasi_wakel') {
               cek_session_guru();
               echo "<div class='row'>";
-              include "application/raport/raport_prestasi.php";
+              include "application/guru/raport_prestasi_wakel.php";
+              echo "</div>";
+            } elseif ($_GET[view] == 'kalender') {
+              cek_session_guru();
+              echo "<div class='row'>";
+              include "application/guru/kalender_akademik.php";
               echo "</div>";
             }
             ?>

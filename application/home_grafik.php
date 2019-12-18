@@ -19,8 +19,8 @@
             },
             tooltip: {
                 formatter: function() {
-                    return '<b>Kunjungan ' + this.series.name + '</b><br/>' +
-                        'Ada ' + this.point.y + ' Kali';
+                    return '<b>Jumlah ' + this.series.name + '</b><br/>' +
+                        'Ada ' + this.point.y ;
                 }
             }
         });
@@ -30,7 +30,7 @@
 <div class="box box-success">
     <div class="box-header">
         <i class="fa fa-th-list"></i>
-        <h3 class="box-title">Grafik Jumlah Siswa Jurusan Per Angkatan</h3>
+        <h3 class="box-title">Grafik Jumlah Siswa Per Jurusan Per Tahun</h3>
         <div class="box-tools pull-right">
             <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
             <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
@@ -47,19 +47,19 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>Siswa</th>
-                    <th>Guru</th>
-                    <th>Superuser</th>
+                    <th>TKJ</th>
+                    <th>MM</th>
+                    <th>TSM</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $grafik = mysqli_query($koneksi, "SELECT * FROM users_aktivitas GROUP BY tanggal ORDER BY tanggal DESC LIMIT 7");
+                $grafik = mysqli_query($koneksi, "SELECT * FROM jurusan a join siswa b on a.kode_jurusan=b.kode_jurusan");
                 while ($r = mysqli_fetch_array($grafik)) {
-                    $ale = tgl_grafik($r[tanggal]);
-                    $siswa = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM users_aktivitas where status='siswa' AND tanggal='$r[tanggal]'"));
-                    $guru = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM users_aktivitas where status='guru' AND tanggal='$r[tanggal]'"));
-                    $superuser = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM users_aktivitas where status='superuser' AND tanggal='$r[tanggal]'"));
+                    $ale = tgl_grafik($r[angkatan]);
+                    $siswa = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM siswa where kode_jurusan='TKJ'"));
+                    $guru = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM siswa where kode_jurusan='MM' "));
+                    $superuser = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM siswa where kode_jurusan='TSM'"));
                     echo "<tr>
                     <th>$ale</th>
                     <td>$siswa</td>

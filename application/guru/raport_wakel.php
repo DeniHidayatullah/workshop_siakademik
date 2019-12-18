@@ -1,6 +1,6 @@
 <?php
 if ($_GET[act] == '') {
-  cek_session_admin();
+  cek_session_guru();
   ?>
   <div class="col-xs-12">
     <div class="box">
@@ -11,7 +11,7 @@ if ($_GET[act] == '') {
                                   echo "Input Nilai Siswa " . date('Y');
                                 } ?></h3>
         <form style='margin-right:5px; margin-top:0px' class='pull-right' action='' method='GET'>
-          <input type="hidden" name='view' value='raport'>
+          <input type="hidden" name='view' value='raport_wakel'>
           <select name='tahun' style='padding:4px'>
             <?php
               echo "<option value=''>- Pilih Tahun Akademik -</option>";
@@ -87,9 +87,9 @@ if ($_GET[act] == '') {
                 if (isset($_GET[tahun]) and isset($_GET[kelas])) {
                   if ($_SESSION[level] != 'kepala') {
                     echo "<td style='width:280px !important'><center>
-                                          <a class='btn btn-warning btn-xs' title='Lihat Nilai Sikap Siswa' href='index.php?view=raport&act=listsiswasikap&jdwl=$r[kodejdwl]&kd=$r[kode_pelajaran]&id=$r[kode_kelas]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th-list'></span> Sikap</a>
-                                          <a class='btn btn-success btn-xs' title='Lihat Nilai Pengetahuan Siswa' href='index.php?view=raport&act=listsiswa&jdwl=$r[kodejdwl]&kd=$r[kode_pelajaran]&id=$r[kode_kelas]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th-list'></span> Pengetahuan</a>
-                                          <a class='btn btn-primary btn-xs' title='Lihat Nilai Keterampilan Siswa' href='index.php?view=raport&act=listsiswaketerampilan&jdwl=$r[kodejdwl]&kd=$r[kode_pelajaran]&id=$r[kode_kelas]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th-list'></span> Keterampilan</a>
+                                          <a class='btn btn-warning btn-xs' title='Lihat Nilai Sikap Siswa' href='index_guru.php?view=raport_wakel&act=listsiswasikap&jdwl=$r[kodejdwl]&kd=$r[kode_pelajaran]&id=$r[kode_kelas]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th-list'></span> Sikap</a>
+                                          <a class='btn btn-success btn-xs' title='Lihat Nilai Pengetahuan Siswa' href='index_guru.php?view=raport_wakel&act=listsiswa&jdwl=$r[kodejdwl]&kd=$r[kode_pelajaran]&id=$r[kode_kelas]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th-list'></span> Pengetahuan</a>
+                                          <a class='btn btn-primary btn-xs' title='Lihat Nilai Keterampilan Siswa' href='index_guru.php?view=raport_wakel&act=listsiswaketerampilan&jdwl=$r[kodejdwl]&kd=$r[kode_pelajaran]&id=$r[kode_kelas]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th-list'></span> Keterampilan</a>
                                         </center></td>";
                   }
                 }
@@ -111,10 +111,10 @@ if ($_GET[act] == '') {
 <?php
 } elseif ($_GET[act] == 'listsiswa') {
   cek_session_guru();
-  include "raport/raport_nilai_pengetahuan.php";
+  include "application/guru/raport_nilai_pengetahuan_wakel.php";
 } elseif ($_GET[act] == 'listsiswaketerampilan') {
   cek_session_guru();
-  include "raport/raport_nilai_keterampilan.php";
+  include "application/guru/raport_nilai_keterampilan_wakel.php";
 } elseif ($_GET[act] == 'detailguru') {
   cek_session_guru();
   include "guru/raport_halaman_guru.php";
@@ -123,6 +123,6 @@ if ($_GET[act] == '') {
   include "siswa/raport_halaman_siswa.php";
 } elseif ($_GET[act] == 'listsiswasikap') {
   cek_session_guru();
-  include "raport/raport_nilai_sikap.php";
+  include "application/guru/raport_nilai_sikap_wakel.php";
 }
 ?>

@@ -110,7 +110,7 @@
                       <td>$r[id_tahun_akademik]</td>";
                 if ($_SESSION[level] != 'kepala') {
                   echo "<td style='width:70px !important'><center>
-<a class='btn btn-warning btn-xs' title='Tampil List Absensi' href='index.php?view=absensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]&jdwl=$r[kodejdwl]'><span class='glyphicon glyphicon-th'></span> Tampilka</a>
+<a class='btn btn-warning btn-xs' title='Tampil List Absensi' href='index.php?view=absensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]&jdwl=$r[kodejdwl]'><span class='glyphicon glyphicon-th'></span> Tampilkan</a>
 </center></td>";
                 }
                 echo "</tr>";

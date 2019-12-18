@@ -17,7 +17,7 @@ if ($_GET[act] == '') {
         }
       }
     }
-    echo "<script>document.location='index.php?view=capaianhasilbelajar&tahun=" . $_POST[tahun] . "&kelas=" . $_POST[kelas] . "';</script>";
+    echo "<script>document.location='index_guru.php?view=capaianhasilbelajar_wakel&tahun=" . $_POST[tahun] . "&kelas=" . $_POST[kelas] . "';</script>";
   }
   ?>
   <div class="col-xs-12">
@@ -25,7 +25,7 @@ if ($_GET[act] == '') {
       <div class="box-header">
         <h3 class="box-title">Input Capaian Hasil Belajar </h3>
         <form style='margin-right:5px; margin-top:0px' class='pull-right' action='' method='GET'>
-          <input type="hidden" name='view' value='capaianhasilbelajar'>
+          <input type="hidden" name='view' value='capaianhasilbelajar_wakel'>
           <select name='tahun' style='padding:4px'>
             <?php
               echo "<option value=''>- Pilih Tahun Akademik -</option>";
@@ -39,7 +39,7 @@ if ($_GET[act] == '') {
               }
               ?>
           </select>
-          <select name='kelas' style='padding:4px'>
+          <!-- <select name='kelas' style='padding:4px'>
             <?php
               echo "<option value=''>- Filter Kelas -</option>";
               $kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
@@ -51,7 +51,7 @@ if ($_GET[act] == '') {
                 }
               }
               ?>
-          </select>
+          </select> -->
           <input type="submit" style='margin-top:-4px' class='btn btn-info btn-sm' value='Lihat'>
         </form>
       </div><!-- /.box-header -->

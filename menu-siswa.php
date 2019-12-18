@@ -20,7 +20,8 @@
       <ul class="treeview-menu">
         <li><a href="index_siswa.php?view=raportuts&act=detailsiswa"><i class="fa fa-circle-o"></i> Data Nilai UTS</a></li>
         <li><a href="index_siswa.php?view=raport&act=detailsiswa"><i class="fa fa-circle-o"></i> Data Nilai Raport</a></li>
-      </ul>
+        </ul>
+        <li><a href="index_siswa.php?view=kalender"><i class="fa fa-calendar-times-o"></i> <span>Kalender Akademik</span></a></li>
     </li>
     <!--<li><a href="index.php?view=dokumentasi"><i class="fa fa-book"></i> <span>Panduan Penggunaan</span></a></li>-->
   </ul>
