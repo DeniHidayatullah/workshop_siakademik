@@ -19,7 +19,7 @@
             },
             tooltip: {
                 formatter: function() {
-                    return '<b>Jumlah ' + this.series.name + '</b><br/>' +
+                    return '<b>Jumlah Siswa ' + this.series.name + '</b><br/>' +
                         'Ada ' + this.point.y ;
                 }
             }

@@ -1,4 +1,7 @@
 <script type="text/javascript" src="plugins/jQuery/jquery.min.js"></script>
+
+
+		
 <script type="text/javascript">
   	var chart; 
 		$(document).ready(function() {
@@ -12,7 +15,7 @@
 					plotShadow: false
 				 },   
 				 title: {
-					text: 'Internet Browser Statistics '
+					text: 'Jumlah siswa Menurut Jenis Kelamin '
 				 },
 				 tooltip: {
 					formatter: function() {
@@ -32,7 +35,7 @@
 							connectorColor: 'green',
 							formatter: function() 
 							{
-								return '<b>' + this.point.name + '</b>: ' + Highcharts.numberFormat(this.percentage, 2) +' % ';
+								return Highcharts.numberFormat(this.percentage, 2) +' % ';
 							}
 						}
 					}
@@ -42,21 +45,14 @@
 					type: 'pie',
 					name: 'Browser share',
 					data: [
-					<?php
-						$query = mysqli_query($koneksi,"SELECT browsername from browser");
-					 
-						while ($row = mysqli_fetch_array($query)) {
-							$browsername = $row['browsername'];
-						 
-							$data = mysqli_fetch_array(mysqli_query($koneksi,"SELECT total from browser where browsername='$browsername'"));
-							$jumlah = $data['total'];
-							?>
-							[ 
-								'<?php echo $browsername ?>', <?php echo $jumlah; ?>
-							],
-							<?php
-						}
-						?>
+						<?php 
+					$jumlah_laki = mysqli_query($koneksi,"select * from siswa where id_jenis_kelamin='1'");
+					echo mysqli_num_rows($jumlah_laki);
+					?>, 
+					<?php 
+					$jumlah_perempuan = mysqli_query($koneksi,"select * from siswa where id_jenis_kelamin='2'");
+					echo mysqli_num_rows($jumlah_perempuan);
+					?>
 			 
 					]
 				}]
@@ -74,74 +70,10 @@
     </div>
 
     <div class="box-body chat" id="chat-box">
-					<div id ="mygraph"></div>
         <script src="plugins/highchart/highcharts.js"></script>
         <script src="plugins/highchart/modules/data.js"></script>
         <script src="plugins/highchart/modules/exporting.js"></script>
-        <script type="text/javascript">
-  	var chart; 
-		$(document).ready(function() {
-			  chart = new Highcharts.Chart(
-			  {
-				  
-				 chart: {
-					renderTo: 'mygraph',
-					plotBackgroundColor: null,
-					plotBorderWidth: null,
-					plotShadow: false
-				 },   
-				 title: {
-					text: 'Internet Browser Statistics '
-				 },
-				 tooltip: {
-					formatter: function() {
-						return '<b>'+
-						this.point.name +'</b>: '+ Highcharts.numberFormat(this.percentage, 2) +' % ';
-					}
-				 },
-				 
-				
-				 plotOptions: {
-					pie: {
-						allowPointSelect: true,
-						cursor: 'pointer',
-						dataLabels: {
-							enabled: true,
-							color: '#000000',
-							connectorColor: 'green',
-							formatter: function() 
-							{
-								return '<b>' + this.point.name + '</b>: ' + Highcharts.numberFormat(this.percentage, 2) +' % ';
-							}
-						}
-					}
-				 },
-       
-					series: [{
-					type: 'pie',
-					name: 'Browser share',
-					data: [
-					<?php
-						$query = mysqli_query($koneksi,"SELECT browsername from browser");
-					 
-						while ($row = mysqli_fetch_array($query)) {
-							$browsername = $row['browsername'];
-						 
-							$data = mysqli_fetch_array(mysqli_query($koneksi,"SELECT total from browser where browsername='$browsername'"));
-							$jumlah = $data['total'];
-							?>
-							[ 
-								'<?php echo $browsername ?>', <?php echo $jumlah; ?>
-							],
-							<?php
-						}
-						?>
-			 
-					]
-				}]
-			  });
-		});	
-</script>
 
+					<div id ="mygraph"></div>
     </div><!-- /.chat -->
 </div><!-- /.box (chat box) -->
