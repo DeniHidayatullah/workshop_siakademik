@@ -10,7 +10,7 @@
 			$tanggal = substr($tgl,8,2);
 			$bulan = getBulanraport(substr($tgl,5,2));
 			$tahun = substr($tgl,0,4);
-			return $tanggal.'_'.$bulan;		 
+			return $tahun;		 
 	}
 
 	function tgl_raport($tgl){
