@@ -15,7 +15,13 @@ if ($_GET[act] == '') {
           LEFT JOIN golongan g ON a.id_golongan=g.id_golongan
               where a.nip='$nip'");
   $s = mysqli_fetch_array($detail);
-  echo "<div class='col-md-12'>
+  echo "
+  <div class='alert alert-warning alert-dismissible fade in' role='alert'> 
+  <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+  <span aria-hidden='true'>×</span></button> 
+  <strong>Perhatian!</strong> - Semua Data-data yang ada dibawah ini akan digunakan untuk keperluan pihak sekolah, jika kedapatan data yang diisikan tidak seuai dengan yang sebenarnya, segera hubungi pihak admin sekolah!!!
+</div>
+  <div class='col-md-12'>
 <div class='box box-info'>
 <div class='box-header with-border'>
 <h3 class='box-title'>Detail Data Guru</h3>
@@ -71,4 +77,35 @@ if ($_GET[act] == '') {
 </div>
 </form>
 </div>";
+}elseif ($_GET[act] == 'ubahpassword') {
+  if (isset($_POST[ubah])) {
+      mysqli_query($koneksi, "UPDATE guru SET password = '$_POST[b]' where nip='$_POST[id]'");
+    
+    echo "<script>document.location='index_guru.php';</script>";
+  }
+  $edit = mysqli_query($koneksi, "SELECT * FROM guru a where a.nip='$_GET[id]'");
+  $s = mysqli_fetch_array($edit);
+  echo "<div class='col-md-12'>
+              <div class='box box-info'>
+                <div class='box-header with-border'>
+                  <h3 class='box-title'>Ubah Password Administrator</h3>
+                </div>
+              <div class='box-body'>
+              <form method='POST' class='form-horizontal' action='' enctype='multipart/form-data'>
+                <div class='col-md-12'>
+                  <table class='table table-condensed table-bordered'>
+                  <tbody>
+                    <input type='hidden' name='id' value='$s[nip]'>
+                    <tr><th scope='row'>Password</th>               
+                    <td><input type='text' class='form-control' name='b' placeholder='Kosongkan saja Jika Password tidak diganti,...'></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class='box-footer'>
+                    <button type='submit' name='ubah' class='btn btn-info'>Ubah</button>
+                    <a href='index_guru.php'><button type='button' class='btn btn-danger'>Kembali</button></a>
+                  </div>
+              </form>
+            </div>";
 }

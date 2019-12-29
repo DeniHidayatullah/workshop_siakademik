@@ -55,9 +55,7 @@
 <?php
 } elseif ($_GET[act] == 'edit') {
   if (isset($_POST[update])) {
-    mysqli_query($koneksi, "UPDATE ruangan SET kode_ruangan = '$_POST[a]',
-                                              nama_ruangan = '$_POST[c]',
-                                              kapasitas_belajar = '$_POST[d]',
+    mysqli_query($koneksi, "UPDATE ruangan SET nama_ruangan = '$_POST[c]',kapasitas_belajar = '$_POST[d]',
                                               aktif = '$_POST[g]' where kode_ruangan='$_POST[id]'");
     echo "<script>document.location='index.php?view=ruangan';</script>";
   }
@@ -75,7 +73,7 @@
                   <tbody>
                     <input type='hidden' name='id' value='$s[kode_ruangan]'>
                     <tr><th width='120px' scope='row'>Kode Ruangan</th> 
-                    <td><input type='text' class='form-control' name='a' value='$s[kode_ruangan]'></td></tr>
+                    <td><input type='text' class='form-control'  name='a' value='$s[kode_ruangan]' disabled='disable'></td></tr>
                     <tr><th scope='row'>Nama Ruangan</th>        
                     <td><input type='text' class='form-control' name='c' value='$s[nama_ruangan]'></td></tr>
                     <tr><th scope='row'>Kapasitas Belajar</th>              
@@ -94,7 +92,7 @@
                 </div>
               </div>
               <div class='box-footer'>
-                    <button type='submit' name='update' class='btn btn-info'>Update</button>
+                    <button type='submit' name='update' class='btn btn-info'>Edit</button>
                     <a href='index.php?view=ruangan'><button type='button' class='btn btn-danger'>Kembali</button></a>
                     
                   </div>
@@ -105,7 +103,14 @@
     mysqli_query($koneksi, "INSERT INTO ruangan VALUES('$_POST[a]','$_POST[c]','$_POST[d]','$_POST[g]')");
     echo "<script>document.location='index.php?view=ruangan';</script>";
   }
-
+  $query = "SELECT max(kode_ruangan) as maxKode FROM ruangan";
+  $hasil = mysqli_query($koneksi,$query);
+  $data = mysqli_fetch_array($hasil);
+  $kode_ruangan = $data['maxKode'];
+  $noUrut = (int) substr($kode_ruangan, 2, 2);
+  $noUrut++;
+  $char = "R";
+  $koderuangan = $char . sprintf("%03s", $noUrut);
   echo "<div class='col-md-12'>
               <div class='box box-info'>
                 <div class='box-header with-border'>
@@ -117,7 +122,7 @@
                   <table class='table table-condensed table-bordered'>
                   <tbody>
                     <tr><th width='120px' scope='row'>Kode Ruangan</th> 
-                    <td><input type='text' class='form-control' name='a'></td></tr>
+                    <td><input type='text' class='form-control' name='a' value='$koderuangan'></td></tr>
                     <tr><th scope='row'>Nama Ruangan</th>        
                     <td><input type='text' class='form-control' name='c'></td></tr>
                     <tr><th scope='row'>Kapasitas Belajar</th>              

@@ -1,4 +1,12 @@
 <?php if ($_GET[act] == '') { ?>
+
+    <section class="content-header">
+    <div class='alert alert-warning alert-dismissible fade in' role='alert'> 
+    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    <span aria-hidden='true'>×</span></button> 
+    <strong>Perhatian!</strong> <br>Silahkan Pilih semester dan tahun akademik  dulu !!!
+    </div>
+        </section>
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">

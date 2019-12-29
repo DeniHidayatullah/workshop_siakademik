@@ -117,7 +117,7 @@
                 </div>
               </div>
               <div class='box-footer'>
-                    <button type='submit' name='update' class='btn btn-info'>Update</button>
+                    <button type='submit' name='update' class='btn btn-info'>Edit</button>
                     <a href='index.php?view=jurusan'><button type='button' class='btn btn-danger'>Kembali</button></a>
                   </div>
               </form>

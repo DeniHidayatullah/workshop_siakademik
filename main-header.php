@@ -28,38 +28,18 @@
 
   <div class="navbar-custom-menu">
     <ul class="nav navbar-nav">
-      <!-- User Account: style can be found in dropdown.less -->
-      <li class="dropdown user user-menu">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <img src="<?php echo $foto; ?>" class="user-image" alt="User Image">
-          <span class="hidden-xs"><?php echo $nama; ?></span> <span class='caret'></span>
-        </a>
-        <ul class="dropdown-menu">
-          <!-- User image -->
-          <li class="user-header">
-            <img src="<?php echo $foto; ?>" class="img-circle" alt="User Image">
-            <p>
-              <?php echo $nama; ?>
-              <small><?php echo $level; ?></small>
-            </p>
-          </li>
-
-          <li class="user-footer">
-            <div class="pull-left">
-              <a href="index.php" class="btn btn-default btn-flat">Dashboard</a>
-            </div>
-            <div class="pull-right">
-              <?php
-              if ($_SESSION[level] == 'superuser') {
-                echo "<a href='index.php?view=admin&act=edit&id=$_SESSION[id]' class='btn btn-default btn-flat'>Edit Profile</a>";
-              } elseif ($_SESSION[level] == 'kepala') {
-                echo "<a href='index.php?view=admin&act=edit&id=$_SESSION[id]' class='btn btn-default btn-flat'>Edit Profile</a>";
-              }
-              ?>
-            </div>
-          </li>
-        </ul>
-      </li>
+      <li>
+      <?php
+      if ($_SESSION[level] == 'superuser') {
+        echo "<a href='index.php?view=admin&act=ubahpassword&id=$_SESSION[id]'>Ubah Password</a>";
+      }elseif ($_SESSION[level] == 'guru') {
+        echo "<a href='index_guru.php?view=home&act=ubahpassword&id=$_SESSION[id]'>Ubah Password</a>";
+      }elseif ($_SESSION[level] == 'siswa') {
+        echo "<a href='index_siswa.php?view=home&act=ubahpassword&id=$_SESSION[id]'>Ubah Password</a>";
+      } elseif ($_SESSION[level] == 'kepala') {
+        echo "<a href='index.php?view=admin&act=edit&id=$_SESSION[id]' class='btn btn-default btn-flat'>Edit Profile</a>";
+      }
+      ?></li>
       <li><a href="logout.php">Logout</a></li>
     </ul>
   </div>

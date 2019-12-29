@@ -42,13 +42,13 @@
           <li><a href="index_guru.php?view=capaianhasilbelajar_wakel"><i class="fa fa-circle-o"></i> Data Capaian Belajar</a></li>
           <li><a href="index_guru.php?view=extrakulikuler_wakel"><i class="fa fa-circle-o"></i> Data Extrakulikuler</a></li>
           <li><a href="index_guru.php?view=prestasi_wakel"><i class="fa fa-circle-o"></i> Data Prestasi</a></li>
+          <li><a href="index_guru.php?view=catatanwakel"><i class="fa fa-circle-o"></i> Data Catatan Wakel</a></li>
           <li><a href="index_guru.php?view=raport_wakel"><i class="fa fa-circle-o"></i> Data Nilai Raport</a></li>
           <li><a href="index_guru.php?view=raportcetak_wakel"><i class="fa fa-circle-o"></i> Cetak Raport</a></li>
           </ul>
         </li>
-        <li><a href="index_guru.php?view=kalender"><i class="fa fa-calendar-times-o"></i> <span>Kalender Akademik</span></a></li>
-    
-			<?php } ?>
-      <?php } ?>
+       		<?php } ?>
+      <?php } ?> 
+      <li><a href="index_guru.php?view=kalender"><i class="fa fa-calendar-times-o"></i> <span>Kalender Akademik</span></a></li>
   </ul>
 </section>

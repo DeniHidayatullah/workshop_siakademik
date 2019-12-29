@@ -1,7 +1,4 @@
 <script type="text/javascript" src="plugins/jQuery/jquery.min.js"></script>
-
-
-		
 <script type="text/javascript">
   	var chart; 
 		$(document).ready(function() {
@@ -30,29 +27,33 @@
 						allowPointSelect: true,
 						cursor: 'pointer',
 						dataLabels: {
-							enabled: true,
+							enabled: true, 
 							color: '#000000',
-							connectorColor: 'green',
+							connectorColor: 'green'
+							,
 							formatter: function() 
 							{
 								return Highcharts.numberFormat(this.percentage, 2) +' % ';
 							}
-						}
+						},
+                    	showInLegend: true
 					}
 				 },
        
 					series: [{
 					type: 'pie',
-					name: 'Browser share',
+					name: 'Jumlah Siswa',
 					data: [
+						[ 'Laki-Laki',
 						<?php 
-					$jumlah_laki = mysqli_query($koneksi,"select * from siswa where id_jenis_kelamin='1'");
-					echo mysqli_num_rows($jumlah_laki);
-					?>, 
-					<?php 
-					$jumlah_perempuan = mysqli_query($koneksi,"select * from siswa where id_jenis_kelamin='2'");
-					echo mysqli_num_rows($jumlah_perempuan);
-					?>
+						$jumlah_laki = mysqli_query($koneksi,"select * from siswa where id_jenis_kelamin='1'");
+						echo mysqli_num_rows($jumlah_laki);
+						?>],
+						['Perempuan',
+						<?php 
+						$jumlah_perempuan = mysqli_query($koneksi,"select * from siswa where id_jenis_kelamin='2'");
+						echo mysqli_num_rows($jumlah_perempuan);
+						?>]
 			 
 					]
 				}]

@@ -74,16 +74,31 @@ $skp = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM nilai_sikap_seme
   echo "</table>";
 
   echo "<b>E. Ketidakhadiran</b>
-      <table id='tablemodul1' width=85% border=1>
-        <tr><td width='70%'>Sakit</td>  <td width='10px'> : </td> <td align=center>0</td> </tr>
-        <tr><td>Izin</td>               <td> : </td>              <td align=center>0</td> </tr>
-        <tr><td>Tanpa Keterangan</td>   <td> : </td>              <td align=center>0</td> </tr>
-      </table>";
+      <table id='tablemodul1' width=85% border=1>";
+      $tampil = mysqli_query($koneksi, "SELECT * FROM siswa  where nisn='$_GET[id]' ");
+      while ($r = mysqli_fetch_array($tampil)) {
+        $sakit = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where  nisn='$_GET[id]' AND kode_kehadiran='S'"));
+        $izin = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where  nisn='$_GET[id]' AND kode_kehadiran='I'"));
+        $alpa = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM `absensi_siswa` where  nisn='$_GET[id]' AND kode_kehadiran='A'"));
+        echo "<tr><td width='70%'>Sakit</td>  <td width='10px'> : </td> 
+        <td align=center>$sakit</td> </tr>
+        <tr><td>Izin</td>               <td> : </td>              
+        <td align=center>$izin</td> </tr>
+        <tr><td>Tanpa Keterangan</td>   <td> : </td>              
+        <td align=center>$alpa</td> </tr>";
+      }
+      echo "</table>";
 
   echo "<b>F. Catatan Wali Kelas</b>
-      <table id='tablemodul1' width=100% height=80px border=1>
-        <tr><td></td></tr>
-      </table>";
+      <table id='tablemodul1' width=100% height=80px border=1>";
+      $catatan = mysqli_query($koneksi, "SELECT * FROM catatan_wakel where id_tahun_akademik='$_GET[tahun]' AND nisn='$_GET[id]' AND kode_kelas='$_GET[kelas]'");
+      while ($ct = mysqli_fetch_array($catatan)) {
+       echo "<tr>
+              <td>$ct[catatan]</td>
+              </tr>";
+    $no++;
+  }
+        echo "</table>";
 
   echo "<b>G. Tanggapan Orang tua / Wali</b>
       <table id='tablemodul1' width=100% height=80px border=1>

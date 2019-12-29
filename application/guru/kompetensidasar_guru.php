@@ -1,4 +1,11 @@
 <?php if ($_GET[act] == '') { ?>
+  <section class="content-header">
+    <div class='alert alert-warning alert-dismissible fade in' role='alert'> 
+    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    <span aria-hidden='true'>×</span></button> 
+    <strong>Perhatian!</strong> <br>Silahkan Pilih semester dan tahun akademik  dulu !!!
+    </div>
+</section>
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
@@ -147,6 +154,7 @@
   echo "<tbody>
                   </table>
                 </div>
+                <a href='index_guru.php?view=kompetensiguru'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>
                 </div>
             </div>";
 } elseif ($_GET[act] == 'tambah') {
@@ -203,8 +211,7 @@
               </div>
               <div class='box-footer'>
                     <button type='submit' name='tambah' class='btn btn-info'>Tambahkan</button>
-                    <a href='#'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
-                    
+                    <a href='index_guru.php?view=kompetensiguru'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>
                   </div>
               </form>
             </div>";
@@ -266,9 +273,9 @@
                 </div>
               </div>
               <div class='box-footer'>
-                    <button type='submit' name='update' class='btn btn-info'>Update</button>
-                    <a href='#'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
-                    
+                    <button type='submit' name='update' class='btn btn-info'>Edit</button>
+                    <a href='#'><button type='button' class='btn btn-default pull-right'>Batal</button></a>
+                    <a href='index_guru.php?view=kompetensiguru'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>
                   </div>
               </form>
             </div>";

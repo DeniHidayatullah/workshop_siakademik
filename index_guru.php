@@ -116,10 +116,15 @@ if (isset($_SESSION[id])) {
               if ($_SESSION[level] == 'guru') {
                 include "application/guru/home_guru.php";
               }
-            } elseif ($_GET[view] == 'jadwalguru') {
+            }elseif ($_GET[view] == 'jadwalguru') {
               cek_session_guru();
               echo "<div class='row'>";
               include "application/guru/jadwalguru.php";
+              echo "</div>";
+            }elseif ($_GET[view] == 'absensi_siswa') {
+              cek_session_guru();
+              echo "<div class='row'>";
+              include "application/guru/absensi_siswa.php";
               echo "</div>";
             }elseif ($_GET[view] == 'kompetensiguru') {
               cek_session_guru();
@@ -132,50 +137,59 @@ if (isset($_SESSION[id])) {
               include "application/guru/journal_guru.php";
               echo "</div>";
             } elseif ($_GET[view] == 'raport') {
+              cek_session_guru();
               echo "<div class='row'>";
               include "application/raport.php";
               echo "</div>";
             } elseif ($_GET[view] == 'raportuts') {
+              cek_session_guru();
               echo "<div class='row'>";
               include "application/raport_uts.php";
-              echo "</div>";
-             } elseif ($_GET[view] == 'raport_wakel') {
-              echo "<div class='row'>";
-              include "application/guru/raport_wakel.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'raportuts_wakel') {
-              echo "<div class='row'>";
-              include "application/guru/raport_uts_wakel.php";
-              echo "</div>";
-             } elseif ($_GET[view] == 'raportcetak_wakel') {
-              cek_session_guru();
-              echo "<div class='row'>";
-              include "application/guru/raport_cetak_wakel.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'raportcetakuts_wakel') {
-              cek_session_guru();
-              echo "<div class='row'>";
-              include "application/guru/raport_cetak_uts_wakel.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'capaianhasilbelajar_wakel') {
-              cek_session_guru();
-              echo "<div class='row'>";
-              include "application/guru/raport_capaian_hasil_belajar_wakel.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'extrakulikuler_wakel') {
-              cek_session_guru();
-              echo "<div class='row'>";
-              include "application/guru/raport_extrakulikuler_wakel.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'prestasi_wakel') {
-              cek_session_guru();
-              echo "<div class='row'>";
-              include "application/guru/raport_prestasi_wakel.php";
               echo "</div>";
             } elseif ($_GET[view] == 'kalender') {
               cek_session_guru();
               echo "<div class='row'>";
               include "application/guru/kalender_akademik.php";
+              echo "</div>";
+            
+            //link untuk walikelas 
+            } elseif ($_GET[view] == 'raport_wakel') {
+              echo "<div class='row'>";
+              include "application/wakel/raport_wakel.php";
+              echo "</div>";
+            } elseif ($_GET[view] == 'raportuts_wakel') {
+              echo "<div class='row'>";
+              include "application/wakel/raport_uts_wakel.php";
+              echo "</div>";
+             } elseif ($_GET[view] == 'raportcetak_wakel') {
+              cek_session_guru();
+              echo "<div class='row'>";
+              include "application/wakel/raport_cetak_wakel.php";
+              echo "</div>";
+            } elseif ($_GET[view] == 'raportcetakuts_wakel') {
+              cek_session_guru();
+              echo "<div class='row'>";
+              include "application/wakel/raport_cetak_uts_wakel.php";
+              echo "</div>";
+            } elseif ($_GET[view] == 'capaianhasilbelajar_wakel') {
+              cek_session_guru();
+              echo "<div class='row'>";
+              include "application/wakel/raport_capaian_hasil_belajar_wakel.php";
+              echo "</div>";
+            } elseif ($_GET[view] == 'extrakulikuler_wakel') {
+              cek_session_guru();
+              echo "<div class='row'>";
+              include "application/wakel/raport_extrakulikuler_wakel.php";
+              echo "</div>";
+            } elseif ($_GET[view] == 'prestasi_wakel') {
+              cek_session_guru();
+              echo "<div class='row'>";
+              include "application/wakel/raport_prestasi_wakel.php";
+              echo "</div>";
+            }elseif ($_GET[view] == 'catatanwakel') {
+              cek_session_guru();
+              echo "<div class='row'>";
+              include "application/wakel/raport_catatan_wakel.php";
               echo "</div>";
             }
             ?>

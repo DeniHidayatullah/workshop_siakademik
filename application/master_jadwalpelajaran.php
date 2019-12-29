@@ -150,8 +150,15 @@
 <?php
 } elseif ($_GET[act] == 'tambah') {
   if (isset($_POST[tambah])) {
+    $cek = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM jadwal_pelajaran WHERE hari='$_POST[j]' AND jam_mulai='$_POST[h]' AND nip='$_POST[e]' "));
+    if ($cek > 0){ 
+      echo "<div class='alert alert-danger alert-dismissible fade in' role='alert'>
+      <strong>Perhatian!</strong> - Jadwal Sudah Ada
+    </div>";
+      }else {
     mysqli_query($koneksi, "INSERT INTO jadwal_pelajaran VALUES('','$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[e]','$_POST[h]','$_POST[i]','$_POST[j]','$_POST[k]')");
     echo "<script>document.location='index.php?view=jadwalpelajaran';</script>";
+  }
   }
 
   echo "<div class='col-md-12'>
@@ -231,6 +238,12 @@
             </div>";
 } elseif ($_GET[act] == 'edit') {
   if (isset($_POST[update])) {
+    $cek = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM jadwal_pelajaran WHERE hari='$_POST[j]' AND jam_mulai='$_POST[h]' AND nip='$_POST[e]' "));
+    if ($cek > 0){ 
+      echo "<div class='alert alert-danger alert-dismissible fade in' role='alert'>
+      <strong>Perhatian!</strong> - Jadwal Sudah Ada
+    </div>";
+      }else {
     mysqli_query($koneksi, "UPDATE jadwal_pelajaran SET id_tahun_akademik = '$_POST[a]',
                                                     kode_kelas = '$_POST[b]',
                                                     kode_pelajaran = '$_POST[c]',
@@ -241,6 +254,7 @@
                                                     hari = '$_POST[j]',
                                                     aktif = '$_POST[k]' where kodejdwl='$_POST[id]'");
     echo "<script>document.location='index.php?view=jadwalpelajaran';</script>";
+    }
   }
   $e = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM jadwal_pelajaran where kodejdwl='$_GET[id]'"));
   echo "<div class='col-md-12'>
@@ -343,7 +357,7 @@
                 </div>
               </div>
               <div class='box-footer'>
-                    <button type='submit' name='update' class='btn btn-info'>Update</button>
+                    <button type='submit' name='update' class='btn btn-info'>Edit</button>
                     <a href='index.php?view=jadwalpelajaran'><button type='button' class='btn btn-danger'>Kembali</button></a>
                   </div>
               </form>

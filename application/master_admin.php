@@ -94,8 +94,40 @@
                 </div>
               </div>
               <div class='box-footer'>
-                    <button type='submit' name='update' class='btn btn-info'>Update</button>
+                    <button type='submit' name='update' class='btn btn-info'>Edit</button>
                     <a href='index.php?view=admin'><button type='button' class='btn btn-danger'>Kembali</button></a>
+                  </div>
+              </form>
+            </div>";
+}elseif ($_GET[act] == 'ubahpassword') {
+  if (isset($_POST[ubah])) {
+    $data = md5($_POST[b]);
+    $passs = hash("sha512", $data);
+      mysqli_query($koneksi, "UPDATE users SET password = '$passs' where id_user='$_POST[id]'");
+    
+    echo "<script>document.location='index.php';</script>";
+  }
+  $edit = mysqli_query($koneksi, "SELECT * FROM users a where a.id_user='$_GET[id]'");
+  $s = mysqli_fetch_array($edit);
+  echo "<div class='col-md-12'>
+              <div class='box box-info'>
+                <div class='box-header with-border'>
+                  <h3 class='box-title'>Ubah Password Administrator</h3>
+                </div>
+              <div class='box-body'>
+              <form method='POST' class='form-horizontal' action='' enctype='multipart/form-data'>
+                <div class='col-md-12'>
+                  <table class='table table-condensed table-bordered'>
+                  <tbody>
+                    <input type='hidden' name='id' value='$s[id_user]'>
+                    <tr><th scope='row'>Password</th>               <td><input type='text' class='form-control' name='b' placeholder='Kosongkan saja Jika Password tidak diganti,...'></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class='box-footer'>
+                    <button type='submit' name='ubah' class='btn btn-info'>Ubah</button>
+                    <a href='index.php'><button type='button' class='btn btn-danger'>Kembali</button></a>
                   </div>
               </form>
             </div>";

@@ -1,5 +1,12 @@
 <?php
-echo "<div class='col-xs-12'>  
+echo "<section class='content-header'>
+<div class='alert alert-warning alert-dismissible fade in' role='alert'> 
+<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+<span aria-hidden='true'>×</span></button> 
+<strong>Perhatian!</strong> <br>Silahkan Pilih semester dan tahun akademik  dulu !!!
+</div>
+    </section>
+    <div class='col-xs-12'>  
               <div class='box'>
                 <div class='box-header'>
                 <h3 class='box-title'>Laporan Nilai Akhir : <b>$nama</b></h3>
@@ -38,9 +45,6 @@ echo "</select>
             <th style='border:1px solid #ffffff; background-color:lightblue'><center>Nilai</center></th>
             <th style='border:1px solid #ffffff; background-color:lightblue'><center>Predikat</center></th>
           </tr>";
-if ($_GET[tahun] == '') {
-  echo "<tr><td colspan=7><center style='padding:60px; color:red'>Silahkan Memilih Tahun akademik Terlebih dahulu...</center></td></tr>";
-}
 $kelompok = mysqli_query($koneksi, "SELECT * FROM kelompok_mata_pelajaran");
 while ($k = mysqli_fetch_array($kelompok)) {
   echo "<tr>
@@ -54,7 +58,7 @@ while ($k = mysqli_fetch_array($kelompok)) {
                                         AND b.id_kelompok_mata_pelajaran='$k[id_kelompok_mata_pelajaran]'");
   $no = 1;
   while ($m = mysqli_fetch_array($mapel)) {
-    $rapn = mysqli_fetch_array(mysqli_query($koneksi, "SELECT sum((nilai1+nilai2+nilai3+nilai4+nilai5)/5)/count(nisn) as raport FROM nilai_pengetahuan where kodejdwl='$m[kodejdwl]' AND nisn='$iden[nisn]'"));
+    $rapn = mysqli_fetch_array(mysqli_query($koneksi, "SELECT sum((nilai1+nilai2+nilai3+nilai4)/4)/count(nisn) as raport FROM nilai_pengetahuan where kodejdwl='$m[kodejdwl]' AND nisn='$iden[nisn]'"));
     $cekpredikat = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='$_SESSION[kelas]'"));
     if ($cekpredikat >= 1) {
       $grade3 = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM `predikat` where (" . number_format($rapn[raport]) . " >=nilai_a) AND (" . number_format($rapn[raport]) . " <= nilai_b) AND kode_kelas='$_SESSION[kelas]'"));
@@ -73,7 +77,7 @@ while ($k = mysqli_fetch_array($kelompok)) {
     echo "<tr>
                 <td align=center>$no</td>
                 <td>$m[namamatapelajaran]</td>
-                <td align=center>77</td>
+                <td align=center>$m[kkm]</td>
                 <td align=center>" . number_format($rapn[raport]) . "</td>
                 <td align=center>$grade3[grade]</td>
                 <td align=center>" . number_format($rapnk[raport]) . "</td>

@@ -1,5 +1,12 @@
 <?php
-echo "<div class='col-xs-12'>  
+echo "<section class='content-header'>
+<div class='alert alert-warning alert-dismissible fade in' role='alert'> 
+<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+<span aria-hidden='true'>×</span></button> 
+<strong>Perhatian!</strong> <br>Silahkan Pilih semester dan tahun akademik  dulu !!!
+</div>
+    </section>
+    <div class='col-xs-12'>  
               <div class='box'>
                 <div class='box-header'>
                 <h3 class='box-title'>Laporan Nilai UTS : <b>$nama</b></h3>
@@ -38,9 +45,6 @@ echo "</select>
             <th style='border:1px solid #ffffff; background-color:lightblue'><center>Nilai</center></th>
             <th style='border:1px solid #ffffff; background-color:lightblue'><center>Predikat</center></th>
           </tr>";
-if ($_GET[tahun] == '') {
-  echo "<tr><td colspan=7><center style='padding:60px; color:red'>Silahkan Memilih Tahun akademik Terlebih dahulu...</center></td></tr>";
-}
 $kelompok = mysqli_query($koneksi, "SELECT * FROM kelompok_mata_pelajaran");
 while ($k = mysqli_fetch_array($kelompok)) {
   echo "<tr>

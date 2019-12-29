@@ -91,11 +91,7 @@ if (isset($_SESSION[id])) {
           }
           ?>
       </aside>
-
       <div class="content-wrapper">
-        <section class="content-header">
-          <h1> Dashboard <small>Control panel</small> </h1>
-        </section>
 
         <section class="content">
           <?php
@@ -118,9 +114,8 @@ if (isset($_SESSION[id])) {
               echo "</div>";
             } 
             
-            
             elseif ($_GET[view] == 'kompetensidasar') {
-              cek_session_admin();
+              cek_session_siswa();
               echo "<div class='row'>";
               include "application/master_kompetensidasar.php";
               echo "</div>";
@@ -140,8 +135,7 @@ if (isset($_SESSION[id])) {
               echo "<div class='row'>";
               include "application/raport_uts.php";
               echo "</div>";
-            }
-            elseif ($_GET[view] == 'kalender') {
+            }elseif ($_GET[view] == 'kalender') {
               cek_session_siswa();
               echo "<div class='row'>";
               include "application/siswa/kalender_akademik.php";
@@ -149,7 +143,7 @@ if (isset($_SESSION[id])) {
             }
             ?>
         </section>
-      </div><!-- /.content-wrapper -->
+    </div><!-- ./wrapper -->
       <footer class="main-footer">
         <?php include "footer.php"; ?>
       </footer>

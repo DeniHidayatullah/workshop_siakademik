@@ -1,4 +1,11 @@
 <?php if ($_GET[act] == '') { ?>
+  <section class="content-header">
+    <div class='alert alert-warning alert-dismissible fade in' role='alert'> 
+    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    <span aria-hidden='true'>×</span></button> 
+    <strong>Perhatian!</strong> <br>Silahkan Pilih semester dan tahun akademik  dulu !!!
+    </div>
+</section>
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
@@ -153,7 +160,8 @@
   echo "<tbody>
                   </table>
                 </div>
-                </div>
+                <a href='index_guru.php?view=kompetensiguru'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>
+                  </div>
             </div>";
 } elseif ($_GET[act] == 'tambah') {
   if (isset($_POST[tambah])) {
@@ -264,7 +272,7 @@
                 </div>
               </div>
               <div class='box-footer'>
-                    <button type='submit' name='update' class='btn btn-info'>Update</button>
+                    <button type='submit' name='update' class='btn btn-info'>Edit</button>
                     <a href='index_guru.php?view=journalguru'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>
                     
                   </div>

@@ -3,7 +3,7 @@ date_default_timezone_set('Asia/Jakarta');
 $server = "localhost";
 $username = "root";
 $password = "";
-$database = "workshop_siakademik";
+$database = "smk7";
 
 $koneksi = mysqli_connect($server, $username, $password, $database);
 mysqli_connect($server, $username, $password, $database);

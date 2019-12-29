@@ -65,15 +65,14 @@
 <?php
 } elseif ($_GET[act] == 'edit') {
   if (isset($_POST[update])) {
-    mysqli_query($koneksi, "UPDATE mata_pelajaran SET kode_pelajaran = '$_POST[a]',
+    mysqli_query($koneksi, "UPDATE mata_pelajaran SET 
     id_kelompok_mata_pelajaran = '$_POST[b]',
     kode_jurusan = '$_POST[c]',
     nip = '$_POST[d]',
     namamatapelajaran = '$_POST[f]',
     tingkat = '$_POST[h]',
     kkm = '$_POST[kkm]',
-    kompetensi_umum = '$_POST[i]',
-    kompetensi_khusus = '$_POST[j]',
+    id_sesi = '$_POST[z]',
     jumlah_jam = '$_POST[k]',
     urutan = '$_POST[l]',
     aktif = '$_POST[m]' where kode_pelajaran='$_POST[id]'");
@@ -94,37 +93,46 @@
                     <input type='hidden' name='id' value='$s[kode_pelajaran]'>
                     
                     <tr><th scope='row'>Kode Pelajaran</th>       
-                    <td><input type='text' class='form-control' name='a' value='$s[kode_pelajaran]'> </td></tr>
+                    <td><input type='text' class='form-control' name='a' value='$s[kode_pelajaran]' disabled> </td></tr>
                     <tr><th scope='row'>Nama Mapel</th>           
                     <td><input type='text' class='form-control' name='f' value='$s[namamatapelajaran]'></td></tr>
                     <tr><th scope='row'>Jurusan</th> <td><select class='form-control' name='c'> 
                              <option value='0' selected>- Pilih Jurusan -</option>";
-  $jurusan = mysqli_query($koneksi, "SELECT * FROM jurusan");
-  while ($a = mysqli_fetch_array($jurusan)) {
-    if ($s[kode_jurusan] == $a[kode_jurusan]) {
-      echo "<option value='$a[kode_jurusan]' selected>$a[nama_jurusan]</option>";
-    } else {
-      echo "<option value='$a[kode_jurusan]'>$a[nama_jurusan]</option>";
-    }
-  }
-  echo "</select>
+                      $jurusan = mysqli_query($koneksi, "SELECT * FROM jurusan");
+                      while ($a = mysqli_fetch_array($jurusan)) {
+                        if ($s[kode_jurusan] == $a[kode_jurusan]) {
+                          echo "<option value='$a[kode_jurusan]' selected>$a[nama_jurusan]</option>";
+                        } else {
+                          echo "<option value='$a[kode_jurusan]'>$a[nama_jurusan]</option>";
+                        }
+                      }
+                      echo "</select>
                     </td></tr>
                     <tr><th scope='row'>Guru Pengampu</th> <td><select class='form-control' name='d'> 
                              <option value='0' selected>- Pilih Guru Pengampu -</option>";
-  $guru = mysqli_query($koneksi, "SELECT * FROM guru");
-  while ($a = mysqli_fetch_array($guru)) {
-    if ($s[nip] == $a[nip]) {
-      echo "<option value='$a[nip]' selected>$a[nama_guru]</option>";
-    } else {
-      echo "<option value='$a[nip]'>$a[nama_guru]</option>";
-    }
-  }
-  echo "</select>
+                      $guru = mysqli_query($koneksi, "SELECT * FROM guru");
+                      while ($a = mysqli_fetch_array($guru)) {
+                        if ($s[nip] == $a[nip]) {
+                          echo "<option value='$a[nip]' selected>$a[nama_guru]</option>";
+                        } else {
+                          echo "<option value='$a[nip]'>$a[nama_guru]</option>";
+                        }
+                      }
+                      echo "</select>
                     </td></tr>
                     <tr><th scope='row'>Tingkat</th>              <td><input type='text' class='form-control' name='h' value='$s[tingkat]'></td></tr>
-                    <tr><th scope='row'>Tingkat</th>              <td><input type='text' class='form-control' name='kkm' value='$s[kkm]'></td></tr>
-                    <tr><th scope='row'>Kompetensi Umum</th>           <td><input type='text' class='form-control' name='i' value='$s[kompetensi_umum]'></td></tr>
-                    <tr><th scope='row'>Kompetensi Khusus</th>           <td><input type='text' class='form-control' name='j' value='$s[kompetensi_khusus]'></td></tr>
+                    <tr><th scope='row'>KKM</th>              <td><input type='text' class='form-control' name='kkm' value='$s[kkm]'></td></tr>
+                    <tr><th scope='row'>Semester</th> <td><select class='form-control' name='z'> 
+                    <option value='0' selected>- Pilih Semester -</option>";
+                    $semester = mysqli_query($koneksi, "SELECT * FROM sesi");
+                    while ($a = mysqli_fetch_array($semester)) {
+                      if ($s[id_sesi] == $a[id_sesi]) {
+                        echo "<option value='$a[id_sesi]' selected>$a[nama_sesi]</option>";
+                      } else {
+                        echo "<option value='$a[id_sesi]'>$a[nama_sesi]</option>";
+                      }
+                    }
+                    echo "</select>
                     <tr><th scope='row'>Jumlah Jam</th>           <td><input type='text' class='form-control' name='k' value='$s[jumlah_jam]'></td></tr>
                     <tr><th scope='row'>Urutan</th>           <td><input type='text' class='form-control' name='l' value='$s[urutan]'></td></tr>
                     <tr><th scope='row'>Kelompok</th> <td><select class='form-control' name='b'> 
@@ -153,7 +161,7 @@
                 </div>
               </div>
               <div class='box-footer'>
-                    <button type='submit' name='update' class='btn btn-info'>Update</button>
+                    <button type='submit' name='update' class='btn btn-info'>Edit</button>
                     <a href='index.php?view=matapelajaran'><button type='button' class='btn btn-danger'>Kembali</button></a>
                   </div>
               </form>
@@ -161,10 +169,9 @@
 } elseif ($_GET[act] == 'tambah') {
   if (isset($_POST[tambah])) {
     mysqli_query($koneksi, "INSERT INTO mata_pelajaran VALUES
-    ('$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[f]','$_POST[h]','$_POST[kkm]','$_POST[i]','$_POST[j]','$_POST[k]','$_POST[l]','$_POST[m]')");
+    ('$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[f]','$_POST[h] (SLTA)','$_POST[kkm]','$_POST[z]','$_POST[k]','$_POST[l]','$_POST[m]')");
     echo "<script>document.location='index.php?view=matapelajaran';</script>";
   }
-
   echo "<div class='col-md-12'>
               <div class='box box-info'>
                 <div class='box-header with-border'>
@@ -175,28 +182,35 @@
                 <div class='col-md-12'>
                   <table class='table table-condensed table-bordered'>
                   <tbody>
-                    <tr><th scope='row'>Kode Pelajaran</th>       <td><input type='text' class='form-control' name='a' value='$s[kode_pelajaran]'> </td></tr>
+                    <tr><th scope='row'>Kode Pelajaran</th>       
+                    <td><input type='text' class='form-control' name='a' value='$s[kode_pelajaran]'> </td></tr>
                     <tr><th scope='row'>Nama Mapel</th>           <td><input type='text' class='form-control' name='f' value='$s[namamatapelajaran]'></td></tr>
                     <tr><th scope='row'>Jurusan</th> <td><select class='form-control' name='c'> 
                              <option value='0' selected>- Pilih Jurusan -</option>";
-  $jurusan = mysqli_query($koneksi, "SELECT * FROM jurusan");
-  while ($a = mysqli_fetch_array($jurusan)) {
-    echo "<option value='$a[kode_jurusan]'>$a[nama_jurusan]</option>";
-  }
-  echo "</select>
+                    $jurusan = mysqli_query($koneksi, "SELECT * FROM jurusan");
+                    while ($a = mysqli_fetch_array($jurusan)) {
+                      echo "<option value='$a[kode_jurusan]'>$a[nama_jurusan]</option>";
+                    }
+                    echo "</select>
                     </td></tr>
                     <tr><th scope='row'>Guru Pengampu</th> <td><select class='form-control' name='d'> 
-                             <option value='0' selected>- Pilih Guru Pengampu -</option>";
-  $guru = mysqli_query($koneksi, "SELECT * FROM guru");
-  while ($a = mysqli_fetch_array($guru)) {
-    echo "<option value='$a[nip]'>$a[nama_guru]</option>";
-  }
-  echo "</select>
+                       <option value='0' selected>- Pilih Guru Pengampu -</option>";
+                      $guru = mysqli_query($koneksi, "SELECT * FROM guru");
+                      while ($a = mysqli_fetch_array($guru)) {
+                        echo "<option value='$a[nip]'>$a[nama_guru]</option>";
+                      }
+                      echo "</select>
                     </td></tr>
                     <tr><th scope='row'>Tingkat</th>              <td><input type='text' class='form-control' name='h' value='$s[tingkat]'></td></tr>
                     <tr><th scope='row'>KKM</th>              <td><input type='text' class='form-control' name='kkm' value='$s[kkm]'></td></tr>
-                    <tr><th scope='row'>Kompetensi Umum</th>           <td><input type='text' class='form-control' name='i' value='$s[kompetensi_umum]'></td></tr>
-                    <tr><th scope='row'>Kompetensi Khusus</th>           <td><input type='text' class='form-control' name='j' value='$s[kompetensi_khusus]'></td></tr>
+                    <tr><th scope='row'>semester</th> <td><select class='form-control' name='z'> 
+                       <option value='0' selected>- Pilih Semester -</option>";
+                      $semester = mysqli_query($koneksi, "SELECT * FROM sesi");
+                      while ($a = mysqli_fetch_array($semester)) {
+                        echo "<option value='$a[id_sesi]'>$a[nama_sesi]</option>";
+                      }
+                      echo "</select>
+                    </td></tr>
                     <tr><th scope='row'>Jumlah Jam</th>           <td><input type='text' class='form-control' name='k' value='$s[jumlah_jam]'></td></tr>
                     <tr><th scope='row'>Urutan</th>           <td><input type='text' class='form-control' name='l' value='$s[urutan]'></td></tr>
                     <tr><th scope='row'>Kelompok</th> <td><select class='form-control' name='b'> 
@@ -220,10 +234,11 @@
               </form>
             </div>";
 } elseif ($_GET[act] == 'detail') {
-  $edit = mysqli_query($koneksi, "SELECT a.*, b.nama_kelompok_mata_pelajaran, c.nama_guru, e.nama_jurusan FROM mata_pelajaran a 
+  $edit = mysqli_query($koneksi, "SELECT a.*, b.nama_kelompok_mata_pelajaran, c.nama_guru, e.nama_jurusan ,f.nama_sesi FROM mata_pelajaran a 
                                               JOIN kelompok_mata_pelajaran b ON a.id_kelompok_mata_pelajaran=b.id_kelompok_mata_pelajaran
                                                 JOIN guru c ON a.nip=c.nip
                                                     JOIN jurusan e ON a.kode_jurusan=e.kode_jurusan
+                                                    JOIN sesi f ON a.id_sesi=f.id_sesi
                                                       where a.kode_pelajaran='$_GET[id]'");
   $s = mysqli_fetch_array($edit);
   echo "<div class='col-md-12'>
@@ -242,9 +257,8 @@
                     <tr><th scope='row'>Guru Pengampu</th>        <td>$s[nama_guru]</td></tr>
                     <tr><th scope='row'>Tingkat</th>              <td>$s[tingkat]</td></tr>
                     <tr><th scope='row'>KKM</th>              <td>$s[kkm]</td></tr>
-                    <tr><th scope='row'>Kompetensi Umum</th>      <td>$s[kompetensi_umum]</td></tr>
-                    <tr><th scope='row'>Kompetensi Khusus</th>    <td>$s[kompetensi_khusus]</td></tr>
-                    <tr><th scope='row'>Jumlah Jam</th>           <td>$s[jumlah_jam]</td></tr>
+                    <tr><th scope='row'>Semester</th>              <td>$s[id_sesi]</td></tr>
+                   <tr><th scope='row'>Jumlah Jam</th>           <td>$s[jumlah_jam]</td></tr>
                     <tr><th scope='row'>Urutan</th>               <td>$s[urutan]</td></tr>
                     <tr><th scope='row'>Kelompok</th>             <td>$s[nama_kelompok_mata_pelajaran]</td></tr>
                     <tr><th scope='row'>Aktif</th>                <td>$s[aktif]</td></tr>

@@ -39,6 +39,6 @@
     </li>
     <li><a href="index.php?view=journalkbm"><i class="fa fa-tags"></i><span>Journal KBM</span></a></li>
     <li><a href="index.php?view=raportcetak"><i class="fa fa-calendar"></i> <span>Laporan Nilai</span></a></li>
-    <li><a href="index.php?view=dokumentasi"><i class="fa fa-book"></i> <span>Panduan Penggunaan</span></a></li>
+    <li><a href="index.php?view=kalender"><i class="fa fa-book"></i> <span>Kalender Akademik</span></a></li>
   </ul>
 </section>

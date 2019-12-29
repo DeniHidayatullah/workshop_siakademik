@@ -52,7 +52,7 @@ $frt = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM header_print ORD
                                   where a.kode_kelas='$_GET[kelas]' AND a.id_tahun_akademik='$_GET[tahun]' AND b.id_kelompok_mata_pelajaran='$k[id_kelompok_mata_pelajaran]'");
     $no = 1;
     while ($m = mysqli_fetch_array($mapel)) {
-      $rapn = mysqli_fetch_array(mysqli_query($koneksi, "SELECT sum((nilai1+nilai2+nilai3+nilai4+nilai5)/5)/count(nisn) as raport FROM nilai_pengetahuan where kodejdwl='$m[kodejdwl]' AND nisn='$s[nisn]'"));
+      $rapn = mysqli_fetch_array(mysqli_query($koneksi, "SELECT sum((nilai1+nilai2+nilai3+nilai4)/4)/count(nisn) as raport FROM nilai_pengetahuan where kodejdwl='$m[kodejdwl]' AND nisn='$s[nisn]'"));
       $cekpredikat = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='$_GET[kelas]'"));
       if ($cekpredikat >= 1) {
         $grade3 = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM `predikat` where (" . number_format($rapn[raport]) . " >=nilai_a) AND (" . number_format($rapn[raport]) . " <= nilai_b) AND kode_kelas='$_GET[kelas]'"));
@@ -71,7 +71,7 @@ $frt = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM header_print ORD
       echo "<tr>
                 <td align=center>$no</td>
                 <td>$m[namamatapelajaran]</td>
-                <td align=center>77</td>
+                <td align=center>$m[kkm]</td>
                 <td align=center>" . number_format($rapn[raport]) . "</td>
                 <td align=center>$grade3[grade]</td>
                 <td align=center>" . number_format($rapnk[raport]) . "</td>
@@ -103,7 +103,7 @@ $frt = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM header_print ORD
   }
   echo "</tr>
               <tr>
-                  <th>77</th>";
+                  <th>$m[kkm]</th>";
   while ($p = mysqli_fetch_array($gradea)) {
     echo "<th>$p[nilai_a] - $p[nilai_b]</th>";
   }

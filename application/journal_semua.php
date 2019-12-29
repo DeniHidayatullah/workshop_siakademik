@@ -295,7 +295,7 @@
                 </div>
               </div>
               <div class='box-footer'>
-                    <button type='submit' name='update' class='btn btn-info'>Update</button>
+                    <button type='submit' name='update' class='btn btn-info'>Edit</button>
                     <a href='#'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
                     
                   </div>

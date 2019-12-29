@@ -62,7 +62,12 @@
 <?php
 } elseif ($_GET[act] == 'edit') {
   if (isset($_POST[update])) {
-    mysqli_query($koneksi, "UPDATE kelas SET kode_kelas = '$_POST[a]',
+    $cek = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM kelas WHERE nip='$_POST[b]' or kode_ruangan='$_POST[d]'"));
+    if ($cek > 0){ 
+      echo "<div class='alert alert-danger alert-dismissible fade in' role='alert'>
+      <strong>Perhatian!</strong> - Kelas Atau Ruangan Sudah ada
+      </div>";
+    }else{mysqli_query($koneksi, "UPDATE kelas SET kode_kelas = '$_POST[a]',
                                          nip = '$_POST[b]',
                                          kode_jurusan = '$_POST[c]',
                                          kode_ruangan = '$_POST[d]',
@@ -70,6 +75,7 @@
                                          aktif = '$_POST[f]' where kode_kelas='$_POST[id]'");
     echo "<script>document.location='index.php?view=kelas';</script>";
   }
+}
   $edit = mysqli_query($koneksi, "SELECT * FROM kelas a LEFT JOIN guru b ON a.nip=b.nip 
                             LEFT JOIN jurusan c ON a.kode_jurusan=c.kode_jurusan 
                               LEFT JOIN ruangan d ON a.kode_ruangan=d.kode_ruangan 
@@ -135,16 +141,23 @@
                 </div>
               </div>
               <div class='box-footer'>
-                    <button type='submit' name='update' class='btn btn-info'>Update</button>
+                    <button type='submit' name='update' class='btn btn-info'>Edit</button>
                     <a href='index.php?view=kelas'><button type='button' class='btn btn-danger'>Kembali</button></a>
                   </div>
               </form>
             </div>";
 } elseif ($_GET[act] == 'tambah') {
   if (isset($_POST[tambah])) {
-    mysqli_query($koneksi, "INSERT INTO kelas VALUES('$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[e]','$_POST[f]')");
-    echo "<script>document.location='index.php?view=kelas';</script>";
+    $cek = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM kelas WHERE nip='$_POST[b]' or kode_ruangan='$_POST[d]'"));
+    if ($cek > 0){ 
+      echo "<div class='alert alert-danger alert-dismissible fade in' role='alert'>
+      <strong>Perhatian!</strong> - Kelas Atau Ruangan Sudah ada
+      </div>";
+    }else{
+      mysqli_query($koneksi, "INSERT INTO kelas VALUES('$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[e]','$_POST[f]')");
+      echo "<script>document.location='index.php?view=kelas';</script>";
   }
+}
 
   echo "<div class='col-md-12'>
               <div class='box box-info'>

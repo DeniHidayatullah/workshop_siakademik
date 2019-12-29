@@ -174,8 +174,8 @@ if ($_GET[act]==''){
               <?php if($_SESSION[level]!='kepala'){
                     if (isset($_GET[kelas])){ ?>
               <div class='box-footer'>
-                  Pindah Ke : 
-                  <input type="number" name='angkatanpindah' style='padding:3px' placeholder='Angkatan' value='<?php echo $_GET[angkatan]; ?>'>
+                  Naik Kelas atau Pindah Kelas Ke : 
+                  <!-- <input type="number" name='angkatanpindah' style='padding:3px' placeholder='Angkatan' value='<?php echo $_GET[angkatan]; ?>'> -->
                   <select name='kelaspindah' style='padding:4px' required>
                         <?php 
                             echo "<option value=''>- Pilih Kelas -</option>";
@@ -208,7 +208,7 @@ if ($_GET[act]==''){
         if (move_uploaded_file($_FILES['ao']['tmp_name'], $uploadfile)) {
            mysqli_query($koneksi,"INSERT INTO siswa VALUES('','$_POST[aa]','$_POST[ac]','$_POST[ad]','$_POST[bd]','$_POST[ab]',
                                '$_POST[bb]','$bc','$_POST[ba]','$_POST[be]','$_POST[bf]','$_POST[ah]','$rt','$rw',
-                               '$_POST[aj]','$_POST[ak]','$_POST[al]','$_POST[am]','$_POST[bg]','$_POST[bh]','$_POST[bi]',
+                               '$_POST[aj]','$_POST[ak]','$_POST[al]','$_POST[am]','$_POST[bg]','$_POST[bh]',  
                                '$_POST[bj]','$_POST[bk]','$_POST[bl]','$_POST[bm]','$_POST[bn]','$filenamee','$_POST[ca]',
                                '$_POST[cb]','$_POST[cc]','$_POST[cd]','$_POST[ce]','$_POST[cf]','$_POST[cg]','$_POST[ch]',
                                '$_POST[ci]','$_POST[cj]','$_POST[ck]','$_POST[cl]','$_POST[cm]','$_POST[cn]','$_POST[co]',
@@ -218,7 +218,7 @@ if ($_GET[act]==''){
       }else{
             mysqli_query($koneksi,"INSERT INTO siswa VALUES('','$_POST[aa]','$_POST[ac]','$_POST[ad]','$_POST[bd]','$_POST[ab]',
                                '$_POST[bb]','$bc','$_POST[ba]','$_POST[be]','$_POST[bf]','$_POST[ah]','$rt','$rw',
-                               '$_POST[aj]','$_POST[ak]','$_POST[al]','$_POST[am]','$_POST[bg]','$_POST[bh]','$_POST[bi]',
+                               '$_POST[aj]','$_POST[ak]','$_POST[al]','$_POST[am]','$_POST[bg]','$_POST[bh]',  
                                '$_POST[bj]','$_POST[bk]','$_POST[bl]','$_POST[bm]','$_POST[bn]','','$_POST[ca]',
                                '$_POST[cb]','$_POST[cc]','$_POST[cd]','$_POST[ce]','$_POST[cf]','$_POST[cg]','$_POST[ch]',
                                '$_POST[ci]','$_POST[cj]','$_POST[ck]','$_POST[cl]','$_POST[cm]','$_POST[cn]','$_POST[co]',
@@ -306,8 +306,7 @@ if ($_GET[act]==''){
                               <tr><th scope='row'>Keb. Khusus</th> <td><input type='text' class='form-control' name='bf'></td></tr>
                               <tr><th scope='row'>Jenis Tinggal</th> <td><input type='text' class='form-control' name='bg'></td></tr>
                               <tr><th scope='row'>Transportasi</th> <td><input type='text' class='form-control' name='bh'></td></tr>
-                              <tr><th scope='row'>No Telpon</th> <td><input type='text' class='form-control' name='bi'></td></tr>
-                              <tr><th scope='row'>No Handpone</th> <td><input type='text' class='form-control' name='bj'></td></tr>
+                              <tr><th scope='row'>No Telpon</th> <td><input type='text' class='form-control' name='bj'></td></tr>
                               <tr><th scope='row'>Alamat Email</th> <td><input type='text' class='form-control' name='bk'></td></tr>
                               <tr><th scope='row'>SKHUN</th> <td><input type='text' class='form-control' name='bl'></td></tr>
                               <tr><th scope='row'>Penerima KPS</th> <td><input type='text' class='form-control' name='bm'></td></tr>
@@ -403,7 +402,6 @@ if ($_GET[act]==''){
                                kebutuhan_khusus = '$_POST[bf]',
                                jenis_tinggal = '$_POST[bg]',
                                alat_transportasi = '$_POST[bh]',
-                               telepon = '$_POST[bi]',
                                hp = '$_POST[bj]',
                                email = '$_POST[bk]',
                                skhun = '$_POST[bl]',
@@ -437,7 +435,6 @@ if ($_GET[act]==''){
                                kebutuhan_khusus = '$_POST[bf]',
                                jenis_tinggal = '$_POST[bg]',
                                alat_transportasi = '$_POST[bh]',
-                               telepon = '$_POST[bi]',
                                hp = '$_POST[bj]',
                                email = '$_POST[bk]',
                                skhun = '$_POST[bl]',
@@ -609,8 +606,7 @@ if ($_GET[act]==''){
                             <tr><th scope='row'>Keb. Khusus</th> <td><input type='text' class='form-control' value='$s[kebutuhan_khusus]' name='bf'></td></tr>
                             <tr><th scope='row'>Jenis Tinggal</th> <td><input type='text' class='form-control' value='$s[jenis_tinggal]' name='bg'></td></tr>
                             <tr><th scope='row'>Transportasi</th> <td><input type='text' class='form-control' value='$s[alat_transportasi]' name='bh'></td></tr>
-                            <tr><th scope='row'>No Telpon</th> <td><input type='text' class='form-control' value='$s[telepon]' name='bi'></td></tr>
-                            <tr><th scope='row'>No Handpone</th> <td><input type='text' class='form-control' value='$s[hp]' name='bj'></td></tr>
+                            <tr><th scope='row'>No Telpon</th> <td><input type='text' class='form-control' value='$s[hp]' name='bj'></td></tr>
                             <tr><th scope='row'>Alamat Email</th> <td><input type='text' class='form-control' value='$s[email]' name='bk'></td></tr>
                             <tr><th scope='row'>SKHUN</th> <td><input type='text' class='form-control' value='$s[skhun]' name='bl'></td></tr>
                             <tr><th scope='row'>Penerima KPS</th> <td><input type='text' class='form-control' value='$s[penerima_kps]' name='bm'></td></tr>
@@ -629,7 +625,7 @@ if ($_GET[act]==''){
                         </div>  
                         <div style='clear:both'></div>
                         <div class='box-footer'>
-                          <button type='submit' name='update1' class='btn btn-info'>Update</button>
+                          <button type='submit' name='update1' class='btn btn-info'>Edit</button>
                           <a href='index.php?view=siswa'><button type='button' class='btn btn-danger'>Kembali</button></a>
                         </div> 
 
@@ -675,7 +671,7 @@ if ($_GET[act]==''){
                           </table>
                         </div>
                         <div class='box-footer'>
-                          <button type='submit' name='update2' class='btn btn-info'>Update</button>
+                          <button type='submit' name='update2' class='btn btn-info'>Edit</button>
                           <a href='index.php?view=siswa'><button type='button' class='btn btn-danger'>Kembali</button></a>
                         </div>
                         </form>
@@ -691,8 +687,7 @@ if ($_GET[act]==''){
     }else{
         $nipd = $_GET[id];
     }
-    $detail = mysqli_query($koneksi,"SELECT * FROM siswa a
-     LEFT JOIN kelas b ON a.kode_kelas=b.kode_kelas 
+    $detail = mysqli_query($koneksi,"SELECT * FROM siswa a LEFT JOIN kelas b ON a.kode_kelas=b.kode_kelas 
                               LEFT JOIN jenis_kelamin c ON a.id_jenis_kelamin=c.id_jenis_kelamin 
                                   LEFT JOIN jurusan d ON b.kode_jurusan=d.kode_jurusan
                                     LEFT JOIN agama e ON a.id_agama=e.id_agama 
@@ -758,8 +753,7 @@ echo "</th>
 <tr><th scope='row'>Keb. Khusus</th> <td>$s[kebutuhan_khusus]</td></tr>
 <tr><th scope='row'>Jenis Tinggal</th> <td>$s[jenis_tinggal]</td></tr>
 <tr><th scope='row'>Transportasi</th> <td>$s[alat_transportasi]</td></tr>
-<tr><th scope='row'>No Telpon</th> <td>$s[telepon]</td></tr>
-<tr><th scope='row'>No Handpone</th> <td>$s[hp]</td></tr>
+<tr><th scope='row'>No Telpon</th> <td>$s[hp]</td></tr>
 <tr><th scope='row'>Alamat Email</th> <td>$s[email]</td></tr>
 <tr><th scope='row'>SKHUN</th> <td>$s[skhun]</td></tr>
 <tr><th scope='row'>Penerima KPS</th> <td>$s[penerima_kps]</td></tr>
