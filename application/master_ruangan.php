@@ -1,3 +1,4 @@
+<!-- Menampilkan Data Ruangan (Indah) -->
 <?php if ($_GET[act] == '') { ?>
   <div class="col-xs-12">
     <div class="box">
@@ -41,6 +42,7 @@
                 echo "</tr>";
                 $no++;
               }
+              // Hapus Data (Indah)
               if (isset($_GET[hapus])) {
                 mysqli_query($koneksi, "DELETE FROM ruangan where kode_ruangan='$_GET[hapus]'");
                 echo "<script>document.location='index.php?view=ruangan';</script>";
@@ -52,6 +54,7 @@
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div>
+<!-- Edit Data Guru -->
 <?php
 } elseif ($_GET[act] == 'edit') {
   if (isset($_POST[update])) {
@@ -98,6 +101,7 @@
                   </div>
               </form>
             </div>";
+            // Tambah Data Guru
 } elseif ($_GET[act] == 'tambah') {
   if (isset($_POST[tambah])) {
     mysqli_query($koneksi, "INSERT INTO ruangan VALUES('$_POST[a]','$_POST[c]','$_POST[d]','$_POST[g]')");
