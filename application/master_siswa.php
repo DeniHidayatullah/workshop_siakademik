@@ -28,12 +28,13 @@ if ($_GET[act]==''){
        echo "<script>document.location='index.php?view=siswa&angkatan=".$angkatan."&kelas=".$kelas."';</script>";
     }
 ?> 
+<!-- menampilkan data -->
             <div class="col-xs-12">  
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">Semua Data Siswa </h3>
                    <?php if($_SESSION[level]!='kepala'){ ?>
-                  <a class='pull-right btn btn-success btn-sm' target='_BLANK' href='print-siswa.php?kelas=<?php echo $_GET[kelas]; ?>&angkatan=<?php echo $_GET[angkatan]; ?>'>Print Siswa</a>
+                  <!-- <a class='pull-right btn btn-success btn-sm' target='_BLANK' href='print-siswa.php?kelas=<?php echo $_GET[kelas]; ?>&angkatan=<?php echo $_GET[angkatan]; ?>'>Print Siswa</a> -->
                   <a style='margin-right:5px' class='pull-right btn btn-primary btn-sm' href='index.php?view=siswa&act=tambahsiswa'>Tambahkan Data Siswa</a>
                   <?php } ?>
 
@@ -79,7 +80,7 @@ if ($_GET[act]==''){
                         </tr>
                     </thead>
                     <tbody>";
-
+// relasi
                   if ($_GET[kelas] != '' AND $_GET[angkatan] != ''){
                     $tampil = mysqli_query($koneksi,"SELECT * FROM siswa a LEFT JOIN kelas b ON a.kode_kelas=b.kode_kelas 
                                               LEFT JOIN jenis_kelamin c ON a.id_jenis_kelamin=c.id_jenis_kelamin 
@@ -123,9 +124,13 @@ if ($_GET[act]==''){
                             echo "</tr>";
                       $no++;
                       }
+                      // hapus
                       if (isset($_GET[hapus])){
                           mysqli_query($koneksi,"DELETE FROM siswa where nisn='$_GET[hapus]'");
                           echo "<script>document.location='index.php?view=siswa';</script>";
+                      }
+                      if (isset($_GET[kelas])){
+                          echo "<td><input type='checkbox' onchange='checkAll(this)' name='chk[]' value='' >Select All</td>";
                       }
                   ?>
 
@@ -192,6 +197,7 @@ if ($_GET[act]==''){
 
               </form>
             </div>
+            <!-- tambah siswa -->
 <?php 
 }elseif($_GET[act]=='tambahsiswa'){
   cek_session_admin();
@@ -363,6 +369,7 @@ if ($_GET[act]==''){
                 </div>
             </div>
         </div>";
+        // edit
 }elseif($_GET[act]=='editsiswa'){
   cek_session_siswa();
   if (isset($_POST[update1])){
@@ -679,7 +686,7 @@ if ($_GET[act]==''){
 
                 </div>
             </div>";
-
+// detail indah
 }elseif($_GET[act]=='detailsiswa'){
   cek_session_siswa();
     if ($_SESSION[level] == 'siswa'){
@@ -809,3 +816,21 @@ echo "</th>
                 </div>
             </div>";
 }?>
+<script type="text/javascript">
+  function checkAll(ele) {
+       var checkboxes = document.getElementsByTagName('input');
+       if (ele.checked) {
+           for (var i = 0; i < checkboxes.length; i++) {
+               if (checkboxes[i].type == 'checkbox' ) {
+                   checkboxes[i].checked = true;
+               }
+           }
+       } else {
+           for (var i = 0; i < checkboxes.length; i++) {
+               if (checkboxes[i].type == 'checkbox') {
+                   checkboxes[i].checked = false;
+               }
+           }
+       }
+   }
+ </script>

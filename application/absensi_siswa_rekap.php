@@ -1,3 +1,4 @@
+<!-- Menampilkan Data Rekap (Indah) -->
 <?php
 if ($_GET[act] == '') {
   cek_session_admin();
@@ -13,6 +14,7 @@ if ($_GET[act] == '') {
         <form style='margin-right:5px; margin-top:0px' class='pull-right' action='' method='GET'>
           <input type="hidden" name='view' value='rekapabsensiswa'>
           <select name='tahun' style='padding:4px'>
+          <!-- Filter Tahun Akademik -->
             <?php
               echo "<option value=''>- Pilih Tahun Akademik -</option>";
               $tahun = mysqli_query($koneksi, "SELECT * FROM tahun_akademik");
@@ -26,6 +28,7 @@ if ($_GET[act] == '') {
               ?>
           </select>
           <select name='kelas' style='padding:4px'>
+          <!-- Filter Kelas (Indah) -->
             <?php
               echo "<option value=''>- Pilih Kelas -</option>";
               $kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
@@ -65,6 +68,7 @@ if ($_GET[act] == '') {
             </tr>
           </thead>
           <tbody>
+          <!-- Analisa Database Relasi Jadwal dan Siswa (Indah) -->
             <?php
               if (isset($_GET[kelas]) and isset($_GET[tahun])) {
                 $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
