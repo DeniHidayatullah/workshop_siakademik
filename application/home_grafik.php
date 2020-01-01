@@ -1,3 +1,4 @@
+<!-- erwin grafik batang -->
 <script type="text/javascript" src="plugins/jQuery/jquery.min.js"></script>
 <script type="text/javascript">
     $(function() {
