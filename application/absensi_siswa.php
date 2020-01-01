@@ -236,6 +236,7 @@
         echo "<option value='$n'>$n</option>";
       }
     }
+    // Lihat Absen (Indah)
     echo "</select></div> 
                         <input name='lihat' class='btn btn-primary' type='submit' value='Lihat Absen'>
               </form>
@@ -301,6 +302,7 @@
                 </div>
               </div>";
     if ($_SESSION[level] != 'kepala') {
+      // Simpan Absen (Indah)
       echo "<div class='box-footer'>
       <a href='index.php?view=absensiswa'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>                
       <button type='submit' name='simpann' class='btn btn-info pull-right'>Simpan Absensi</button>
