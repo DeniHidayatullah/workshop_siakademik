@@ -53,18 +53,20 @@
           <tbody>
             <?php
               if (isset($_GET[tahun])) {
-                $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
+                $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan,f.nama_tahun FROM jadwal_pelajaran a 
                                             JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran
                                               JOIN guru c ON a.nip=c.nip 
                                                 JOIN ruangan d ON a.kode_ruangan=d.kode_ruangan
                                                   JOIN kelas e ON a.kode_kelas=e.kode_kelas 
+                                                JOIN tahun_akademik f ON a.id_tahun_akademik=f.id_tahun_akademik
                                                   where a.nip='$_SESSION[id]' AND a.id_tahun_akademik='$_GET[tahun]' ORDER BY a.hari DESC");
               } else {
-                $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
+                $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan, f.nama_tahun FROM jadwal_pelajaran a 
                                             JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran
                                               JOIN guru c ON a.nip=c.nip 
                                                 JOIN ruangan d ON a.kode_ruangan=d.kode_ruangan
                                                 JOIN kelas e ON a.kode_kelas=e.kode_kelas 
+                                                JOIN tahun_akademik f ON a.id_tahun_akademik=f.id_tahun_akademik
                                                   where a.nip='$_SESSION[id]' AND a.id_tahun_akademik LIKE '" . date('Y') . "%' ORDER BY a.hari DESC");
               }
               $no = 1;
@@ -78,7 +80,7 @@
                               <td>$r[jam_mulai]</td>
                               <td>$r[jam_selesai]</td>
                               <td>$r[nama_ruangan]</td>
-                              <td>$r[id_tahun_akademik]</td>
+                              <td>$r[nama_tahun]</td>
                               <td style='width:80px !important'><center>
                                         <a class='btn btn-success btn-xs' title='Lihat Journal' href='index_guru.php?view=journalguru&act=lihat&id=$r[kodejdwl]'><span class='glyphicon glyphicon-search'></span> Lihat Journal</a>
                                       </center></td>

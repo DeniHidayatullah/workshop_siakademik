@@ -1,3 +1,4 @@
+<!-- TAMPIL DATA KELAS @MHA -->
 <?php if ($_GET[act] == '') { ?>
   <div class="col-xs-12">
     <div class="box">
@@ -24,6 +25,7 @@
             </tr>
           </thead>
           <tbody>
+          <!-- RELASI KELAS DG JURUSAN @MHA -->
             <?php
               $tampil = mysqli_query($koneksi, "SELECT * FROM kelas a LEFT JOIN guru b ON a.nip=b.nip 
                                             LEFT JOIN jurusan c ON a.kode_jurusan=c.kode_jurusan 
@@ -48,6 +50,7 @@
                 echo "</tr>";
                 $no++;
               }
+              // HAPUS DATA KELAS @MHA
               if (isset($_GET[hapus])) {
                 mysqli_query($koneksi, "DELETE FROM kelas where kode_kelas='$_GET[hapus]'");
                 echo "<script>document.location='index.php?view=kelas';</script>";
@@ -59,22 +62,18 @@
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div>
+  <!-- EDIT DATA KELAS @MHA -->
 <?php
 } elseif ($_GET[act] == 'edit') {
   if (isset($_POST[update])) {
-    $cek = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM kelas WHERE nip='$_POST[b]' or kode_ruangan='$_POST[d]'"));
-    if ($cek > 0){ 
-      echo "<div class='alert alert-danger alert-dismissible fade in' role='alert'>
-      <strong>Perhatian!</strong> - Kelas Atau Ruangan Sudah ada
-      </div>";
-    }else{mysqli_query($koneksi, "UPDATE kelas SET kode_kelas = '$_POST[a]',
+    mysqli_query($koneksi, "UPDATE kelas SET kode_kelas = '$_POST[a]',
                                          nip = '$_POST[b]',
                                          kode_jurusan = '$_POST[c]',
                                          kode_ruangan = '$_POST[d]',
                                          nama_kelas = '$_POST[e]', 
                                          aktif = '$_POST[f]' where kode_kelas='$_POST[id]'");
     echo "<script>document.location='index.php?view=kelas';</script>";
-  }
+  
 }
   $edit = mysqli_query($koneksi, "SELECT * FROM kelas a LEFT JOIN guru b ON a.nip=b.nip 
                             LEFT JOIN jurusan c ON a.kode_jurusan=c.kode_jurusan 
@@ -92,9 +91,11 @@
                   <table class='table table-condensed table-bordered'>
                   <tbody>
                     <input type='hidden' name='id' value='$s[kode_kelas]'>
-                    <tr><th width='120px' scope='row'>Kode Kelas</th> <td><input type='text' class='form-control' name='a' value='$s[kode_kelas]'> </td></tr>
-                    <tr><th scope='row'>Wali Kelas</th>               <td><select class='form-control' name='b'> 
-                                                                          <option value='0' selected>- Pilih Wali Kelas -</option>";
+                    <tr><th width='120px' scope='row'>Kode Kelas</th> 
+                    <td><input type='text' class='form-control' name='a' value='$s[kode_kelas]'> </td></tr>
+                    <tr><th scope='row'>Wali Kelas</th>               
+                    <td><select class='form-control' name='b'> 
+                    <option value='0' selected>- Pilih Wali Kelas -</option>";
   $wali = mysqli_query($koneksi, "SELECT * FROM guru");
   while ($a = mysqli_fetch_array($wali)) {
     if ($a[nip] == $s[nip]) {
@@ -104,8 +105,9 @@
     }
   }
   echo "</select></td></tr>
-                    <tr><th scope='row'>Jurusan</th>               <td><select class='form-control' name='c'> 
-                                                                          <option value='0' selected>- Pilih Jurusan -</option>";
+                    <tr><th scope='row'>Jurusan</th>              
+                    <td><select class='form-control' name='c'> 
+                     <option value='0' selected>- Pilih Jurusan -</option>";
   $jur = mysqli_query($koneksi, "SELECT * FROM jurusan");
   while ($a = mysqli_fetch_array($jur)) {
     if ($a[kode_jurusan] == $s[kode_jurusan]) {
@@ -115,8 +117,9 @@
     }
   }
   echo "</select></td></tr>
-                    <tr><th scope='row'>Ruangan</th>               <td><select class='form-control' name='d'> 
-                                                                          <option value='0' selected>- Pilih Ruangan -</option>";
+                    <tr><th scope='row'>Ruangan</th>               
+                    <td><select class='form-control' name='d'> 
+                    <option value='0' selected>- Pilih Ruangan -</option>";
   $rua = mysqli_query($koneksi, "SELECT * FROM ruangan");
   while ($a = mysqli_fetch_array($rua)) {
     if ($a[kode_ruangan] == $s[kode_ruangan]) {
@@ -146,6 +149,7 @@
                   </div>
               </form>
             </div>";
+            // TAMBAH DATA KELAS @MHA
 } elseif ($_GET[act] == 'tambah') {
   if (isset($_POST[tambah])) {
     $cek = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM kelas WHERE nip='$_POST[b]' or kode_ruangan='$_POST[d]'"));
