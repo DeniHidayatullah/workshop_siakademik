@@ -1,8 +1,10 @@
+<!-- menampilkan -->
 <?php
 echo "<section class='content-header'>
 <div class='alert alert-warning alert-dismissible fade in' role='alert'> 
 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
 <span aria-hidden='true'>×</span></button> 
+// pilih tahun akademik
 <strong>Perhatian!</strong> <br>Silahkan Pilih semester dan tahun akademik  dulu !!!
 </div>
     </section><div class='col-xs-12'>  
@@ -45,6 +47,7 @@ while ($k = mysqli_fetch_array($kelompok)) {
   echo "<tr>
             <td style='border:1px solid #e3e3e3' colspan='9'><b>$k[nama_kelompok_mata_pelajaran]</b></td>
           </tr>";
+          // relasi
   $mapel = mysqli_query($koneksi, "SELECT * FROM  jadwal_pelajaran a 
           JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran 
             where a.kode_kelas='$_SESSION[kode_kelas]' 
