@@ -1,3 +1,4 @@
+<!-- MENAMPILKAN DATA KELMAPEL (KIRANA) -->
 <?php if ($_GET[act] == '') { ?>
   <div class="col-xs-12">
     <div class="box">
@@ -36,7 +37,7 @@
                 echo "</tr>";
                 $no++;
               }
-
+// HAPUS DATA KELMAPEL (KIRANA)
               if (isset($_GET[hapus])) {
                 mysqli_query($koneksi, "DELETE FROM kelompok_mata_pelajaran where id_kelompok_mata_pelajaran='$_GET[hapus]'");
                 echo "<script>document.location='index.php?view=kelompokmapel';</script>";
@@ -48,6 +49,7 @@
     </div><!-- /.box -->
   </div>
 <?php
+// EDIT DATA KELMAPEL (KIRANA)
 } elseif ($_GET[act] == 'edit') {
   if (isset($_POST[update])) {
     mysqli_query($koneksi, "UPDATE kelompok_mata_pelajaran SET jenis_kelompok_mata_pelajaran = '$_POST[a]',
@@ -79,6 +81,7 @@
                   </div>
               </form>
             </div>";
+// TAMBAH DATA KELMAPEL
 } elseif ($_GET[act] == 'tambah') {
   if (isset($_POST[tambah])) {
     mysqli_query($koneksi, "INSERT INTO kelompok_mata_pelajaran VALUES('','$_POST[a]','$_POST[b]')");
