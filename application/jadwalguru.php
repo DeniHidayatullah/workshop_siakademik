@@ -25,6 +25,7 @@
             </form>
 
         </div><!-- /.box-header -->
+        <!--indah layout-->
         <div class="box-body">
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -42,6 +43,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                <!--kirana DB-->
                     <?php
                     if (isset($_GET[tahun])) {
                         $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
@@ -68,7 +70,7 @@
                               <td>$r[hari]</td>
                               <td>$r[jam_mulai]</td>
                               <td>$r[jam_selesai]</td>
-                              <td>$r[nama_ruangan]</td>
+                              <td>$r[nama_ruangan]</td> 
                               <td>$r[id_tahun_akademik]</td>
                           </tr>";
                         $no++;

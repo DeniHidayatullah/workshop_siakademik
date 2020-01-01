@@ -116,12 +116,7 @@ if (isset($_SESSION[id])) {
             } 
             
             //Data Master
-            elseif ($_GET[view] == 'identitas') {
-              cek_session_admin();
-              echo "<div class='row'>";
-              include "application/master_identitas.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'tahunakademik') {
+             elseif ($_GET[view] == 'tahunakademik') {
               cek_session_admin();
               echo "<div class='row'>";
               include "application/master_tahun_akademik.php";
@@ -140,16 +135,6 @@ if (isset($_SESSION[id])) {
               cek_session_admin();
               echo "<div class='row'>";
               include "application/master_kelas.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'statuspegawai') {
-              cek_session_admin();
-              echo "<div class='row'>";
-              include "application/master_statuspegawai.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'golongan') {
-              cek_session_admin();
-              echo "<div class='row'>";
-              include "application/master_golongan.php";
               echo "</div>";
             } 
             
@@ -191,17 +176,7 @@ if (isset($_SESSION[id])) {
               echo "<div class='row'>";
               include "application/master_jadwalpelajaran.php";
               echo "</div>";
-            } elseif ($_GET[view] == 'kompetensidasar') {
-              cek_session_admin();
-              echo "<div class='row'>";
-              include "application/master_kompetensidasar.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'predikat') {
-              cek_session_admin();
-              echo "<div class='row'>";
-              include "application/master_predikat.php";
-              echo "</div>";
-            } 
+            }
             
             //Absensi
             elseif ($_GET[view] == 'absensiswa') {
@@ -214,13 +189,6 @@ if (isset($_SESSION[id])) {
               echo "</div>";
              } 
 
-           //Jurnal KBM
-           elseif ($_GET[view] == 'journalkbm') {
-            cek_session_admin();
-            echo "<div class='row'>";
-            include "application/journal_semua.php";
-            echo "</div>";
-            } 
            
            //Raport
             elseif ($_GET[view] == 'raport') {
@@ -241,35 +209,10 @@ if (isset($_SESSION[id])) {
               echo "<div class='row'>";
               include "application/raport_cetak_uts.php";
               echo "</div>";
-            } elseif ($_GET[view] == 'capaianhasilbelajar') {
-              cek_session_admin();
-              echo "<div class='row'>";
-              include "application/raport/raport_capaian_hasil_belajar.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'extrakulikuler') {
-              cek_session_admin();
-              echo "<div class='row'>";
-              include "application/raport/raport_extrakulikuler.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'prestasi') {
-              cek_session_admin();
-              echo "<div class='row'>";
-              include "application/raport/raport_prestasi.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'bukuinduk') {
-              cek_session_admin();
-              echo "<div class='row'>";
-              include "application/buku_induk.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'kalender') {
+             } elseif ($_GET[view] == 'kalender') {
               cek_session_admin();
               echo "<div class='row'>";
               include "application/master_kalender.php";
-              echo "</div>";
-            } elseif ($_GET[view] == 'ptk') {
-              cek_session_admin();
-              echo "<div class='row'>";
-              include "application/master_ptk.php";
               echo "</div>";
             } 
             ?>

@@ -1,3 +1,4 @@
+<!-- MENAMPILKAN DATA JURUSAN (KIRANA) -->
 <?php if ($_GET[act] == '') { ?>
   <div class="col-xs-12">
     <div class="box">
@@ -39,7 +40,7 @@
                 echo "</tr>";
                 $no++;
               }
-
+// HAPUS DATA JURUSAN (KIRANA)
               if (isset($_GET[hapus])) {
                 mysqli_query($koneksi, "DELETE FROM jurusan where kode_jurusan='$_GET[hapus]'");
                 echo "<script>document.location='index.php?view=jurusan';</script>";
@@ -51,6 +52,7 @@
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div>
+<!-- DETAIL JURUSAN (KIRANA) -->
 <?php
 } elseif ($_GET[act] == 'detail') {
   $edit = mysqli_query($koneksi, "SELECT * FROM jurusan where kode_jurusan='$_GET[id]'");
@@ -79,6 +81,7 @@
               </div>
               </form>
             </div>";
+// EDIT JURUSAN (KIRANA)
 } elseif ($_GET[act] == 'edit') {
   if (isset($_POST[update])) {
     mysqli_query($koneksi, "UPDATE jurusan SET kode_jurusan = '$_POST[a]',
@@ -122,6 +125,7 @@
                   </div>
               </form>
             </div>";
+// TAMBAH DATA JURUSAN (KIRANA)
 } elseif ($_GET[act] == 'tambah') {
   if (isset($_POST[tambah])) {
     mysqli_query($koneksi, "INSERT INTO jurusan VALUES('$_POST[a]','$_POST[b]','$_POST[g]','$_POST[j]')");
