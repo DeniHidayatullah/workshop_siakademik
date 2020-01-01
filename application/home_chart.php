@@ -1,3 +1,4 @@
+<!-- erwin grafik bundar -->
 <script type="text/javascript" src="plugins/jQuery/jquery.min.js"></script>
 <script type="text/javascript">
   	var chart; 
