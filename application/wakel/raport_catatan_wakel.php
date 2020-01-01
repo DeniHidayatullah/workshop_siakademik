@@ -59,13 +59,13 @@ if ($_GET[act] == '') {
                     $kelas =  mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kelas where nip='$_SESSION[id]' "));
                     $tampil = mysqli_query($koneksi, "SELECT a.* , c.nama_kelas FROM siswa a JOIN jenis_kelamin b ON a.id_jenis_kelamin=b.id_jenis_kelamin JOIN kelas c ON c.kode_kelas=a.kode_kelas where a.kode_kelas='$kelas[kode_kelas]' ORDER BY a.id_siswa");
                     $no = 1;
-          while ($r = mysqli_fetch_array($tampil)) {
-            if (isset($_GET[edit])) {
-              $e = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM catatan_wakel where id_catatan='$_GET[edit]'"));
-              $name = 'Update';
-            } else {
-              $name = 'Simpan';
-            }
+                  while ($r = mysqli_fetch_array($tampil)) {
+                    if (isset($_GET[edit])) {
+                      $e = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM catatan_wakel where id_catatan='$_GET[edit]'"));
+                      $name = 'Update';
+                    } else {
+                      $name = 'Simpan';
+                    }
 
             if ($_GET[nisn] == $r[nisn]) {
               echo "<form action='index_guru.php?view=catatanwakel&tahun=$_GET[tahun]&kelas=$kelas[kode_kelas]' method='POST'>

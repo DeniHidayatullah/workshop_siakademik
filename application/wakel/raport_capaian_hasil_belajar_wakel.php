@@ -46,19 +46,6 @@ if ($_GET[act] == '') {
               }
               ?>
           </select>
-          <!-- <select name='kelas' style='padding:4px'>
-            <?php
-              echo "<option value=''>- Filter Kelas -</option>";
-              $kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
-              while ($k = mysqli_fetch_array($kelas)) {
-                if ($_GET[kelas] == $k[kode_kelas]) {
-                  echo "<option value='$k[kode_kelas]' selected>$k[kode_kelas] - $k[nama_kelas]</option>";
-                } else {
-                  echo "<option value='$k[kode_kelas]'>$k[kode_kelas] - $k[nama_kelas]</option>";
-                }
-              }
-              ?>
-          </select> -->
           <input type="submit" style='margin-top:-4px' class='btn btn-info btn-sm' value='Lihat'>
         </form>
       </div><!-- /.box-header -->
@@ -86,9 +73,9 @@ if ($_GET[act] == '') {
                     $kelas =  mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kelas where nip='$_SESSION[id]' "));
                     $tampil = mysqli_query($koneksi, "SELECT a.* , c.nama_kelas FROM siswa a JOIN jenis_kelamin b ON a.id_jenis_kelamin=b.id_jenis_kelamin JOIN kelas c ON c.kode_kelas=a.kode_kelas where a.kode_kelas='$kelas[kode_kelas]' ORDER BY a.id_siswa");
                     $no = 1;
-            while ($r = mysqli_fetch_array($tampil)) {
-              $n = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM nilai_sikap_semester where id_tahun_akademik='$_GET[tahun]' AND nisn='$r[nisn]' AND kode_kelas='$_GET[kelas]'"));
-              echo "<tr><td>$no</td>
+                    while ($r = mysqli_fetch_array($tampil)) {
+                      $n = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM nilai_sikap_semester where id_tahun_akademik='$_GET[tahun]' AND nisn='$r[nisn]' AND kode_kelas='$kelas[kode_kelas]'"));
+                      echo "<tr><td>$no</td>
                               <td>$r[nisn]</td>
                               <td>$r[nama]</td>
                               <input type='hidden' name='nisn" . $no . "' value='$r[nisn]'>
