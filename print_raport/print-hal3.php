@@ -1,3 +1,4 @@
+<!-- CETAK RAPOT HAL 3 (KIRANA) -->
 <?php 
 session_start();
 error_reporting(0);
