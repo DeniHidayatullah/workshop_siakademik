@@ -58,6 +58,7 @@
             </tr>
           </thead>
           <tbody>
+          <!-- relasi -->
             <?php
               if (isset($_GET[kelas]) and isset($_GET[tahun])) {
                 $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
@@ -80,6 +81,7 @@
                               <td>$r[nama_ruangan]</td>
                               <td>$r[id_tahun_akademik]</td>";
                 if ($_SESSION[level] != 'kepala') {
+                  // list tampil
                   echo "<td style='width:70px !important'><center>
                                 <a class='btn btn-success btn-xs' title='Tampil List Absensi' href='index.php?view=absensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]&jdwl=$r[kodejdwl]'><span class='glyphicon glyphicon-th'></span> Tampilkan</a>
                               </center></td>";
@@ -236,7 +238,7 @@
         echo "<option value='$n'>$n</option>";
       }
     }
-    // Lihat Absen (Indah)
+    // Lihat Absen
     echo "</select></div> 
                         <input name='lihat' class='btn btn-primary' type='submit' value='Lihat Absen'>
               </form>
@@ -302,7 +304,7 @@
                 </div>
               </div>";
     if ($_SESSION[level] != 'kepala') {
-      // Simpan Absen (Indah)
+      // Simpan Absen 
       echo "<div class='box-footer'>
       <a href='index.php?view=absensiswa'><button type='button' class='btn btn-danger pull-right'>Kembali</button></a>                
       <button type='submit' name='simpann' class='btn btn-info pull-right'>Simpan Absensi</button>
@@ -364,6 +366,7 @@
               <input type="hidden" name='view' value='absensiswa'>
               <input type="hidden" name='act' value='detailabsenguru'>
               <select name='tahun' style='padding:4px'>
+              <!-- pilih tahun akademik -->
                 <?php
                   echo "<option value=''>- Pilih Tahun Akademik -</option>";
                   $tahun = mysqli_query($koneksi, "SELECT * FROM tahun_akademik");
@@ -434,7 +437,7 @@
           </div><!-- /.box-body -->
         </div>
       </div>
-
+<!-- tampilan -->
     <?php
     } elseif ($_GET[act] == 'detailabsensiswa') {
       echo "<div class='col-xs-12'>  
