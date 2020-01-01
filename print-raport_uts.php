@@ -50,7 +50,7 @@ $frt = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM header_print ORD
           </tr>";
     $mapel = mysqli_query($koneksi, "SELECT * FROM  jadwal_pelajaran a JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran 
                                   where a.kode_kelas='$_GET[kelas]' AND a.id_tahun_akademik='$_GET[tahun]' AND b.id_kelompok_mata_pelajaran='$k[id_kelompok_mata_pelajaran]'");
-    $no = 1;
+    
     while ($m = mysqli_fetch_array($mapel)) {
       $n = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM nilai_uts where kodejdwl='$m[kodejdwl]' AND nisn='$s[nisn]'"));
       $cekpredikat = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='$_GET[kelas]'"));
@@ -62,7 +62,7 @@ $frt = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM header_print ORD
         $grade2 = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM `predikat` where ($n[angka_keterampilan] >=nilai_a) AND ($n[angka_keterampilan] <= nilai_b) AND kode_kelas='0'"));
       }
       echo "<tr>
-                <td align=center>$no</td>
+                <td align=center></td>
                 <td>$m[namamatapelajaran]</td>
                 <td align=center>$m[kkm]</td>
                 <td align=center>" . number_format($n[angka_pengetahuan]) . "</td>
@@ -75,33 +75,8 @@ $frt = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM header_print ORD
   }
 
   echo "</table><br/>";
-  $cekpredikat2 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='$_GET[kelas]'"));
-  if ($cekpredikat2 >= 1) {
-    $grade = mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='$_GET[kelas]'");
-    $gradea = mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='$_GET[kelas]'");
-    $total = mysqli_num_rows($grade);
-  } else {
-    $grade = mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='0'");
-    $gradea = mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='0'");
-    $total = mysqli_num_rows($grade);
-  }
-  echo "<center><table width='90%' border=1 id='tablemodul1'>
-              <tr>
-                  <th rowspan='2'>KKM</th>
-                  <th colspan='$total'>Predikat</th>
-              </tr>
-              <tr>";
-  while ($g = mysqli_fetch_array($grade)) {
-    echo "<th>$g[grade] = $g[keterangan]</th>";
-  }
-  echo "</tr>
-              <tr>
-                  <th>77</th>";
-  while ($p = mysqli_fetch_array($gradea)) {
-    echo "<th>$p[nilai_a] - $p[nilai_b]</th>";
-  }
-  echo "</tr>
-          </table></center><br>";
+  echo "<br>";
+  echo "<br>";
   ?>
   <table border=0 width=100%>
     <tr>
