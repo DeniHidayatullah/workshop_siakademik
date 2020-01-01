@@ -1,4 +1,11 @@
-            <div class="col-xs-12">
+<section class="content-header">
+    <div class='alert alert-warning alert-dismissible fade in' role='alert'> 
+    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    <span aria-hidden='true'>×</span></button> 
+    <strong>Perhatian!</strong> <br>Silahkan Pilih semester dan tahun akademik  dulu !!!
+    </div>
+</section>
+           <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title"><?php if (isset($_GET[tahun])) {
@@ -49,19 +56,21 @@
                     <tbody>
                       <?php
                       if (isset($_GET[tahun])) {
-                        $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
+                        $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan,f.nama_tahun FROM jadwal_pelajaran a 
                                             JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran
                                               JOIN guru c ON a.nip=c.nip 
                                                 JOIN ruangan d ON a.kode_ruangan=d.kode_ruangan
                                                   JOIN kelas e ON a.kode_kelas=e.kode_kelas 
-                                                  where e.nip='$_SESSION[id]' 
+                                                JOIN tahun_akademik f ON a.id_tahun_akademik=f.id_tahun_akademik
+                                                  where a.nip='$_SESSION[id]' 
                                                     AND a.id_tahun_akademik='$_GET[tahun]'  ORDER BY a.hari DESC");
                       } else {
-                        $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
+                        $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan,f.nama_tahun FROM jadwal_pelajaran a 
                                             JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran
                                               JOIN guru c ON a.nip=c.nip 
                                                 JOIN ruangan d ON a.kode_ruangan=d.kode_ruangan
                                                 JOIN kelas e ON a.kode_kelas=e.kode_kelas 
+                                                JOIN tahun_akademik f ON a.id_tahun_akademik=f.id_tahun_akademik
                                                   where a.nip='$_SESSION[id]' 
                                                       AND a.id_tahun_akademik LIKE '" . date('Y') . "%' ORDER BY a.hari DESC");
                       }
@@ -75,12 +84,11 @@
                               <td>$r[jam_mulai]</td>
                               <td>$r[jam_selesai]</td>
                               <td>$r[nama_ruangan]</td>
-                              <td>$r[id_tahun_akademik]</td>";
-                        if (isset($_GET[tahun])) {
-                          echo "<td style='width:70px !important'><center>
+                              <td>$r[nama_tahun]</td>
+                              <td style='width:70px !important'><center>
                                           <a class='btn btn-success btn-xs' title='Lihat Siswa' href='index_guru.php?view=raportuts&act=listsiswa&jdwl=$r[kodejdwl]&kd=$r[kode_pelajaran]&id=$r[kode_kelas]&tahun=$_GET[tahun]'><span class='glyphicon glyphicon-th-list'></span> Input Nilai</a>
                                         </center></td>";
-                        }
+            
 
                         echo "</tr>";
                         $no++;
