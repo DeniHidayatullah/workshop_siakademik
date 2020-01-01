@@ -1,3 +1,4 @@
+<!-- Menampilkan Data Jadwal (Indah) -->
 <section class="content-header">
     <div class='alert alert-warning alert-dismissible fade in' role='alert'> 
     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
@@ -16,6 +17,7 @@
             <form style='margin-right:5px; margin-top:0px' class='pull-right' action='' method='GET'>
                 <input type='hidden' name='view' value='jadwalguru'>
                 <select name='tahun' style='padding:4px'>
+                <!-- Filter Tahun Akademik (Indah) -->
                     <?php
                     echo "<option value=''>- Pilih Tahun Akademik -</option>";
                     $tahun = mysqli_query($koneksi, "SELECT * FROM tahun_akademik");
@@ -49,6 +51,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                <!-- Relasi Mapel dan Guru -->
                     <?php
                     if (isset($_GET[tahun])) {
                         $tampil = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
@@ -77,6 +80,7 @@
                               <td>$r[jam_selesai]</td>
                               <td>$r[nama_ruangan]</td>";
                               if ($_SESSION[level] != 'kepala') {
+                                //   Lihat Absen (Indah)
                                 echo "<td><a class='btn btn-xs btn-warning' href='index_guru.php?view=absensi_siswa'>Buka Absensi Siswa</a></td>";
                               }
                           echo"</tr>";
