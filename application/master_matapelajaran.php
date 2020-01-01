@@ -1,3 +1,4 @@
+<!-- TAMPIL DATA MAPEL @MHA -->
 <?php if ($_GET[act] == '') { ?>
   <div class="col-xs-12">
     <div class="box">
@@ -25,6 +26,7 @@
             </tr>
           </thead>
           <tbody>
+          <!-- RELASI DB @MHA-->
             <?php
               $tampil = mysqli_query($koneksi, "SELECT * FROM mata_pelajaran a 
                                               LEFT JOIN kelompok_mata_pelajaran b ON a.id_kelompok_mata_pelajaran=b.id_kelompok_mata_pelajaran
@@ -51,6 +53,7 @@
                 echo "</tr>";
                 $no++;
               }
+              // HAPUS MAPEL @MHA
               if (isset($_GET[hapus])) {
                 mysqli_query($koneksi, "DELETE FROM mata_pelajaran where kode_pelajaran='$_GET[hapus]'");
                 echo "<script>document.location='index.php?view=matapelajaran';</script>";
@@ -62,6 +65,7 @@
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div>
+  <!-- EDIT MAPEL @MHA -->
 <?php
 } elseif ($_GET[act] == 'edit') {
   if (isset($_POST[update])) {
@@ -166,6 +170,7 @@
                   </div>
               </form>
             </div>";
+            // TAMBAH MAPEL @MHA
 } elseif ($_GET[act] == 'tambah') {
   if (isset($_POST[tambah])) {
     mysqli_query($koneksi, "INSERT INTO mata_pelajaran VALUES
@@ -233,6 +238,7 @@
                   </div>
               </form>
             </div>";
+            // DETAIL MAPEL @MHA
 } elseif ($_GET[act] == 'detail') {
   $edit = mysqli_query($koneksi, "SELECT a.*, b.nama_kelompok_mata_pelajaran, c.nama_guru, e.nama_jurusan ,f.nama_sesi FROM mata_pelajaran a 
                                               JOIN kelompok_mata_pelajaran b ON a.id_kelompok_mata_pelajaran=b.id_kelompok_mata_pelajaran
