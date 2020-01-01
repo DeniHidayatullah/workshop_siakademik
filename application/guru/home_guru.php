@@ -6,6 +6,7 @@ if ($_GET[act] == '') {
   } else {
     $nip = $_GET[id];
   }
+  // relasi
   $detail = mysqli_query($koneksi, "SELECT a.*, b.jenis_kelamin, c.status_kepegawaian, d.jenis_ptk, e.nama_agama, g.nama_golongan, f.nama_status_keaktifan 
   FROM guru a LEFT JOIN jenis_kelamin b ON a.id_jenis_kelamin=b.id_jenis_kelamin 
     LEFT JOIN status_kepegawaian c ON a.id_status_kepegawaian=c.id_status_kepegawaian 
@@ -77,6 +78,7 @@ if ($_GET[act] == '') {
 </div>
 </form>
 </div>";
+// ubah password
 }elseif ($_GET[act] == 'ubahpassword') {
   if (isset($_POST[ubah])) {
       mysqli_query($koneksi, "UPDATE guru SET password = '$_POST[b]' where nip='$_POST[id]'");
