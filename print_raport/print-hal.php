@@ -1,3 +1,4 @@
+<!-- CETAK COVER (INDAH) -->
 <?php
 session_start();
 error_reporting(0);

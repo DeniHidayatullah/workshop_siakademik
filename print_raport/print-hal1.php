@@ -1,3 +1,4 @@
+<!-- CETAK RAPOT HAL 1 (INDAH) -->
 <?php
 session_start();
 error_reporting(0);
