@@ -1,3 +1,4 @@
+<!-- TAMPIL DATA USER @MHA -->
 <?php if ($_GET[act] == '') { ?>
   <div class="col-xs-12">
     <div class="box">
@@ -38,6 +39,7 @@
                 echo "</tr>";
                 $no++;
               }
+              // HAPUS USER @MHA
               if (isset($_GET[hapus])) {
                 mysqli_query($koneksi, "DELETE FROM users where id_user='$_GET[hapus]'");
                 echo "<script>document.location='index.php?view=admin';</script>";
@@ -49,6 +51,7 @@
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div>
+  <!-- EDIT USER @MHA -->
 <?php
 } elseif ($_GET[act] == 'edit') {
   if (isset($_POST[update])) {
@@ -131,6 +134,7 @@
                   </div>
               </form>
             </div>";
+// TAMBAH USER @MHA
 } elseif ($_GET[act] == 'tambah') {
   if (isset($_POST[tambah])) {
     $data = md5($_POST[b]);
