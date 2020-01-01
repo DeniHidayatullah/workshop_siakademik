@@ -1,4 +1,4 @@
-<!-- Menampilkan Data Jadwal (Indah) -->
+<!-- Menampilkan Data Jadwal Guru (Indah) -->
 <section class="content-header">
     <div class='alert alert-warning alert-dismissible fade in' role='alert'> 
     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
