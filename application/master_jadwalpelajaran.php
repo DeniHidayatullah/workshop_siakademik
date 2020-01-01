@@ -1,3 +1,4 @@
+<!-- MENAMBAHKAN DATA JADWAL (KIRANA) -->
 <?php if ($_GET[act] == '') { ?>
   <div class="col-xs-12">
     <div class="box">
@@ -13,6 +14,7 @@
         <form style='margin-right:5px; margin-top:0px' class='pull-right' action='' method='GET'>
           <input type="hidden" name='view' value='jadwalpelajaran'>
           <select name='tahun' style='padding:4px'>
+            <!-- FILTER THN AKADEMIK JADWAL (KIRANA) -->
             <?php
               echo "<option value=''>- Pilih Tahun Akademik -</option>";
               $tahun = mysqli_query($koneksi, "SELECT * FROM tahun_akademik");
@@ -26,6 +28,7 @@
               ?>
           </select>
           <select name='kelas' style='padding:4px'>
+          <!-- FILTER KELAS JADWAL (KIRANA) -->
             <?php
               echo "<option value=''>- Pilih Kelas -</option>";
               $kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
@@ -84,6 +87,7 @@
                               <td>$r[jam_selesai]</td>
                               <td>$r[nama_ruangan]</td>";
                 if ($_SESSION[level] != 'kepala') {
+                  // BUKA ABSEN (INDAH)
                   echo "<td><a class='btn btn-xs btn-warning' href='index.php?view=absensiswa&act=tampilabsen&id=$r[kode_kelas]&kd=$r[kode_pelajaran]&jdwl=$r[kodejdwl]'>Buka Absensi Siswa</a></td>";
                 }
                 if ($_SESSION[level] != 'kepala') {
@@ -96,7 +100,7 @@
                 echo "</tr>";
                 $no++;
               }
-
+// HAPUS DATA JADWAL (KIRANA)
               if (isset($_GET[hapus])) {
                 mysqli_query($koneksi, "DELETE FROM jadwal_pelajaran where kodejdwl='$_GET[hapus]'");
                 echo "<script>document.location='index.php?view=jadwalpelajaran';</script>";
@@ -156,7 +160,7 @@
       <strong>Perhatian!</strong> - Jadwal Sudah Ada
     </div>";
       }else {
-    mysqli_query($koneksi, "INSERT INTO jadwal_pelajaran VALUES('','$_POST[a]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[e]','$_POST[h]','$_POST[i]','$_POST[j]','$_POST[k]')");
+    mysqli_query($koneksi, "INSERT INTO jadwal_pelajaran VALUES('','$_POST[a]','$_POST[ju]','$_POST[b]','$_POST[c]','$_POST[d]','$_POST[e]','$_POST[h]','$_POST[i]','$_POST[j]','$_POST[k]')");
     echo "<script>document.location='index.php?view=jadwalpelajaran';</script>";
   }
   }
@@ -171,45 +175,61 @@
                 <div class='col-md-12'>
                   <table class='table table-condensed table-bordered'>
                   <tbody>
-                    <tr><th style='width:120px' scope='row'>Tahun Akademik</th>   <td><select class='form-control' name='a'> 
-                                                <option value='0' selected>- Pilih Tahun Akademik -</option>";
-  $tahun = mysqli_query($koneksi, "SELECT * FROM tahun_akademik");
-  while ($a = mysqli_fetch_array($tahun)) {
-    echo "<option value='$a[id_tahun_akademik]'>$a[nama_tahun]</option>";
-  }
-  echo "</select>
+                    <tr><th style='width:120px' scope='row'>Tahun Akademik</th>   
+                      <td><select class='form-control' name='a'> 
+                        <option value='0' selected>- Pilih Tahun Akademik -</option>";
+                        $tahun = mysqli_query($koneksi, "SELECT * FROM tahun_akademik");
+                        while ($a = mysqli_fetch_array($tahun)) {
+                          echo "<option value='$a[id_tahun_akademik]'>$a[nama_tahun]</option>";
+                        }
+                        echo "</select>
                     </td></tr>
-                    <tr><th scope='row'>Kelas</th>   <td><select class='form-control' name='b'> 
-                                                <option value='0' selected>- Pilih Kelas -</option>";
-  $kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
-  while ($a = mysqli_fetch_array($kelas)) {
-    echo "<option value='$a[kode_kelas]'>$a[nama_kelas]</option>";
-  }
-  echo "</select>
+                    <tr><th scope='row'>Jurusan</th>   
+                      <td><select class='form-control' name='ju' id='jurusan'> 
+                        <option value='0' selected>- Pilih Jurusan -</option>";
+                        $sql = mysqli_query($koneksi, "SELECT * FROM jurusan");
+                        while ($data = mysqli_fetch_array($sql)) {
+                          echo "<option value='$data[kode_jurusan]'>$data[nama_jurusan]</option>";
+                        }
+                        echo "</select>
                     </td></tr>
-                    <tr><th scope='row'>Mata Pelajaran</th>   <td><select class='form-control' name='c'> 
-                                                <option value='0' selected>- Pilih Mata Pelajaran -</option>";
-  $mapel = mysqli_query($koneksi, "SELECT * FROM mata_pelajaran");
-  while ($a = mysqli_fetch_array($mapel)) {
-    echo "<option value='$a[kode_pelajaran]'>$a[namamatapelajaran]</option>";
-  }
-  echo "</select>
+                    <tr><th scope='row'>Kelas</th>   
+                      <td><select class='form-control' name='b' id='kelas'> 
+                        <option value='0' selected>- Pilih Kelas -</option>";
+                       /*  $kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
+                        while ($a = mysqli_fetch_array($kelas)) {
+                          echo "<option value='$a[kode_kelas]'>$a[nama_kelas]</option>";
+                        } *//* echo "<div id='loading' style='margin-top: 15px;'>
+                            <img src='images/loading.gif' width='18'> <small>Loading...</small>
+                            </div>"; */
+                        echo "</select>
                     </td></tr>
-                    <tr><th scope='row'>Ruangan</th>   <td><select class='form-control' name='d'> 
-                                                <option value='0' selected>- Pilih Ruangan -</option>";
-  $ruangan = mysqli_query($koneksi, "SELECT * FROM ruangan");
-  while ($a = mysqli_fetch_array($ruangan)) {
-    echo "<option value='$a[kode_ruangan]'>$a[nama_ruangan]</option>";
-  }
-  echo "</select>
+                    <tr><th scope='row'>Mata Pelajaran</th>   
+                      <td><select class='form-control' name='c' id='mata_pelajaran'> 
+                        <option value='0' selected>- Pilih Mata Pelajaran -</option>";
+                          /* $mapel = mysqli_query($koneksi, "SELECT * FROM mata_pelajaran");
+                          while ($a = mysqli_fetch_array($mapel)) {
+                            echo "<option value='$a[kode_pelajaran]'>$a[namamatapelajaran]</option>";
+                          } */
+                          echo "</select>
+                      </td></tr>
+                    <tr><th scope='row'>Ruangan</th>   
+                      <td><select class='form-control' name='d' id='ruangan'> 
+                        <option value='0' selected>- Pilih Ruangan -</option>";
+                         /*  $ruangan = mysqli_query($koneksi, "SELECT * FROM ruangan");
+                          while ($a = mysqli_fetch_array($ruangan)) {
+                            echo "<option value='$a[kode_ruangan]'>$a[nama_ruangan]</option>";
+                          } */
+                          echo "</select>
                     </td></tr>
-                    <tr><th scope='row'>Guru</th>   <td><select class='form-control' name='e'> 
-                                                <option value='0' selected>- Pilih Guru -</option>";
-  $guru = mysqli_query($koneksi, "SELECT * FROM guru");
-  while ($a = mysqli_fetch_array($guru)) {
-    echo "<option value='$a[nip]'>$a[nama_guru]</option>";
-  }
-  echo "</select>
+                    <tr><th scope='row'>Guru</th>   
+                      <td><select class='form-control' name='e' id='guru'> 
+                        <option value='0' selected>- Pilih Guru -</option>";
+                         /*  $guru = mysqli_query($koneksi, "SELECT * FROM guru");
+                          while ($a = mysqli_fetch_array($guru)) {
+                            echo "<option value='$a[nip]'>$a[nama_guru]</option>";
+                          } */
+                          echo "</select>
                     </td></tr>
                     <tr><th scope='row'>Jam Mulai</th>  <td><input type='text' class='form-control' name='h' placeholder='hh:ii:ss' value='" . date('H:i:s') . "'></td></tr>
                     <tr><th scope='row'>Jam Selesai</th><td><input type='text' class='form-control' name='i' placeholder='hh:ii:ss' value='" . date('H:i:s') . "'></td></tr>
@@ -221,10 +241,10 @@
                                                 <option value='Kamis'>Kamis</option>
                                                 <option value='Jumat'>Jumat</option>
                                                 <option value='Sabtu'>Sabtu</option>
-                                                <option value='Minggu'>Minggu</option>
                     </td></tr>
-                    <tr><th scope='row'>Aktif</th>                <td><input type='radio' name='k' value='Ya' checked> Ya
-                                                                             <input type='radio' name='k' value='Tidak'> Tidak
+                    <tr><th scope='row'>Aktif</th>                
+                    <td><input type='radio' name='k' value='Ya' checked> Ya
+                    <input type='radio' name='k' value='Tidak'> Tidak
                     </td></tr>
                   </tbody>
                   </table>
@@ -236,6 +256,7 @@
                   </div>
               </form>
             </div>";
+// EDIT DATA JADWAL (KIRANA)
 } elseif ($_GET[act] == 'edit') {
   if (isset($_POST[update])) {
     $cek = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM jadwal_pelajaran WHERE hari='$_POST[j]' AND jam_mulai='$_POST[h]' AND nip='$_POST[e]' "));
@@ -245,14 +266,15 @@
     </div>";
       }else {
     mysqli_query($koneksi, "UPDATE jadwal_pelajaran SET id_tahun_akademik = '$_POST[a]',
-                                                    kode_kelas = '$_POST[b]',
-                                                    kode_pelajaran = '$_POST[c]',
-                                                    kode_ruangan = '$_POST[d]',
-                                                    nip = '$_POST[e]',
-                                                    jam_mulai = '$_POST[h]',
-                                                    jam_selesai = '$_POST[i]',
-                                                    hari = '$_POST[j]',
-                                                    aktif = '$_POST[k]' where kodejdwl='$_POST[id]'");
+    kode_jurusan = '$_POST[ju]',
+    kode_kelas = '$_POST[b]',
+    kode_pelajaran = '$_POST[c]',
+    kode_ruangan = '$_POST[d]',
+    nip = '$_POST[e]',
+    jam_mulai = '$_POST[h]',
+    jam_selesai = '$_POST[i]',
+    hari = '$_POST[j]',
+    aktif = '$_POST[k]' where kodejdwl='$_POST[id]'");
     echo "<script>document.location='index.php?view=jadwalpelajaran';</script>";
     }
   }
@@ -269,67 +291,80 @@
                   <tbody>
                   <input type='hidden' name='id' value='$_GET[id]'>
                     <tr><th style='width:120px' scope='row'>Tahun Akademik</th>   <td><select class='form-control' name='a'> 
-                                                <option value='0' selected>- Pilih Tahun Akademik -</option>";
-  $tahun = mysqli_query($koneksi, "SELECT * FROM tahun_akademik");
-  while ($a = mysqli_fetch_array($tahun)) {
-    if ($e[id_tahun_akademik] == $a[id_tahun_akademik]) {
-      echo "<option value='$a[id_tahun_akademik]' selected>$a[nama_tahun]</option>";
-    } else {
-      echo "<option value='$a[id_tahun_akademik]'>$a[nama_tahun]</option>";
-    }
-  }
-  echo "</select>
+                       <option value='0' selected>- Pilih Tahun Akademik -</option>";
+                          $tahun = mysqli_query($koneksi, "SELECT * FROM tahun_akademik");
+                          while ($a = mysqli_fetch_array($tahun)) {
+                            if ($e[id_tahun_akademik] == $a[id_tahun_akademik]) {
+                              echo "<option value='$a[id_tahun_akademik]' selected>$a[nama_tahun]</option>";
+                            } else {
+                              echo "<option value='$a[id_tahun_akademik]'>$a[nama_tahun]</option>";
+                            }
+                          }
+                          echo "</select>
+                    </td></tr>
+                    <tr><th scope='row'>Jurusan</th>   
+                    <td><select class='form-control' name='ju'>
+                    <option value='0' selected>- Pilih Jurusan -</option>";
+                        $jurusan = mysqli_query($koneksi, "SELECT * FROM jurusan");
+                        while ($a = mysqli_fetch_array($jurusan)) {
+                          if ($e[kode_jurusan] == $a[kode_jurusan]) {
+                            echo "<option value='$a[kode_jurusan]' selected>$a[nama_jurusan]</option>";
+                          } else {
+                            echo "<option value='$a[kode_jurusan]'>$a[nama_jurusan]</option>";
+                          }
+                        }
+                        echo "</select>
                     </td></tr>
                     <tr><th scope='row'>Kelas</th>   
                     <td><select class='form-control' name='b'>
                     <option value='0' selected>- Pilih Kelas -</option>";
-  $kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
-  while ($a = mysqli_fetch_array($kelas)) {
-    if ($e[kode_kelas] == $a[kode_kelas]) {
-      echo "<option value='$a[kode_kelas]' selected>$a[nama_kelas]</option>";
-    } else {
-      echo "<option value='$a[kode_kelas]'>$a[nama_kelas]</option>";
-    }
-  }
-  echo "</select>
+                        $kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
+                        while ($a = mysqli_fetch_array($kelas)) {
+                          if ($e[kode_kelas] == $a[kode_kelas]) {
+                            echo "<option value='$a[kode_kelas]' selected>$a[nama_kelas]</option>";
+                          } else {
+                            echo "<option value='$a[kode_kelas]'>$a[nama_kelas]</option>";
+                          }
+                        }
+                        echo "</select>
                     </td></tr>
                     <tr><th scope='row'>Mata Pelajaran</th>   
                     <td><select class='form-control' name='c'>
                     <option value='0' selected>- Pilih Mata Pelajaran -</option>";
-  $mapel = mysqli_query($koneksi, "SELECT * FROM mata_pelajaran");
-  while ($a = mysqli_fetch_array($mapel)) {
-    if ($e[kode_pelajaran] == $a[kode_pelajaran]) {
-      echo "<option value='$a[kode_pelajaran]' selected>$a[namamatapelajaran]</option>";
-    } else {
-      echo "<option value='$a[kode_pelajaran]'>$a[namamatapelajaran]</option>";
-    }
-  }
-  echo "</select>
+                        $mapel = mysqli_query($koneksi, "SELECT * FROM mata_pelajaran");
+                        while ($a = mysqli_fetch_array($mapel)) {
+                          if ($e[kode_pelajaran] == $a[kode_pelajaran]) {
+                            echo "<option value='$a[kode_pelajaran]' selected>$a[namamatapelajaran]</option>";
+                          } else {
+                            echo "<option value='$a[kode_pelajaran]'>$a[namamatapelajaran]</option>";
+                          }
+                        }
+                        echo "</select>
                     </td></tr>
                     <tr><th scope='row'>Ruangan</th>   
                     <td><select class='form-control' name='d'>
                     <option value='0' selected>- Pilih Ruangan -</option>";
-  $ruangan = mysqli_query($koneksi, "SELECT * FROM ruangan ");
-  while ($a = mysqli_fetch_array($ruangan)) {
-    if ($e[kode_ruangan] == $a[kode_ruangan]) {
-      echo "<option value='$a[kode_ruangan]' selected>$a[nama_ruangan]</option>";
-    } else {
-      echo "<option value='$a[kode_ruangan]'>$a[nama_ruangan]</option>";
-    }
-  }
-  echo "</select>
-                    </td></tr>
-                    <tr><th scope='row'>Guru</th>   <td><select class='form-control' name='e'> 
-                                                <option value='0' selected>- Pilih Guru -</option>";
-  $guru = mysqli_query($koneksi, "SELECT * FROM guru");
-  while ($a = mysqli_fetch_array($guru)) {
-    if ($e[nip] == $a[nip]) {
-      echo "<option value='$a[nip]' selected>$a[nama_guru]</option>";
-    } else {
-      echo "<option value='$a[nip]'>$a[nama_guru]</option>";
-    }
-  }
-  echo "</select>
+                      $ruangan = mysqli_query($koneksi, "SELECT * FROM ruangan ");
+                      while ($a = mysqli_fetch_array($ruangan)) {
+                        if ($e[kode_ruangan] == $a[kode_ruangan]) {
+                          echo "<option value='$a[kode_ruangan]' selected>$a[nama_ruangan]</option>";
+                        } else {
+                          echo "<option value='$a[kode_ruangan]'>$a[nama_ruangan]</option>";
+                        }
+                      }
+                      echo "</select>
+                                        </td></tr>
+                                        <tr><th scope='row'>Guru</th>   <td><select class='form-control' name='e'> 
+                                                                    <option value='0' selected>- Pilih Guru -</option>";
+                      $guru = mysqli_query($koneksi, "SELECT * FROM guru");
+                      while ($a = mysqli_fetch_array($guru)) {
+                        if ($e[nip] == $a[nip]) {
+                          echo "<option value='$a[nip]' selected>$a[nama_guru]</option>";
+                        } else {
+                          echo "<option value='$a[nip]'>$a[nama_guru]</option>";
+                        }
+                      }
+                      echo "</select>
                     </td></tr>
                     <tr><th scope='row'>Jam Mulai</th>  <td><input type='text' class='form-control' name='h' placeholder='hh:ii:ss' value='$e[jam_mulai]'></td></tr>
                     <tr><th scope='row'>Jam Selesai</th><td><input type='text' class='form-control' name='i' placeholder='hh:ii:ss' value='$e[jam_selesai]'></td></tr>
@@ -341,7 +376,6 @@
                                                 <option value='Kamis'>Kamis</option>
                                                 <option value='Jumat'>Jumat</option>
                                                 <option value='Sabtu'>Sabtu</option>
-                                                <option value='Minggu'>Minggu</option>
                     </td></tr>
                     <tr><th scope='row'>Aktif</th>                <td>";
   if ($e[aktif] == 'Ya') {
@@ -362,12 +396,14 @@
                   </div>
               </form>
             </div>";
+// MENAMPILKAN DATA JADWAL (KIRANA)
 } elseif ($_GET[act] == 'detail') {
-  $detail = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan FROM jadwal_pelajaran a 
+  $detail = mysqli_query($koneksi, "SELECT a.*, e.nama_kelas, b.namamatapelajaran, b.kode_pelajaran, c.nama_guru, d.nama_ruangan,f.nama_jurusan FROM jadwal_pelajaran a 
   JOIN mata_pelajaran b ON a.kode_pelajaran=b.kode_pelajaran
     JOIN guru c ON a.nip=c.nip 
       JOIN ruangan d ON a.kode_ruangan=d.kode_ruangan
         JOIN kelas e ON a.kode_kelas=e.kode_kelas
+          JOIN jurusan f ON e.kode_jurusan=f.kode_jurusan
         where a.kodejdwl='$_GET[id]'");
   $s = mysqli_fetch_array($detail);
   echo "<div class='col-md-12'>
@@ -381,6 +417,7 @@
                   <table class='table table-condensed table-bordered'>
                   <tbody>
                     <tr><th scope='row'>Nama Mapel</th>           <td>$s[namamatapelajaran]</td></tr>
+                    <tr><th scope='row'>Nama Jurusan</th>           <td>$s[nama_jurusan]</td></tr>
                     <tr><th scope='row'>Nama Kelas</th>           <td>$s[nama_kelas]</td></tr>
                     <tr><th scope='row'>Guru Pengampu</th>        <td>$s[nama_guru]</td></tr>
                     <tr><th scope='row'>Hari</th>                 <td>$s[hari]</td></tr>
@@ -400,3 +437,55 @@
             </div>";
 }
 ?>
+<script src="js/jquery-3.3.1.min.js"></script>
+ <script>
+        $("#jurusan").change(function(){
+          	var jurusan = $("#jurusan").val();
+	          	$.ajax({
+	          		type: 'POST',
+	              	url: "get_kelas.php",
+	              	data: {jurusan: jurusan},
+	              	cache: false,
+	              	success: function(msg){
+	                  $("#kelas").html(msg);
+	                }
+	            });
+            });
+
+            $("#kelas").change(function(){
+          	var kelas = $("#kelas").val();
+	          	$.ajax({
+	          		type: 'POST',
+	              	url: "get_mapel.php",
+	              	data: {kelas: kelas},
+	              	cache: false,
+	              	success: function(msg){
+	                  $("#mata_pelajaran").html(msg);
+	                }
+	            });
+            });
+            $("#kelas").change(function(){
+          	var kelas = $("#kelas").val();
+	          	$.ajax({
+	          		type: 'POST',
+	              	url: "get_ruangan.php",
+	              	data: {kelas: kelas},
+	              	cache: false,
+	              	success: function(msg){
+	                  $("#ruangan").html(msg);
+	                }
+	            });
+            });
+            $("#mata_pelajaran").change(function(){
+          	var mata_pelajaran = $("#mata_pelajaran").val();
+	          	$.ajax({
+	          		type: 'POST',
+	              	url: "get_guru.php",
+	              	data: {mata_pelajaran: mata_pelajaran},
+	              	cache: false,
+	              	success: function(msg){
+	                  $("#guru").html(msg);
+	                }
+	            });
+            });
+    </script>
