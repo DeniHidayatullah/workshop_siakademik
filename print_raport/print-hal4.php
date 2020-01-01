@@ -82,33 +82,6 @@ $frt = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM header_print ORD
   }
 
   echo "</table><br/>";
-  $cekpredikat1 = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='$_GET[kelas]'"));
-  if ($cekpredikat1 >= 1) {
-    $grade = mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='$_GET[kelas]'");
-    $gradea = mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='$_GET[kelas]'");
-    $total = mysqli_num_rows($grade);
-  } else {
-    $grade = mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='0'");
-    $gradea = mysqli_query($koneksi, "SELECT * FROM predikat where kode_kelas='0'");
-    $total = mysqli_num_rows($grade);
-  }
-  echo "<center><table width='90%' border=1 id='tablemodul1'>
-              <tr>
-                  <th rowspan='2'>KKM</th>
-                  <th colspan='$total'>Predikat</th>
-              </tr>
-              <tr>";
-  while ($g = mysqli_fetch_array($grade)) {
-    echo "<th>$g[grade] = $g[keterangan]</th>";
-  }
-  echo "</tr>
-              <tr>
-                  <th>$m[kkm]</th>";
-  while ($p = mysqli_fetch_array($gradea)) {
-    echo "<th>$p[nilai_a] - $p[nilai_b]</th>";
-  }
-  echo "</tr>
-          </table></center><br>";
   ?>
 
   <table border=0 width=100%>
